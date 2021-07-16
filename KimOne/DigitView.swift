@@ -34,16 +34,16 @@ class DigitView: UIView {
             if (segments[i]) {
                 l.fillColor = UIColor.red.cgColor
             } else {
-                l.fillColor = UIColor.darkGray.cgColor
+                l.fillColor = UIColor(red: 0.25, green: 0.15, blue: 0.15, alpha: 1).cgColor
             }
         }
     }
     
     func setup() {
         // Create a CAShapeLayer
-        
+        let grey = UIColor(red: 0.25, green: 0.15, blue: 0.15, alpha: 1).cgColor
         self.layers[0].path = createSidePath(w:18, h:40, flipH: true).cgPath
-        self.layers[0].fillColor = UIColor.darkGray.cgColor
+        self.layers[0].fillColor = grey
         self.layers[0].position = CGPoint(x: 20, y: 10)
         //shapeLayer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 1.0)
         
@@ -52,14 +52,14 @@ class DigitView: UIView {
         
         
         self.layers[1].path = createTopPath(w:29, h:10).cgPath
-        self.layers[1].fillColor = UIColor.darkGray.cgColor
+        self.layers[1].fillColor = grey
         self.layers[1].position = CGPoint(x: 38, y: 10)
         
         self.layer.addSublayer(self.layers[1])
         
         
         self.layers[2].path = createSidePath(w:18, h:40, flipH: false).cgPath
-        self.layers[2].fillColor = UIColor.darkGray.cgColor
+        self.layers[2].fillColor = grey
         self.layers[2].position = CGPoint(x: 60, y: 10)
         //shapeLayer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 1.0)
         
@@ -68,7 +68,7 @@ class DigitView: UIView {
         self.layers[3] = CAShapeLayer()
         
         self.layers[3].path = createMiddlePath(w:38, h:10).cgPath
-        self.layers[3].fillColor = UIColor.darkGray.cgColor
+        self.layers[3].fillColor = grey
         self.layers[3].position = CGPoint(x: 25.5, y: 46)
         //shapeLayer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 1.0)
         
@@ -78,7 +78,7 @@ class DigitView: UIView {
         self.layers[4] = CAShapeLayer()
         
         self.layers[4].path = createSidePath(w:18, h:40, flipH: false).cgPath
-        self.layers[4].fillColor = UIColor.darkGray.cgColor
+        self.layers[4].fillColor = grey
         self.layers[4].position = CGPoint(x: 29, y: 92)
         self.layers[4].transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 1.0)
         
@@ -87,7 +87,7 @@ class DigitView: UIView {
         self.layers[5] = CAShapeLayer()
         
         self.layers[5].path = createTopPath(w:29, h:10).cgPath
-        self.layers[5].fillColor = UIColor.darkGray.cgColor
+        self.layers[5].fillColor = grey
         self.layers[5].position = CGPoint(x: 22, y: 82)
         
         self.layer.addSublayer(self.layers[5])
@@ -95,7 +95,7 @@ class DigitView: UIView {
         self.layers[6] = CAShapeLayer()
         
         self.layers[6].path = createSidePath(w:18, h:40, flipH: true).cgPath
-        self.layers[6].fillColor = UIColor.darkGray.cgColor
+        self.layers[6].fillColor = grey
         self.layers[6].position = CGPoint(x: 69, y: 92)
         self.layers[6].transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 1.0)
         

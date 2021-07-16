@@ -165,7 +165,7 @@ class Riot {
         let filename = String(format: "rom%d", self.num)
         let bundle = Bundle.main
         let path = bundle.path(forResource: filename, ofType: "bin")!
-        print(path)
+        //print(path)
         
         let data = NSData(contentsOfFile: path)!
         let dataRange = NSRange(location: 0, length: 1024)
