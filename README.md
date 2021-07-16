@@ -8,3 +8,6 @@ is a MOS Kim-1 emulator for iOS
 </p>
 
 
+<p align="center">
+<img alt="Mac version" src="img/sc3.png" title="Mac version" width="300px" hspace="30px" />
+</p>
