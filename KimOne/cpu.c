@@ -232,6 +232,7 @@ void reset6502() {
     
     printf("reset vec %04X\n", pc);
     clockticks6502 = 0;
+    prevTicks = 0;
     a = 0;
     x = 0;
     y = 0;

@@ -83,7 +83,7 @@ uint8_t sp, a, x, y, status = FLAG_CONSTANT;
 
 //helper variables
 uint64_t instructions = 0; //keep track of total instructions executed
-uint64_t clockticks6502, clockgoal6502 = 0;
+uint64_t clockticks6502, clockgoal6502 = 0, prevTicks;
 uint16_t oldpc, ea, reladdr, value, result;
 uint8_t opcode, oldstatus;
 

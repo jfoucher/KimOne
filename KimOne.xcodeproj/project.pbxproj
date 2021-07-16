@@ -14,11 +14,13 @@
 		AB107F06269F7D4E0048A3CF /* DigitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB107F05269F7D4E0048A3CF /* DigitView.swift */; };
 		AB107F24269FA3950048A3CF /* cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = AB107F23269FA3950048A3CF /* cpu.c */; };
 		AB107F29269FB1400048A3CF /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AB107F28269FB1400048A3CF /* logo.png */; };
+		AB65D41426A1872800AA37D6 /* test.m4a in Resources */ = {isa = PBXBuildFile; fileRef = AB65D41326A1872800AA37D6 /* test.m4a */; };
 		AB9AEC1F26A04CB30010CB6D /* 3270Condensed-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */; };
 		ABB6814E26A0720800C2FC21 /* Riot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6814D26A0720800C2FC21 /* Riot.swift */; };
 		ABB6815426A0974600C2FC21 /* rom1.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABB6815226A0974600C2FC21 /* rom1.bin */; };
 		ABB6815526A0974600C2FC21 /* rom0.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABB6815326A0974600C2FC21 /* rom0.bin */; };
 		ABD781B422A00AFE00574458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABD781B322A00AFE00574458 /* Assets.xcassets */; };
+		ABEBE79426A1B20E009AA3F5 /* key.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABEBE79326A1B20E009AA3F5 /* key.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,7 @@
 		AB107F23269FA3950048A3CF /* cpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cpu.c; sourceTree = "<group>"; };
 		AB107F28269FB1400048A3CF /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = KimOne/Resources/logo.png; sourceTree = SOURCE_ROOT; };
 		AB33BE62229FF6150003EEA3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		AB65D41326A1872800AA37D6 /* test.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.m4a; sourceTree = "<group>"; };
 		AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3270Condensed-Regular.otf"; sourceTree = "<group>"; };
 		ABB2EE6426A0CBB900212B68 /* Microchess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Microchess.h; sourceTree = "<group>"; };
 		ABB6814D26A0720800C2FC21 /* Riot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Riot.swift; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 		ABB6815326A0974600C2FC21 /* rom0.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = rom0.bin; sourceTree = "<group>"; };
 		ABB9723326A0DF910076B03D /* Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
 		ABD781B322A00AFE00574458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ABEBE79326A1B20E009AA3F5 /* key.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = key.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,8 @@
 		AB65D3FD26A15E8900AA37D6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ABEBE79326A1B20E009AA3F5 /* key.m4a */,
+				AB65D41326A1872800AA37D6 /* test.m4a */,
 				AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */,
 				ABB2EE6426A0CBB900212B68 /* Microchess.h */,
 				ABB9723326A0DF910076B03D /* Test.h */,
@@ -247,8 +253,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB65D41426A1872800AA37D6 /* test.m4a in Resources */,
 				AB04BF38229F539500B1111E /* LaunchScreen.storyboard in Resources */,
 				ABB6815426A0974600C2FC21 /* rom1.bin in Resources */,
+				ABEBE79426A1B20E009AA3F5 /* key.m4a in Resources */,
 				AB107F29269FB1400048A3CF /* logo.png in Resources */,
 				AB9AEC1F26A04CB30010CB6D /* 3270Condensed-Regular.otf in Resources */,
 				ABD781B422A00AFE00574458 /* Assets.xcassets in Resources */,

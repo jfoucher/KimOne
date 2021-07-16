@@ -672,32 +672,36 @@
                                     <constraint firstItem="1bb-Vu-rD2" firstAttribute="top" secondItem="UHG-9l-mxu" secondAttribute="top" id="z3S-wT-86L"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzE-lo-q16">
-                                <rect key="frame" x="16" y="102" width="42" height="17"/>
-                                <color key="tintColor" red="0.66903949873096447" green="0.056226648928225383" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Label">
-                                        <attributes>
-                                            <color key="NSColor" red="0.66903949873096447" green="0.056226648928225383" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="17" name="3270Condensed"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="biR-dm-X2B">
+                                <rect key="frame" x="13" y="102" width="53" height="30"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Button">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="0.084040851149999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="18" name="3270Condensed"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="speedClicked:" destination="oJ6-If-Sbn" eventType="touchUpInside" id="gVM-gg-jza"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dIY-R0-IZ1"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZYm-IK-zGb" firstAttribute="leading" secondItem="dIY-R0-IZ1" secondAttribute="leading" priority="750" id="2DL-Qh-v9P"/>
                             <constraint firstItem="ZYm-IK-zGb" firstAttribute="trailing" secondItem="dIY-R0-IZ1" secondAttribute="trailing" priority="750" id="6Ze-dW-NFH"/>
+                            <constraint firstItem="UHG-9l-mxu" firstAttribute="top" secondItem="biR-dm-X2B" secondAttribute="bottom" constant="12" id="DeX-WO-DhA"/>
                             <constraint firstItem="UHG-9l-mxu" firstAttribute="centerX" secondItem="ca5-c5-v8U" secondAttribute="centerX" id="FAo-Pz-Cep"/>
-                            <constraint firstItem="HzE-lo-q16" firstAttribute="leading" secondItem="dIY-R0-IZ1" secondAttribute="leading" constant="16" id="QFL-qN-xA9"/>
                             <constraint firstItem="UHG-9l-mxu" firstAttribute="bottom" secondItem="dIY-R0-IZ1" secondAttribute="bottom" id="Szh-Di-mWx"/>
+                            <constraint firstItem="biR-dm-X2B" firstAttribute="top" secondItem="ZYm-IK-zGb" secondAttribute="bottom" constant="8" symbolic="YES" id="XqG-LC-HK0"/>
                             <constraint firstItem="UHG-9l-mxu" firstAttribute="top" secondItem="ZYm-IK-zGb" secondAttribute="bottom" constant="50" id="ZcC-Y8-Ebn"/>
                             <constraint firstItem="ZYm-IK-zGb" firstAttribute="centerX" secondItem="UHG-9l-mxu" secondAttribute="centerX" id="a7n-Br-eLE"/>
+                            <constraint firstItem="biR-dm-X2B" firstAttribute="leading" secondItem="dIY-R0-IZ1" secondAttribute="leading" constant="13" id="i93-7a-Kcb"/>
                             <constraint firstItem="ZYm-IK-zGb" firstAttribute="top" secondItem="dIY-R0-IZ1" secondAttribute="top" id="ifY-ez-lHz"/>
-                            <constraint firstItem="HzE-lo-q16" firstAttribute="top" secondItem="ZYm-IK-zGb" secondAttribute="bottom" constant="8" symbolic="YES" id="pft-eq-BZi"/>
                             <constraint firstItem="UHG-9l-mxu" firstAttribute="leading" relation="lessThanOrEqual" secondItem="dIY-R0-IZ1" secondAttribute="leading" priority="750" constant="37" id="zbV-TC-F9l"/>
                             <constraint firstItem="dIY-R0-IZ1" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="UHG-9l-mxu" secondAttribute="trailing" priority="750" constant="37" id="zm1-Lk-X5J"/>
                         </constraints>
@@ -718,7 +722,7 @@
                         <outlet property="goButton" destination="Vl0-Px-TgJ" id="IoY-Z9-mxB"/>
                         <outlet property="plusButton" destination="MwM-oN-QLX" id="scg-Bl-tor"/>
                         <outlet property="rsbutton" destination="ZKO-QY-aCm" id="AWq-I6-UEP"/>
-                        <outlet property="speedLabel" destination="HzE-lo-q16" id="AwL-Eq-AyV"/>
+                        <outlet property="speedButton" destination="biR-dm-X2B" id="ZJe-J6-DzL"/>
                         <outlet property="sst" destination="RG0-c6-fEY" id="Jlw-5n-kif"/>
                         <outlet property="stbutton" destination="0hs-SE-6Kt" id="eng-am-vrJ"/>
                     </connections>

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AVFoundation
 
 fileprivate var buffer = ""
 
@@ -142,7 +142,12 @@ class FirstViewController: UIViewController {
     
     var running: Bool = true;
 
+    let kbSound = URL(fileURLWithPath: Bundle.main.path(forResource: "key", ofType: "m4a")!)
+    
+    var audioPlayer = AVAudioPlayer()
+    
     var singleStep: Bool = false
+    var speedLimit: Bool = false
     
     @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var stbutton: UIButton!
@@ -157,87 +162,132 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var Dbutton: UIButton!
     @IBOutlet weak var EButton: UIButton!
     @IBOutlet weak var Fbutton: UIButton!
+    @IBOutlet weak var speedButton: UIButton!
     
-    @IBOutlet weak var speedLabel: UILabel!
+
     
+    @IBAction func speedClicked(_ sender: UIButton) {
+        
+        self.speedLimit = !self.speedLimit
+        
+        print("speed limit %b", self.speedLimit)
+        if (start.uptimeNanoseconds > 1000) {
+            start = DispatchTime.now()
+            clockticks6502 = 0
+            prevTicks = 0
+        }
+        if (self.speedLimit) {
+            let attributedText: NSAttributedString = self.speedButton.attributedTitle(for: .normal)!
+            let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
+            mutableAttributedText.mutableString.setString("1.00 MHz")
+            self.speedButton.setAttributedTitle(mutableAttributedText, for: .normal)
+            
+        }
+    }
     
     @IBAction func GoClicked(_ sender: Any) {
         riot0.charPending = 0x13;
+        audioPlayer.play()
     }
     @IBAction func stClicked(_ sender: Any) {
         print("NMI")
         riot0.charPending = 0x15
         nmi6502()
+        audioPlayer.play()
     }
     @IBAction func rstClicked(_ sender: Any) {
         print("RESET")
         riot0.charPending = 0x15
-        reset6502()
+        if (start.uptimeNanoseconds > 1000) {
+            reset6502()
+            start = DispatchTime.now()
+        }
+        audioPlayer.play()
     }
     @IBAction func sstChanged(_ sender: UISwitch) {
         self.singleStep = sender.isOn
     }
     @IBAction func ADClicked(_ sender: Any) {
         riot0.charPending = 0x10
+        audioPlayer.play()
     }
     @IBAction func DAClicked(_ sender: Any) {
         riot0.charPending = 0x11
+        audioPlayer.play()
     }
     @IBAction func pcClicked(_ sender: Any) {
         riot0.charPending = 0x14
+        audioPlayer.play()
     }
     
     @IBAction func plusClicked(_ sender: Any) {
         riot0.charPending = 0x12
+        audioPlayer.play()
     }
     
     @IBAction func CClicked(_ sender: Any) {
         riot0.charPending = 0xC
+        audioPlayer.play()
     }
     @IBAction func DClicked(_ sender: Any) {
         riot0.charPending = 0xD
+        audioPlayer.play()
     }
     @IBAction func EClicked(_ sender: Any) {
         riot0.charPending = 0xE
+        audioPlayer.play()
     }
     @IBAction func FClicked(_ sender: Any) {
         riot0.charPending = 0xF
+        audioPlayer.play()
     }
     @IBAction func Eightclicked(_ sender: Any) {
         riot0.charPending = 0x8
+        audioPlayer.play()
     }
     @IBAction func NineClicked(_ sender: Any) {
         riot0.charPending = 0x9
+        audioPlayer.play()
     }
     @IBAction func AClicked(_ sender: Any) {
         riot0.charPending = 0xA
+        audioPlayer.play()
     }
     @IBAction func Bclicked(_ sender: Any) {
         riot0.charPending = 0xB
+        audioPlayer.play()
     }
     @IBAction func FourClicked(_ sender: Any) {
         riot0.charPending = 0x4
+        audioPlayer.play()
     }
     @IBAction func FiveClicked(_ sender: Any) {
         riot0.charPending = 0x5
+        audioPlayer.play()
     }
     @IBAction func SixClicked(_ sender: Any) {
         riot0.charPending = 0x6
+        audioPlayer.play()
     }
     @IBAction func SevenClicked(_ sender: Any) {
         riot0.charPending = 0x7
+        audioPlayer.play()
     }
     @IBAction func ZeroClicked(_ sender: Any) {
         riot0.charPending = 0x0
+        audioPlayer.play()
     }
     @IBAction func OneClicked(_ sender: Any) {
         riot0.charPending = 0x1
+        audioPlayer.play()
     }
     @IBAction func TwoClicked(_ sender: Any) {
         riot0.charPending = 0x2
+        audioPlayer.play()
     }
     @IBAction func ThreeClicked(_ sender: Any) {
         riot0.charPending = 0x3
+        audioPlayer.play()
     }
     
     override func viewDidLayoutSubviews() {
@@ -271,12 +321,14 @@ class FirstViewController: UIViewController {
         
         goButton.titleLabel!.adjustsFontSizeToFitWidth = true
         sst.isOn = false;
-        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: kbSound)
+        }catch{}
         sst.backgroundColor = UIColor.darkGray
         sst.layer.cornerRadius = sst.frame.height / 2.0
         sst.clipsToBounds = true
         
-        speedLabel.text = ""
+        //speedButton.titleLabel?.text = ""
         
         let testView: UIView = self.view.viewWithTag(1)!
 
@@ -308,44 +360,59 @@ class FirstViewController: UIViewController {
         
         self.view.addSubview(testView)
         
-        let start = DispatchTime.now()
+        
         var prevS: UInt64 = 0
         
+        
+        var prevTime: UInt64 = 0;
         dispatchQueue.async {
             reset6502();
+            start = DispatchTime.now()
             
             var nmiFlag: Bool = false;
             while self.running {
                 let t = DispatchTime.now().uptimeNanoseconds
+                
+                //Slow down if speed limit
+                // Frequency in hundreds of MHZ
+                
+                let div = t > start.uptimeNanoseconds ? t.subtractingReportingOverflow(start.uptimeNanoseconds).partialValue : 1
+                let freq = clockticks6502*100000 / div
+                
+                if (self.speedLimit && freq > 100) {
+                    usleep(1);
+                    continue;
+                }
 
-                let totalEl = t - start.uptimeNanoseconds
+                let totalEl = t > prevTime ? t - prevTime : 0
 
-                if (totalEl > 1000000) {
-                    let s = clockticks6502 / (totalEl/100000)
-                    if (s/10 != prevS) {
-                        print(s)
-                        prevS = s/10
+                if (totalEl > 100000000) {
+                    prevTicks = clockticks6502
+                    prevTime = t
+                    //start = DispatchTime.now()
+                    //print(freq)
+                    if (freq/10 != prevS && freq/10+1 != prevS) {
+                        prevS = freq/10
                         DispatchQueue.main.async {
-                            self.speedLabel.text = String(format: "%.2f MHz", Float(s)/100.0)
+                            let attributedText: NSAttributedString = self.speedButton.attributedTitle(for: .normal)!
+                            let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
+                            mutableAttributedText.mutableString.setString(String(format: "%.2f MHz", Float(freq)/100.0))
+                            self.speedButton.setAttributedTitle(mutableAttributedText, for: .normal)
                         }
                     }
-                    if (s > 100) {
-                        // We are running at more than 1 MHz, slow down
-                        usleep(1)
-                        continue
-                    }
+                    
+                    
+
                 }
+
+                
                 
                 
                 if (self.singleStep && ((pc < 0x1C00) || (pc >= 0x2000))) {
                     nmiFlag = true;
                 }
-                
-                
-                
+
                 step6502()
-                
-                
                 
                 if (nmiFlag) {
                     nmiFlag = false;
