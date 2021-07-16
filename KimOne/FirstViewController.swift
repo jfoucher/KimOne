@@ -12,15 +12,17 @@ var digits: [DigitItem] = [DigitItem(id:0), DigitItem(id:1), DigitItem(id:2), Di
 
 let dispatchQueue = DispatchQueue.global(qos: .background)
 
-let riot0 = Riot(n:0)
-let riot1 = Riot(n:1)
+var riot0 = Riot(n:0)
+var riot1 = Riot(n:1)
+
+var singleStep: Bool = false
 
 
 class FirstViewController: UIViewController {
     var running: Bool = true
     let kbSound = URL(fileURLWithPath: Bundle.main.path(forResource: "key", ofType: "m4a")!)
     var audioPlayer = AVAudioPlayer()
-    var singleStep: Bool = false
+    
     var speedLimit: Bool = false
     
     @IBOutlet weak var goButton: UIButton!
@@ -74,7 +76,7 @@ class FirstViewController: UIViewController {
         audioPlayer.play()
     }
     @IBAction func sstChanged(_ sender: UISwitch) {
-        self.singleStep = sender.isOn
+        singleStep = sender.isOn
     }
     @IBAction func ADClicked(_ sender: Any) {
         riot0.charPending = 0x10
@@ -164,7 +166,9 @@ class FirstViewController: UIViewController {
         
         // Prepare UI
         goButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        sst.isOn = false;
+        
+        sst.isOn = singleStep;
+        
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: kbSound)
         }catch{}
@@ -233,7 +237,7 @@ class FirstViewController: UIViewController {
                 }
                 // If the single step switch is on and we are in RAM
                 // Turn the nmi flag on
-                if (self.singleStep && ((pc < 0x1C00) || (pc >= 0x2000))) {
+                if (singleStep && ((pc < 0x1C00) || (pc >= 0x2000))) {
                     nmiFlag = true;
                 }
                 

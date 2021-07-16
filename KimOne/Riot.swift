@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct TIMER {
+struct TIMER: Codable {
     var timer_mult:UInt16
     var tick_accum: UInt16
     var start_value: UInt8
     var timer_count: UInt8
     var timeout: UInt8
 
-    var starttime: DispatchTime;
+    var starttime: UInt64;
 }
 
 
-class Riot {
+class Riot: Codable {
     var rom:[UInt8] = [UInt8](repeating: 0, count: Int(1024))
     var ram: [UInt8] = [UInt8](repeating: 0, count: Int(64))
     var padd: UInt8 = 0
@@ -27,7 +27,7 @@ class Riot {
     var sbd: UInt8 = 0
     var charPending: UInt8 = 0x15
     
-    var timer: TIMER = TIMER(timer_mult: 0, tick_accum: 0, start_value: 0, timer_count: 0, timeout: 0, starttime: DispatchTime.now())
+    var timer: TIMER = TIMER(timer_mult: 0, tick_accum: 0, start_value: 0, timer_count: 0, timeout: 0, starttime: DispatchTime.now().uptimeNanoseconds)
 
     let num: UInt
     let baseAddress: UInt16
@@ -42,6 +42,7 @@ class Riot {
         self.ramBaseAddress = n > 0 ? 0x1780 : 0x17C0
         self.romBaseAddress = n > 0 ? 0x1800 : 0x1C00
     }
+    
     
     func read(address: UInt16) -> UInt8 {
         let addr = address - self.baseAddress;
@@ -140,7 +141,7 @@ class Riot {
         self.timer.start_value = value;
         self.timer.timer_count = value;
         self.timer.timeout = 0;
-        self.timer.starttime = DispatchTime.now()
+        self.timer.starttime = DispatchTime.now().uptimeNanoseconds
     }
     
     func updateTimer() {
@@ -148,7 +149,7 @@ class Riot {
             return;
         }
         let t = DispatchTime.now()
-        let diff = t.uptimeNanoseconds - self.timer.starttime.uptimeNanoseconds
+        let diff = t.uptimeNanoseconds - self.timer.starttime
         if (diff / 1000 >= UInt64(self.timer.start_value) * UInt64(self.timer.timer_mult)) {
             self.timer.timeout = 1;
             self.timer.timer_count = 0;
