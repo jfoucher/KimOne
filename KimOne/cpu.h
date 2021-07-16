@@ -14,6 +14,8 @@
 #include <stdint.h>
 
 
+
+
 //6502 defines
 // #define UNDOCUMENTED //when this is defined, undocumented opcodes are handled.
                      //otherwise, they're simply treated as NOPs.
@@ -81,7 +83,7 @@ uint8_t sp, a, x, y, status = FLAG_CONSTANT;
 
 //helper variables
 uint64_t instructions = 0; //keep track of total instructions executed
-uint32_t clockticks6502, clockgoal6502 = 0;
+uint64_t clockticks6502, clockgoal6502 = 0;
 uint16_t oldpc, ea, reladdr, value, result;
 uint8_t opcode, oldstatus;
 
@@ -97,4 +99,7 @@ void exec6502(uint32_t tickcount);
 void step6502(void);
 
 void CallSwiftFromC(void(*f)(void));
+
+uint8_t mchess[1393];
+
 #endif /* cpu_h */

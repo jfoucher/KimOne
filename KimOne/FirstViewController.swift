@@ -35,23 +35,26 @@ func read6502Swift(address: UInt16) -> UInt8 {
     let  addr = address;
     if (addr == 0x1F1F) {
         pc = 0x1F45;    // skip subroutine part that deals with LEDs
-        
-        DispatchQueue.main.async {
-            let c1 = memory[0x00FB]
-            if (c1 != prev1) {
-                prev1 = c1;
+        let c1 = memory[0x00FB]
+        if (c1 != prev1) {
+            prev1 = c1;
+            DispatchQueue.main.async {
                 digits[0].view.showDigit(digit: ((c1 & 0xF0) >> 4))
                 digits[1].view.showDigit(digit: (c1 & 0x0F))
             }
-            let c2 = memory[0x00FA]
-            if (c2 != prev2) {
-                prev2 = c2;
+        }
+        let c2 = memory[0x00FA]
+        if (c2 != prev2) {
+            prev2 = c2;
+            DispatchQueue.main.async {
                 digits[2].view.showDigit(digit: ((c2 & 0xF0) >> 4))
                 digits[3].view.showDigit(digit: (c2 & 0x0F))
             }
-            let c3 = memory[0x00F9]
-            if (c3 != prev3) {
-                prev3 = c3;
+        }
+        let c3 = memory[0x00F9]
+        if (c3 != prev3) {
+            prev3 = c3;
+            DispatchQueue.main.async {
                 digits[4].view.showDigit(digit: ((c3 & 0xF0) >> 4))
                 digits[5].view.showDigit(digit: (c3 & 0x0F))
             }
@@ -155,6 +158,8 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var EButton: UIButton!
     @IBOutlet weak var Fbutton: UIButton!
     
+    @IBOutlet weak var speedLabel: UILabel!
+    
     
     @IBAction func GoClicked(_ sender: Any) {
         riot0.charPending = 0x13;
@@ -237,9 +242,6 @@ class FirstViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        NSLog("bounds = \(self.view.bounds)")
-        
-        
         
         let testView: UIView = self.view.viewWithTag(1)!
         
@@ -274,6 +276,8 @@ class FirstViewController: UIViewController {
         sst.layer.cornerRadius = sst.frame.height / 2.0
         sst.clipsToBounds = true
         
+        speedLabel.text = ""
+        
         let testView: UIView = self.view.viewWithTag(1)!
 
         self.view.backgroundColor = UIColor.black
@@ -304,16 +308,44 @@ class FirstViewController: UIViewController {
         
         self.view.addSubview(testView)
         
+        let start = DispatchTime.now()
+        var prevS: UInt64 = 0
         
         dispatchQueue.async {
             reset6502();
+            
             var nmiFlag: Bool = false;
             while self.running {
+                let t = DispatchTime.now().uptimeNanoseconds
+
+                let totalEl = t - start.uptimeNanoseconds
+
+                if (totalEl > 1000000) {
+                    let s = clockticks6502 / (totalEl/100000)
+                    if (s/10 != prevS) {
+                        print(s)
+                        prevS = s/10
+                        DispatchQueue.main.async {
+                            self.speedLabel.text = String(format: "%.2f MHz", Float(s)/100.0)
+                        }
+                    }
+                    if (s > 100) {
+                        // We are running at more than 1 MHz, slow down
+                        usleep(1)
+                        continue
+                    }
+                }
+                
+                
                 if (self.singleStep && ((pc < 0x1C00) || (pc >= 0x2000))) {
                     nmiFlag = true;
                 }
-                            
+                
+                
+                
                 step6502()
+                
+                
                 
                 if (nmiFlag) {
                     nmiFlag = false;
@@ -330,7 +362,7 @@ class FirstViewController: UIViewController {
                 }
                 
                     
-                usleep(1)
+                //usleep(1)
             }
         }
     }
@@ -345,7 +377,7 @@ class FirstViewController: UIViewController {
     func loadMicroChess() {
         var i = 0;
         let val = [UInt8].fromTuple(mchess)
-        
+
         while i < 1393 {
             memory[0xC000 + i] = val?[i] ?? 0
             i += 1
