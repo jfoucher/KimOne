@@ -15,6 +15,8 @@
 		AB107F24269FA3950048A3CF /* cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = AB107F23269FA3950048A3CF /* cpu.c */; };
 		AB107F29269FB1400048A3CF /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AB107F28269FB1400048A3CF /* logo.png */; };
 		AB65D41426A1872800AA37D6 /* test.m4a in Resources */ = {isa = PBXBuildFile; fileRef = AB65D41326A1872800AA37D6 /* test.m4a */; };
+		AB77A36426A2149A00F59F9D /* ProcessorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB77A36326A2149A00F59F9D /* ProcessorInterface.swift */; };
+		AB77A36926A2159F00F59F9D /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB77A36826A2159F00F59F9D /* DisplayView.swift */; };
 		AB9AEC1F26A04CB30010CB6D /* 3270Condensed-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */; };
 		ABB6814E26A0720800C2FC21 /* Riot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6814D26A0720800C2FC21 /* Riot.swift */; };
 		ABB6815426A0974600C2FC21 /* rom1.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABB6815226A0974600C2FC21 /* rom1.bin */; };
@@ -56,6 +58,9 @@
 		AB107F28269FB1400048A3CF /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = KimOne/Resources/logo.png; sourceTree = SOURCE_ROOT; };
 		AB33BE62229FF6150003EEA3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		AB65D41326A1872800AA37D6 /* test.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.m4a; sourceTree = "<group>"; };
+		AB77A36326A2149A00F59F9D /* ProcessorInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessorInterface.swift; sourceTree = "<group>"; };
+		AB77A36826A2159F00F59F9D /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
+		AB77A36D26A2206400F59F9D /* KimOne.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KimOne.entitlements; sourceTree = "<group>"; };
 		AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3270Condensed-Regular.otf"; sourceTree = "<group>"; };
 		ABB2EE6426A0CBB900212B68 /* Microchess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Microchess.h; sourceTree = "<group>"; };
 		ABB6814D26A0720800C2FC21 /* Riot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Riot.swift; sourceTree = "<group>"; };
@@ -112,12 +117,15 @@
 		AB04BF2A229F539400B1111E /* KimOne */ = {
 			isa = PBXGroup;
 			children = (
+				AB77A36D26A2206400F59F9D /* KimOne.entitlements */,
 				AB107F05269F7D4E0048A3CF /* DigitView.swift */,
+				AB77A36826A2159F00F59F9D /* DisplayView.swift */,
 				AB04BF2B229F539400B1111E /* AppDelegate.swift */,
 				AB107F22269FA3950048A3CF /* cpu.h */,
 				ABB6814D26A0720800C2FC21 /* Riot.swift */,
 				AB107F23269FA3950048A3CF /* cpu.c */,
 				AB04BF2D229F539400B1111E /* FirstViewController.swift */,
+				AB77A36326A2149A00F59F9D /* ProcessorInterface.swift */,
 				AB65D3FD26A15E8900AA37D6 /* Resources */,
 				ABD781B322A00AFE00574458 /* Assets.xcassets */,
 				AB04BF31229F539400B1111E /* Main.storyboard */,
@@ -334,7 +342,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB107F06269F7D4E0048A3CF /* DigitView.swift in Sources */,
+				AB77A36926A2159F00F59F9D /* DisplayView.swift in Sources */,
 				AB04BF2C229F539400B1111E /* AppDelegate.swift in Sources */,
+				AB77A36426A2149A00F59F9D /* ProcessorInterface.swift in Sources */,
 				ABB6814E26A0720800C2FC21 /* Riot.swift in Sources */,
 				AB107F24269FA3950048A3CF /* cpu.c in Sources */,
 				AB04BF2E229F539400B1111E /* FirstViewController.swift in Sources */,
@@ -516,6 +526,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = KimOne/KimOne.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -530,6 +541,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = sixpixels.kimone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "KimOne/KimOne-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -542,6 +554,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = KimOne/KimOne.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 24G23598DF;
@@ -555,6 +568,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = sixpixels.kimone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "KimOne/KimOne-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

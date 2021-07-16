@@ -3,7 +3,6 @@
 //  KimOne
 //
 //  Created by Jonathan Foucher on 15/07/2021.
-//  Copyright © 2021 Jonathan Foucher. All rights reserved.
 //
 
 import Foundation
@@ -52,9 +51,6 @@ class Riot {
         case 0:
             sv = (self.sbd >> 1) & 0xf
             let ch = Int(self.charPending)
-            if (ch != 0x15) {
-                print(String(format: "char pending %d", self.charPending))
-            }
             
             if (self.num == 1) {
                 return self.sad

@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view autoresizesSubviews="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZYm-IK-zGb">
+                            <view autoresizesSubviews="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZYm-IK-zGb" customClass="DisplayView" customModule="KimOne" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
                                 <accessibility key="accessibilityConfiguration" hint="This is the display, composed of 6 seven segment displays" identifier="disp" label="Display">
                                     <accessibilityTraits key="traits" notEnabled="YES" updatesFrequently="YES"/>
@@ -29,8 +29,24 @@
                                     <constraint firstAttribute="width" priority="250" constant="375" id="sqv-kW-SBc"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="biR-dm-X2B">
+                                <rect key="frame" x="16" y="118" width="53" height="30"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Button">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="0.084040851149999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="18" name="3270Condensed"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="speedClicked:" destination="oJ6-If-Sbn" eventType="touchUpInside" id="gVM-gg-jza"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UHG-9l-mxu">
-                                <rect key="frame" x="16" y="144" width="344" height="523"/>
+                                <rect key="frame" x="16" y="136" width="344" height="523"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vl0-Px-TgJ">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -584,7 +600,7 @@
                                                 <rect key="frame" x="18.5" y="8" width="43" height="29"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="43" id="nSN-hA-vts"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="43" id="nSN-hA-vts"/>
                                                 </constraints>
                                                 <attributedString key="attributedText">
                                                     <fragment content="SST">
@@ -674,22 +690,6 @@
                                     <constraint firstItem="f9O-dD-sdm" firstAttribute="top" secondItem="0wp-Jx-8Ta" secondAttribute="bottom" constant="8" symbolic="YES" id="ywg-TO-DVD"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="biR-dm-X2B">
-                                <rect key="frame" x="16" y="106" width="53" height="30"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Button">
-                                            <attributes>
-                                                <color key="NSColor" red="1" green="0.084040851149999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="18" name="3270Condensed"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <connections>
-                                    <action selector="speedClicked:" destination="oJ6-If-Sbn" eventType="touchUpInside" id="gVM-gg-jza"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dIY-R0-IZ1"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -697,8 +697,9 @@
                             <constraint firstItem="ZYm-IK-zGb" firstAttribute="leading" secondItem="dIY-R0-IZ1" secondAttribute="leading" priority="750" id="2DL-Qh-v9P"/>
                             <constraint firstItem="ZYm-IK-zGb" firstAttribute="trailing" secondItem="dIY-R0-IZ1" secondAttribute="trailing" priority="750" id="6Ze-dW-NFH"/>
                             <constraint firstItem="UHG-9l-mxu" firstAttribute="top" secondItem="biR-dm-X2B" secondAttribute="bottom" constant="8" symbolic="YES" id="DeX-WO-DhA"/>
-                            <constraint firstItem="UHG-9l-mxu" firstAttribute="bottom" secondItem="dIY-R0-IZ1" secondAttribute="bottom" id="Szh-Di-mWx"/>
+                            <constraint firstItem="biR-dm-X2B" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZYm-IK-zGb" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="bEJ-l8-n0j"/>
                             <constraint firstItem="biR-dm-X2B" firstAttribute="leading" secondItem="Vl0-Px-TgJ" secondAttribute="leading" id="f14-om-6Vm"/>
+                            <constraint firstItem="UHG-9l-mxu" firstAttribute="bottom" secondItem="dIY-R0-IZ1" secondAttribute="bottom" constant="-8" id="fHE-Jb-dQj"/>
                             <constraint firstItem="ZYm-IK-zGb" firstAttribute="top" secondItem="dIY-R0-IZ1" secondAttribute="top" id="ifY-ez-lHz"/>
                             <constraint firstItem="UHG-9l-mxu" firstAttribute="leading" relation="lessThanOrEqual" secondItem="dIY-R0-IZ1" secondAttribute="leading" priority="250" id="zbV-TC-F9l"/>
                             <constraint firstItem="dIY-R0-IZ1" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="UHG-9l-mxu" secondAttribute="trailing" priority="750" constant="15" id="zm1-Lk-X5J"/>

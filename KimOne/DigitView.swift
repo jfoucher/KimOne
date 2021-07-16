@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+struct DigitItem {
+    let view: DigitView = DigitView()
+    let id: Int
+}
+
 
 class DigitView: UIView {
     var value: UInt8 = 0

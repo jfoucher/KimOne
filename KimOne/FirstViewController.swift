@@ -1,151 +1,25 @@
 //
 //  FirstViewController.swift
-//  Cesium
+//  KimOne
 //
 //  Created by Jonathan Foucher on 30/05/2019.
-//  Copyright © 2019 Jonathan Foucher. All rights reserved.
 //
 
 import UIKit
 import AVFoundation
 
-fileprivate var buffer = ""
-
-var memory:[UInt8] = [UInt8](repeating: 0x00, count: Int(64*1024))
-
 var digits: [DigitItem] = [DigitItem(id:0), DigitItem(id:1), DigitItem(id:2), DigitItem(id:3), DigitItem(id:4), DigitItem(id:5)]
 
 let dispatchQueue = DispatchQueue.global(qos: .background)
 
-struct DigitItem {
-    let view: DigitView = DigitView()
-    let id: Int
-}
-
 let riot0 = Riot(n:0)
 let riot1 = Riot(n:1)
 
-var prev1: UInt8 = 0xFF
-var prev2: UInt8 = 0xFF
-var prev3: UInt8 = 0xFF
-
-@_cdecl("ReadCallback")
-func read6502Swift(address: UInt16) -> UInt8 {
-    var val: UInt8
-    let  addr = address;
-    if (addr == 0x1F1F) {
-        pc = 0x1F45;    // skip subroutine part that deals with LEDs
-        let c1 = memory[0x00FB]
-        if (c1 != prev1) {
-            prev1 = c1;
-            DispatchQueue.main.async {
-                digits[0].view.showDigit(digit: ((c1 & 0xF0) >> 4))
-                digits[1].view.showDigit(digit: (c1 & 0x0F))
-            }
-        }
-        let c2 = memory[0x00FA]
-        if (c2 != prev2) {
-            prev2 = c2;
-            DispatchQueue.main.async {
-                digits[2].view.showDigit(digit: ((c2 & 0xF0) >> 4))
-                digits[3].view.showDigit(digit: (c2 & 0x0F))
-            }
-        }
-        let c3 = memory[0x00F9]
-        if (c3 != prev3) {
-            prev3 = c3;
-            DispatchQueue.main.async {
-                digits[4].view.showDigit(digit: ((c3 & 0xF0) >> 4))
-                digits[5].view.showDigit(digit: (c3 & 0x0F))
-            }
-        }
-        
-        return (0xEA);
-    } else if (address == 0xCFF4)  {
-         //simulated keyboard input
-        let tempval = riot0.charPending;
-        riot0.charPending = 0x15
-                // translate KIM-1 button codes into ASCII code expected by this version of Microchess
-        switch (tempval) {
-        case 0x14:  return 0x50    // PC translated to P
-        case 0xF:  return 13    // F translated to Return
-        case 0x12: return 0x57   // + translated to W meaning Blitz mode toggle
-        default:
-            return tempval
-        }
-        
-    } else if (address == 0xCFF3) {
-        return (riot0.charPending == 0) ? 0 : 1;
-    } else if (addr >= riot0.baseAddress && addr < riot0.baseAddress + 8) {
-        
-        val = riot0.read(address: addr)
-        //print(String(format: "Read riot 0 registers ad: %04X v: %02X", address, val))
-    } else if (addr >= riot1.baseAddress && addr < riot1.baseAddress + 8) {
-        
-        val = riot1.read(address: addr)
-        //print(String(format: "Read riot 1 registers ad: %04X v: %02X", address, val))
-    } else if (addr >= riot0.ramBaseAddress && addr < riot0.ramBaseAddress + 64) {
-        
-        val = riot0.ram[Int(addr - riot0.ramBaseAddress)]
-        //print(String(format: "Read riot 0 RAM ad: %04X v: %02X", address, val))
-    } else if (addr >= riot1.ramBaseAddress && addr < riot1.ramBaseAddress + 64) {
-        
-        val = riot1.ram[Int(addr - riot1.ramBaseAddress)]
-        //print(String(format: "Read riot 1 RAM ad: %04X v: %02X", address, val))
-    } else if (addr >= riot0.romBaseAddress && addr <= riot0.romBaseAddress + 1023) {
-        
-        val = riot0.rom[Int(addr - riot0.romBaseAddress)]
-        //print(String(format: "Read riot 0 ROM ad: %04X v: %02X", address, val))
-    } else if (addr >= riot1.romBaseAddress && addr <= riot1.romBaseAddress + 1023) {
-        
-        val = riot1.rom[Int(addr - riot1.romBaseAddress)]
-        //print(String(format: "Read riot 1 ROM ad: %04X v: %02X", address, val))
-    } else if (addr >= 0xFF00) {
-        
-        val = riot0.rom[Int(addr - 0xFC00)]
-        //print(String(format: "Read riot 0 ROM ad: %04X v: %02X", address, val))
-    } else {
-        
-        val = memory[Int(address)]
-        //print(String(format: "Read MEMORY ad: %04X v: %02X", address, val))
-    }
-    
-//    print(String(format: "read ad: %04X v: %02X", addr, val))
-    
-    return val
-}
-
-@_cdecl("WriteCallback")
-func write6502Swift(address: UInt16, value: UInt8) {
-    let  addr = address;
-    if (addr >= riot0.baseAddress && addr < riot0.baseAddress + 8) {
-        //print(String(format: "Write riot 0 registers ad: %04X v: %02X", address, value))
-        riot0.write(address: addr, value: value)
-    } else if (addr >= riot1.baseAddress && addr < riot1.baseAddress + 8) {
-        //print(String(format: "Write riot 1 registers ad: %04X v: %02X", address, value))
-        riot1.write(address: addr, value: value)
-    } else if (addr >= riot0.ramBaseAddress && addr < riot0.ramBaseAddress + 64) {
-        //print(String(format: "Write riot 0 RAM ad: %04X v: %02X", address, value))
-        riot0.ram[Int(addr - riot0.ramBaseAddress)] = value
-    } else if (addr >= riot1.ramBaseAddress && addr < riot1.ramBaseAddress + 64) {
-        //print(String(format: "Write riot 1 RAM ad: %04X v: %02X", address, value))
-        riot1.ram[Int(addr - riot1.ramBaseAddress)] = value
-    } else {
-        //print(String(format: "Write mem ad: %04X v: %02X", address, value))
-        memory[Int(address)] = value
-    }
-    
-    
-}
 
 class FirstViewController: UIViewController {
-    
-    var running: Bool = true;
-
+    var running: Bool = true
     let kbSound = URL(fileURLWithPath: Bundle.main.path(forResource: "key", ofType: "m4a")!)
-    
     var audioPlayer = AVAudioPlayer()
-    
     var singleStep: Bool = false
     var speedLimit: Bool = false
     
@@ -153,7 +27,6 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var stbutton: UIButton!
     @IBOutlet weak var rsbutton: UIButton!
     @IBOutlet weak var sst: UISwitch!
-
     @IBOutlet var adBtn: UIButton!
     @IBOutlet weak var DAButton: UIButton!
     @IBOutlet weak var PCButton: UIButton!
@@ -164,13 +37,9 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var Fbutton: UIButton!
     @IBOutlet weak var speedButton: UIButton!
     
-
-    
     @IBAction func speedClicked(_ sender: UIButton) {
-        
         self.speedLimit = !self.speedLimit
         
-        print("speed limit %b", self.speedLimit)
         if (start.uptimeNanoseconds > 1000) {
             start = DispatchTime.now()
             clockticks6502 = 0
@@ -290,35 +159,10 @@ class FirstViewController: UIViewController {
         audioPlayer.play()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        let testView: UIView = self.view.viewWithTag(1)!
-        
-        let screenWidth = testView.bounds.width
-        
-        let totalWidth = CGFloat(70.0*5.0+95.0);
-        
-        let ratio = screenWidth / totalWidth
-        
-        for (i, d) in digits.enumerated() {
-            var s = 70.0;
-            if (i == 4) {
-                s=74.0
-            }
-            if (i == 5) {
-                s=73.0
-            }
-            
-            d.view.transform = CGAffineTransform(scaleX: ratio, y: ratio)
-            
-            d.view.frame = CGRect(x: (CGFloat(s)*CGFloat(i)*ratio), y: 0, width: 85*ratio, height: 110*ratio)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Prepare UI
         goButton.titleLabel!.adjustsFontSizeToFitWidth = true
         sst.isOn = false;
         do {
@@ -328,17 +172,22 @@ class FirstViewController: UIViewController {
         sst.layer.cornerRadius = sst.frame.height / 2.0
         sst.clipsToBounds = true
         
-        //speedButton.titleLabel?.text = ""
         
-        let testView: UIView = self.view.viewWithTag(1)!
+        let testView: DisplayView = self.view.viewWithTag(1) as! DisplayView
 
         self.view.backgroundColor = UIColor.black
+        for d in digits {
+            testView.addSubview(d.view)
+        }
         
+        self.view.addSubview(testView)
+        
+        // Load data into 6530 ROM
         riot0.loadRom()
         riot1.loadRom()
         
+        // LOAD data into RAM
         loadMicroChess()
-        
 
         memory[0x400] = 0x42
         memory[0x401] = 0xFF
@@ -353,29 +202,22 @@ class FirstViewController: UIViewController {
         write6502(0x17FA, 0x00)
         write6502(0x17FB, 0x1C)
         
-        
-        for d in digits {
-            testView.addSubview(d.view)
-        }
-        
-        self.view.addSubview(testView)
-        
-        
         var prevS: UInt64 = 0
         
-        
         var prevTime: UInt64 = 0;
+        
+        //Start a new thread to run the 6502 emulation
         dispatchQueue.async {
             reset6502();
             start = DispatchTime.now()
             
+            // Flag for NMI when single stepping or when ST is pressed
             var nmiFlag: Bool = false;
+            // Start main loop
             while self.running {
                 let t = DispatchTime.now().uptimeNanoseconds
                 
-                //Slow down if speed limit
-                // Frequency in hundreds of MHZ
-                
+                // Slow down if speed limit
                 let div = t > start.uptimeNanoseconds ? t.subtractingReportingOverflow(start.uptimeNanoseconds).partialValue : 1
                 let freq = clockticks6502*100000 / div
                 
@@ -386,11 +228,11 @@ class FirstViewController: UIViewController {
 
                 let totalEl = t > prevTime ? t - prevTime : 0
 
+                // update speed counter every 0.1s
                 if (totalEl > 100000000) {
                     prevTicks = clockticks6502
                     prevTime = t
-                    //start = DispatchTime.now()
-                    //print(freq)
+                    // Only update if it changed by at least 0.1 MHz
                     if (freq/10 != prevS && freq/10+1 != prevS) {
                         prevS = freq/10
                         DispatchQueue.main.async {
@@ -400,26 +242,21 @@ class FirstViewController: UIViewController {
                             self.speedButton.setAttributedTitle(mutableAttributedText, for: .normal)
                         }
                     }
-                    
-                    
-
                 }
-
-                
-                
-                
+                // If the single step switch is on and we are in RAM
+                // Turn the nmi flag on
                 if (self.singleStep && ((pc < 0x1C00) || (pc >= 0x2000))) {
                     nmiFlag = true;
                 }
-
+                
+                //Run the current instruction
                 step6502()
                 
                 if (nmiFlag) {
+                    // If we have an nmi, go to the nmi handler now
                     nmiFlag = false;
                     nmi6502();
                 }
-                
-                //print(String(format: "%04X", pc))
                 
                 if ((pc == 0x1f79) || (pc == 0x1f90)) {
                     // If we get to the place where a character has been read,
@@ -427,20 +264,16 @@ class FirstViewController: UIViewController {
                     
                     riot0.charPending = 0x15;
                 }
-                
-                    
-                //usleep(1)
             }
         }
     }
     
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
-      return .lightContent
-   }
+    // Hide status bar
     override var prefersStatusBarHidden: Bool{
         return true
     }
     
+    // Load microchess at 0XC000
     func loadMicroChess() {
         var i = 0;
         let val = [UInt8].fromTuple(mchess)
@@ -448,57 +281,6 @@ class FirstViewController: UIViewController {
         while i < 1393 {
             memory[0xC000 + i] = val?[i] ?? 0
             i += 1
-        }
-    }
-    
-//    func loadTest() {
-//        var i = 0;
-//        let val = [UInt8].fromTuple(test)
-//
-//        while i < 65536 {
-//            memory[i] = val?[i] ?? 0
-//            i += 1
-//        }
-//    }
-    
-    func mapCodeToChar(code: UInt8) -> UInt8 {
-        switch code {
-        case 57:
-            return 0xC
-        case 94:
-            return 0xD
-        case 121:
-            return 0xE
-            
-        case 113:
-            return 0xF
-        case 127:
-            return 0x8
-        case 111:
-            return 0x9
-        case 119:
-            return 0xA
-        case 124:
-            return 0xB
-        case 102:
-            return 0x4
-        case 109:
-            return 0x5
-        case 125:
-            return 0x6
-        case 7:
-            return 0x7
-        case 6:
-            return 0x1
-        case 91:
-            return 0x2
-        case 79:
-            return 0x3
-        case 63:
-            return 0
-        default:
-            print(String(format: "Unkown code %d", code))
-            return 0xFF
         }
     }
 }
