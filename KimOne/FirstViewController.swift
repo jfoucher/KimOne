@@ -45,12 +45,12 @@ class FirstViewController: UIViewController {
             clockticks6502 = 0
             prevTicks = 0
         }
+        
         if (self.speedLimit) {
             let attributedText: NSAttributedString = self.speedButton.attributedTitle(for: .normal)!
             let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
             mutableAttributedText.mutableString.setString("1.00 MHz")
             self.speedButton.setAttributedTitle(mutableAttributedText, for: .normal)
-            
         }
     }
     
@@ -186,25 +186,13 @@ class FirstViewController: UIViewController {
         riot0.loadRom()
         riot1.loadRom()
         
-        // LOAD data into RAM
-        loadMicroChess()
 
-        memory[0x400] = 0x42
-        memory[0x401] = 0xFF
-        memory[0x402] = 0xCA
-        memory[0x403] = 0xD0
-        memory[0x404] = 0xFD
-        
-        // Set up default IRQ vector
-        write6502(0x17FE, 0x22)
-        write6502(0x17FF, 0x1C)
-        //Setup default NMI vector
-        write6502(0x17FA, 0x00)
-        write6502(0x17FB, 0x1C)
         
         var prevS: UInt64 = 0
         
         var prevTime: UInt64 = 0;
+        
+        
         
         //Start a new thread to run the 6502 emulation
         dispatchQueue.async {
@@ -271,44 +259,5 @@ class FirstViewController: UIViewController {
     // Hide status bar
     override var prefersStatusBarHidden: Bool{
         return true
-    }
-    
-    // Load microchess at 0XC000
-    func loadMicroChess() {
-        var i = 0;
-        let val = [UInt8].fromTuple(mchess)
-
-        while i < 1393 {
-            memory[0xC000 + i] = val?[i] ?? 0
-            i += 1
-        }
-    }
-}
-
-extension Array {
-    
-    /**
-     Attempt to convert a tuple into an Array.
-     
-     - Parameter tuple: The tuple to try and convert. All members must be of the same type.
-     - Returns: An array of the tuple's values, or `nil` if any tuple members do not match the `Element` type of this array.
-     */
-    static func fromTuple<Tuple> (_ tuple: Tuple) -> [Element]? {
-        let val = Array<Element>.fromTupleOptional(tuple)
-        return val.allSatisfy({ $0 != nil }) ? val.map { $0! } : nil
-    }
-    
-    /**
-     Convert a tuple into an array.
-     
-     - Parameter tuple: The tuple to try and convert.
-     - Returns: An array of the tuple's values, with `nil` for any values that could not be cast to the `Element` type of this array.
-     */
-    static func fromTupleOptional<Tuple> (_ tuple: Tuple) -> [Element?] {
-        return Mirror(reflecting: tuple)
-            .children
-            .filter { child in
-                (child.label ?? "x").allSatisfy { char in ".1234567890".contains(char) }
-            }.map { $0.value as? Element }
     }
 }

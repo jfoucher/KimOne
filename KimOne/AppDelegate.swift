@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        restoreData()
         return true
     }
 
@@ -28,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -35,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         clockticks6502 = 0
         prevTicks = 0
         start = DispatchTime.now()
+        
+        
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -43,14 +48,108 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        saveData()
     }
 
 
+    func saveData() {
+        let mem = Data(memory).base64EncodedString()
+        UserDefaults.standard.set(mem, forKey: "memory")
+        let r1ram = Data(riot1.ram).base64EncodedString()
+        UserDefaults.standard.set(r1ram, forKey: "r1ram")
+        let r0ram = Data(riot1.ram).base64EncodedString()
+        UserDefaults.standard.set(r0ram, forKey: "r0ram")
+    }
+    
+    func restoreData() {
+        // LOAD data into RAM
+        loadMicroChess()
+
+        memory[0x400] = 0x42
+        memory[0x401] = 0xFF
+        memory[0x402] = 0xCA
+        memory[0x403] = 0xD0
+        memory[0x404] = 0xFD
+        
+        // Set up default IRQ vector
+        write6502(0x17FE, 0x22)
+        write6502(0x17FF, 0x1C)
+        //Setup default NMI vector
+        write6502(0x17FA, 0x00)
+        write6502(0x17FB, 0x1C)
+        
+        //Load user data
+        if let stringData = UserDefaults.standard.string(forKey: "memory")  {
+            if let nsdata1 = Data(base64Encoded: stringData, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
+
+                memory = nsdata1.withUnsafeBytes {
+                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
+                }
+            }
+        }
+        
+        if let stringData = UserDefaults.standard.string(forKey: "r0ram")  {
+            if let nsdata1 = Data(base64Encoded: stringData, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
+
+                riot0.ram = nsdata1.withUnsafeBytes {
+                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
+                }
+            }
+        }
+        if let stringData = UserDefaults.standard.string(forKey: "r1ram")  {
+            if let nsdata1 = Data(base64Encoded: stringData, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
+
+                riot1.ram = nsdata1.withUnsafeBytes {
+                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
+                }
+            }
+        }
+    }
+    
+    // Load microchess at 0XC000
+    func loadMicroChess() {
+        var i = 0;
+        let val = [UInt8].fromTuple(mchess)
+
+        while i < 1393 {
+            memory[0xC000 + i] = val?[i] ?? 0
+            i += 1
+        }
+    }
 }
 
 extension String {
     
     func localized(bundle: Bundle = .main, tableName: String = "Localizable") -> String {
         return NSLocalizedString(self, tableName: tableName, value: "**\(self)**", comment: "")
+    }
+}
+
+
+extension Array {
+    
+    /**
+     Attempt to convert a tuple into an Array.
+     
+     - Parameter tuple: The tuple to try and convert. All members must be of the same type.
+     - Returns: An array of the tuple's values, or `nil` if any tuple members do not match the `Element` type of this array.
+     */
+    static func fromTuple<Tuple> (_ tuple: Tuple) -> [Element]? {
+        let val = Array<Element>.fromTupleOptional(tuple)
+        return val.allSatisfy({ $0 != nil }) ? val.map { $0! } : nil
+    }
+    
+    /**
+     Convert a tuple into an array.
+     
+     - Parameter tuple: The tuple to try and convert.
+     - Returns: An array of the tuple's values, with `nil` for any values that could not be cast to the `Element` type of this array.
+     */
+    static func fromTupleOptional<Tuple> (_ tuple: Tuple) -> [Element?] {
+        return Mirror(reflecting: tuple)
+            .children
+            .filter { child in
+                (child.label ?? "x").allSatisfy { char in ".1234567890".contains(char) }
+            }.map { $0.value as? Element }
     }
 }
