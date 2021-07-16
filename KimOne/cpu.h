@@ -78,7 +78,7 @@
 
 //6502 CPU registers
 uint16_t pc;
-uint8_t sp, a, x, y, status = FLAG_CONSTANT;
+uint8_t sp, a, x, y, status;
 
 
 //helper variables

@@ -53,12 +53,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func saveData() {
-        let mem = Data(memory).base64EncodedString()
-        UserDefaults.standard.set(mem, forKey: "memory")
-        let r1ram = Data(riot1.ram).base64EncodedString()
-        UserDefaults.standard.set(r1ram, forKey: "r1ram")
-        let r0ram = Data(riot1.ram).base64EncodedString()
-        UserDefaults.standard.set(r0ram, forKey: "r0ram")
+//        let mem = Data(memory).base64EncodedString()
+//        UserDefaults.standard.set(mem, forKey: "memory")
+//        let r1ram = Data(riot1.ram).base64EncodedString()
+//        UserDefaults.standard.set(r1ram, forKey: "r1ram")
+//        let r0ram = Data(riot1.ram).base64EncodedString()
+//        UserDefaults.standard.set(r0ram, forKey: "r0ram")
+//        UserDefaults.standard.set(pc, forKey: "pc")
+//        UserDefaults.standard.set(a, forKey: "a")
+//        UserDefaults.standard.set(x, forKey: "x")
+//        UserDefaults.standard.set(y, forKey: "y")
+//        UserDefaults.standard.set(sp, forKey: "sp")
+//        UserDefaults.standard.set(status, forKey: "status")
     }
     
     func restoreData() {
@@ -77,33 +83,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Setup default NMI vector
         write6502(0x17FA, 0x00)
         write6502(0x17FB, 0x1C)
-        
-        //Load user data
-        if let stringData = UserDefaults.standard.string(forKey: "memory")  {
-            if let nsdata1 = Data(base64Encoded: stringData, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
-
-                memory = nsdata1.withUnsafeBytes {
-                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
-                }
-            }
-        }
-        
-        if let stringData = UserDefaults.standard.string(forKey: "r0ram")  {
-            if let nsdata1 = Data(base64Encoded: stringData, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
-
-                riot0.ram = nsdata1.withUnsafeBytes {
-                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
-                }
-            }
-        }
-        if let stringData = UserDefaults.standard.string(forKey: "r1ram")  {
-            if let nsdata1 = Data(base64Encoded: stringData, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
-
-                riot1.ram = nsdata1.withUnsafeBytes {
-                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
-                }
-            }
-        }
+//
+//        pc = UInt16(UserDefaults.standard.integer(forKey: "pc"))
+//        a = UInt8(UserDefaults.standard.integer(forKey: "a"))
+//        x = UInt8(UserDefaults.standard.integer(forKey: "x"))
+//        y = UInt8(UserDefaults.standard.integer(forKey: "y"))
+//        sp = UInt8(UserDefaults.standard.integer(forKey: "sp"))
+//        status = UInt8(UserDefaults.standard.integer(forKey: "status"))
+//        if (status == 0) {
+//            status = UInt8(FLAG_CONSTANT)
+//        }
+//
+//        //Load user data
+//        if let stringData = UserDefaults.standard.string(forKey: "memory")  {
+//            if let nsdata1 = Data(base64Encoded: stringData, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
+//
+//                memory = nsdata1.withUnsafeBytes {
+//                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
+//                }
+//            }
+//        }
+//
+//        if let stringData = UserDefaults.standard.string(forKey: "r0ram")  {
+//            if let nsdata1 = Data(base64Encoded: stringData, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
+//
+//                riot0.ram = nsdata1.withUnsafeBytes {
+//                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
+//                }
+//            }
+//        }
+//        if let stringData = UserDefaults.standard.string(forKey: "r1ram")  {
+//            if let nsdata1 = Data(base64Encoded: stringData, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
+//
+//                riot1.ram = nsdata1.withUnsafeBytes {
+//                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
+//                }
+//            }
+//        }
     }
     
     // Load microchess at 0XC000
