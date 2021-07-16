@@ -14,13 +14,11 @@
 		AB107F06269F7D4E0048A3CF /* DigitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB107F05269F7D4E0048A3CF /* DigitView.swift */; };
 		AB107F24269FA3950048A3CF /* cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = AB107F23269FA3950048A3CF /* cpu.c */; };
 		AB107F29269FB1400048A3CF /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AB107F28269FB1400048A3CF /* logo.png */; };
-		AB1AC3BF22A060EB00CDEEB7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB1AC3C122A060EB00CDEEB7 /* Localizable.strings */; };
 		AB9AEC1F26A04CB30010CB6D /* 3270Condensed-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */; };
 		ABB6814E26A0720800C2FC21 /* Riot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6814D26A0720800C2FC21 /* Riot.swift */; };
 		ABB6815426A0974600C2FC21 /* rom1.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABB6815226A0974600C2FC21 /* rom1.bin */; };
 		ABB6815526A0974600C2FC21 /* rom0.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABB6815326A0974600C2FC21 /* rom0.bin */; };
 		ABD781B422A00AFE00574458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABD781B322A00AFE00574458 /* Assets.xcassets */; };
-		ABF6252122B5CCCB008D5087 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABF6252322B5CCCB008D5087 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +51,7 @@
 		AB107F21269FA3950048A3CF /* KimOne-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KimOne-Bridging-Header.h"; sourceTree = "<group>"; };
 		AB107F22269FA3950048A3CF /* cpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cpu.h; sourceTree = "<group>"; };
 		AB107F23269FA3950048A3CF /* cpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cpu.c; sourceTree = "<group>"; };
-		AB107F28269FB1400048A3CF /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = SOURCE_ROOT; };
-		AB1AC3C022A060EB00CDEEB7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AB1AC3C222A060EF00CDEEB7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AB107F28269FB1400048A3CF /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = KimOne/Resources/logo.png; sourceTree = SOURCE_ROOT; };
 		AB33BE62229FF6150003EEA3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3270Condensed-Regular.otf"; sourceTree = "<group>"; };
 		ABB2EE6426A0CBB900212B68 /* Microchess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Microchess.h; sourceTree = "<group>"; };
@@ -64,8 +60,6 @@
 		ABB6815326A0974600C2FC21 /* rom0.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = rom0.bin; sourceTree = "<group>"; };
 		ABB9723326A0DF910076B03D /* Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
 		ABD781B322A00AFE00574458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		ABF6252222B5CCCB008D5087 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		ABF6252422B5CCD3008D5087 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,21 +114,27 @@
 				ABB6814D26A0720800C2FC21 /* Riot.swift */,
 				AB107F23269FA3950048A3CF /* cpu.c */,
 				AB04BF2D229F539400B1111E /* FirstViewController.swift */,
-				ABB6815326A0974600C2FC21 /* rom0.bin */,
-				ABB6815226A0974600C2FC21 /* rom1.bin */,
+				AB65D3FD26A15E8900AA37D6 /* Resources */,
 				ABD781B322A00AFE00574458 /* Assets.xcassets */,
 				AB04BF31229F539400B1111E /* Main.storyboard */,
-				AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */,
 				AB04BF36229F539500B1111E /* LaunchScreen.storyboard */,
-				AB107F28269FB1400048A3CF /* logo.png */,
 				AB04BF39229F539500B1111E /* Info.plist */,
-				ABF6252322B5CCCB008D5087 /* InfoPlist.strings */,
-				AB1AC3C122A060EB00CDEEB7 /* Localizable.strings */,
 				AB107F21269FA3950048A3CF /* KimOne-Bridging-Header.h */,
-				ABB2EE6426A0CBB900212B68 /* Microchess.h */,
-				ABB9723326A0DF910076B03D /* Test.h */,
 			);
 			path = KimOne;
+			sourceTree = "<group>";
+		};
+		AB65D3FD26A15E8900AA37D6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */,
+				ABB2EE6426A0CBB900212B68 /* Microchess.h */,
+				ABB9723326A0DF910076B03D /* Test.h */,
+				AB107F28269FB1400048A3CF /* logo.png */,
+				ABB6815326A0974600C2FC21 /* rom0.bin */,
+				ABB6815226A0974600C2FC21 /* rom1.bin */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,13 +249,11 @@
 			files = (
 				AB04BF38229F539500B1111E /* LaunchScreen.storyboard in Resources */,
 				ABB6815426A0974600C2FC21 /* rom1.bin in Resources */,
-				AB1AC3BF22A060EB00CDEEB7 /* Localizable.strings in Resources */,
 				AB107F29269FB1400048A3CF /* logo.png in Resources */,
 				AB9AEC1F26A04CB30010CB6D /* 3270Condensed-Regular.otf in Resources */,
 				ABD781B422A00AFE00574458 /* Assets.xcassets in Resources */,
 				ABB6815526A0974600C2FC21 /* rom0.bin in Resources */,
 				AB04BF33229F539400B1111E /* Main.storyboard in Resources */,
-				ABF6252122B5CCCB008D5087 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,24 +378,6 @@
 				AB33BE62229FF6150003EEA3 /* fr */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		AB1AC3C122A060EB00CDEEB7 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AB1AC3C022A060EB00CDEEB7 /* en */,
-				AB1AC3C222A060EF00CDEEB7 /* fr */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		ABF6252322B5CCCB008D5087 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ABF6252222B5CCCB008D5087 /* en */,
-				ABF6252422B5CCD3008D5087 /* fr */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

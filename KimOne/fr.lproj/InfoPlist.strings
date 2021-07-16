@@ -1,8 +1,0 @@
-/* 
-  InfoPlist.strings
-  Cesium
-
-  Created by Jonathan Foucher on 16/06/2019.
-  Copyright © 2019 Jonathan Foucher. All rights reserved.
-*/
-"NSFaceIDUsageDescription"="Nous utilisons Face ID pour vous authentifier après votre première connection";

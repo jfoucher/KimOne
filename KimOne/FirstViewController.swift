@@ -58,6 +58,21 @@ func read6502Swift(address: UInt16) -> UInt8 {
         }
         
         return (0xEA);
+    } else if (address == 0xCFF4)  {
+         //simulated keyboard input
+        let tempval = riot0.charPending;
+        riot0.charPending = 0x15
+                // translate KIM-1 button codes into ASCII code expected by this version of Microchess
+        switch (tempval) {
+        case 0x14:  return 0x50    // PC translated to P
+        case 0xF:  return 13    // F translated to Return
+        case 0x12: return 0x57   // + translated to W meaning Blitz mode toggle
+        default:
+            return tempval
+        }
+        
+    } else if (address == 0xCFF3) {
+        return (riot0.charPending == 0) ? 0 : 1;
     } else if (addr >= riot0.baseAddress && addr < riot0.baseAddress + 8) {
         
         val = riot0.read(address: addr)
