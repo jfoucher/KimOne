@@ -10,7 +10,8 @@ import Foundation
 
 var memory:[UInt8] = [UInt8](repeating: 0x00, count: Int(64*1024))
 
-
+var serialBuffer: [UInt8] = [UInt8](repeating: 0x00, count: Int(256))
+var serialCharsWaiting = 0;
 
 var prev1: UInt8 = 0xFF
 var prev2: UInt8 = 0xFF

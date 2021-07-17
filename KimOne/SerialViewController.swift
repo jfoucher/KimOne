@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 protocol TextReceiverDelegate:class {
-   func addText()
+    func addText(char: UInt8)
 }
 
-class SerialViewController: UIViewController, UITextViewDelegate {
+class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDelegate {
 
     var text = ""
     var previousText = ""
@@ -27,25 +27,75 @@ class SerialViewController: UIViewController, UITextViewDelegate {
         serialText.textContainerInset.bottom = 10
         serialText.clipsToBounds = true;
         serialText.layer.cornerRadius = 10.0;
-        serialText.delegate = self
         
+        serialText.isEditable = true
+        
+        
+        // Hidden textview to make keyboard appear
+        let textView = UITextView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0))
+        
+        textView.delegate = self
+        textView.becomeFirstResponder()
+        self.view.addSubview(textView)
+//        riot0.charPending = 0x15
+//        if (start.uptimeNanoseconds > 1000) {
+//            reset6502()
+//            start = DispatchTime.now()
+//        }
         riot0.serial = true
+        
+        riot0.delegate = self
     }
     
     func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
          //the textView parameter is the textView where text was changed
         if (textView.text.count < previousText.count) {
             // Delete key was pressed, trigger it on Kim
-            
+            print("delete")
+            dispatchQueue.sync {
+                serialBuffer[serialCharsWaiting] = 0x7F
+                serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
+                print(serialCharsWaiting)
+            }
         }
-        if (textView.text.last! == "\n") {
-            var lines = textView.text.components(separatedBy: "\n")
-            lines.removeLast()
-            let lastLine = lines.last ?? ""
-            print(lastLine);
+        if (textView.text.count > previousText.count) {
+            if let character = textView.text.last {
+                if let f = character.unicodeScalars.first {
+                    
+                    var v = UInt8(f.value & 0xFF)
+                    // convert lowercase to uppercase
+                    if (v >= 0x61 && v <= 0x74) {
+                        v -= 0x20
+                    }
+                    // Convert + to LF to enable stepping forwards
+                    if (v == 43) {
+                        v = 13
+                    }
+                    print(v)
+                    // Add text to serial monitor, unless its return
+                    if (v != 13 && v != 10) {
+                        self.serialText.text.append(Character(UnicodeScalar(v)))
+                    }
+                
+                    
+                    dispatchQueue.sync {
+                        serialBuffer[serialCharsWaiting] = v
+                        serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
+                    }
+                }
+                
+            }
+            
         }
         
         previousText = textView.text
+    }
+    
+    func addText(char: UInt8) {
+        print(char)
+        self.serialText.text.append(Character(UnicodeScalar(char)))
+        let range = NSMakeRange(self.serialText.text.count - 1, 0)
+        self.serialText.scrollRangeToVisible(range)
     }
     
     

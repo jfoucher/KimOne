@@ -685,7 +685,7 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                 </state>
                                 <connections>
-                                    <segue destination="DNX-cu-SF5" kind="show" animates="NO" id="UMd-Ip-zkZ"/>
+                                    <segue destination="DNX-cu-SF5" kind="showDetail" animates="NO" id="UMd-Ip-zkZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="biR-dm-X2B">
@@ -705,11 +705,14 @@
                                     <action selector="speedClicked:" destination="oJ6-If-Sbn" eventType="touchUpInside" id="gVM-gg-jza"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPJ-0d-ppD">
-                                <rect key="frame" x="292" y="98" width="30" height="30"/>
-                                <state key="normal" title="?"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPJ-0d-ppD">
+                                <rect key="frame" x="267" y="102" width="55" height="35"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                                <state key="normal" title="?">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
-                                    <segue destination="Pbw-pW-hKV" kind="show" id="Y60-hY-fRl"/>
+                                    <segue destination="Pbw-pW-hKV" kind="showDetail" id="Y60-hY-fRl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -721,7 +724,7 @@
                             <constraint firstItem="UHG-9l-mxu" firstAttribute="top" secondItem="biR-dm-X2B" secondAttribute="bottom" constant="8" symbolic="YES" id="DeX-WO-DhA"/>
                             <constraint firstItem="5o7-wS-Zy4" firstAttribute="leading" secondItem="DPJ-0d-ppD" secondAttribute="trailing" constant="8" symbolic="YES" id="MNZ-N0-hmW"/>
                             <constraint firstItem="5o7-wS-Zy4" firstAttribute="trailing" secondItem="1bb-Vu-rD2" secondAttribute="trailing" id="ZAb-BJ-Yd7"/>
-                            <constraint firstItem="UHG-9l-mxu" firstAttribute="top" secondItem="DPJ-0d-ppD" secondAttribute="bottom" constant="8" symbolic="YES" id="Zxo-P2-glU"/>
+                            <constraint firstItem="UHG-9l-mxu" firstAttribute="top" secondItem="DPJ-0d-ppD" secondAttribute="bottom" constant="2" id="Zxo-P2-glU"/>
                             <constraint firstItem="biR-dm-X2B" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZYm-IK-zGb" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="bEJ-l8-n0j"/>
                             <constraint firstItem="biR-dm-X2B" firstAttribute="leading" secondItem="Vl0-Px-TgJ" secondAttribute="leading" id="f14-om-6Vm"/>
                             <constraint firstItem="UHG-9l-mxu" firstAttribute="bottom" secondItem="dIY-R0-IZ1" secondAttribute="bottom" constant="-8" id="fHE-Jb-dQj"/>
@@ -762,7 +765,7 @@
             <objects>
                 <viewController id="DNX-cu-SF5" customClass="SerialViewController" customModule="KimOne" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aLu-tp-vwg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amD-Bh-zfp">
@@ -773,7 +776,7 @@
                                     <segue destination="xzR-5c-doK" kind="unwind" animates="NO" unwindAction="unwindToMainWithSegue:" id="Rg3-S5-QEI"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZvV-ok-0HC">
+                            <textView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvV-ok-0HC">
                                 <rect key="frame" x="27.5" y="24" width="320" height="240"/>
                                 <color key="backgroundColor" red="0.1875" green="0.17692398133194073" blue="0.16515988760860945" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -781,11 +784,11 @@
                                     <constraint firstAttribute="height" constant="240" id="r8A-dO-UFB"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="Lorem ipsum dolor sit er elit lamet">
+                                    <fragment content=" ">
                                         <attributes>
-                                            <color key="NSColor" red="0.39591410523105841" green="0.73381979695431476" blue="0.39187379479423945" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="14" name="CourierNewPS-BoldMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <color key="NSColor" red="0.0" green="0.60332725253807107" blue="0.030877060237273109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name="3270Condensed"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -812,17 +815,11 @@
         <!--Help View Controller-->
         <scene sceneID="GSs-Gu-364">
             <objects>
-                <exit id="9YD-XW-BU1" userLabel="Exit" sceneMemberID="exit"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0xK-vT-EtD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="Pbw-pW-hKV" customClass="HelpViewController" customModule="KimOne" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="B3c-l5-nem">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eX0-1y-glB">
-                                <rect key="frame" x="0.0" y="48" width="375" height="619"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKk-bO-YC1">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                 <subviews>
@@ -840,24 +837,194 @@
                                     <constraint firstAttribute="height" constant="40" id="2RP-u2-2iN"/>
                                 </constraints>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70f-qH-iiQ">
+                                <rect key="frame" x="0.0" y="48" width="375" height="599"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">00  BRK
+01  ORA   (a8,X)
+05  ORA   a8
+06  ASL   a8
+08  PHP
+09  ORA   #d8
+0A  ASL   A
+0D  ORA   a16
+0E  ASL   a16
+10  BPL   r8
+11  ORA   (a8),Y
+15  ORA   a8,X
+16  ASL   a8,X
+18  CLC
+19  ORA   a16,Y
+1D  ORA   a16,X
+1E  ASL   a16,X
+20  JSR   a16
+21  AND   (a8,X)
+24  BIT   a8
+25  AND   a8
+26  ROL   a8
+28  PLP
+29  AND   #d8
+2A  ROL   A
+2C  BIT   a16
+2D  AND   a16
+2E  ROL   a16
+30  BMI   r8
+31  AND   (a8),Y
+35  AND   a8,X
+36  ROL   a8,X
+38  SEC
+39  AND   a16,Y
+3D  AND   a16,X
+3E  ROL   a16,X
+40  RTI
+41  EOR   (a8,X)
+45  EOR   a8
+46  LSR   a8
+48  PHA
+49  EOR   #d8
+4A  LSR   A
+4C  JMP   a16
+4D  EOR   a16
+4E  LSR   a16
+50  BVC   r8
+51  EOR   (a8),Y
+55  EOR   a8,X
+56  LSR   a8,X
+58  CLI
+59  EOR   a16,Y
+5D  EOR   a16,X
+5E  LSR   a16,X
+60  RTS
+61  ADC   (a8,X)
+65  ADC   a8
+66  ROR   a8
+68  PLA
+69  ADC   #d8
+6A  ROR   A
+6C  JMP   (a16)
+6D  ADC   a16
+6E  ROR   a16
+70  BVS   r8
+71  ADC   (a8),Y
+75  ADC   a8,X
+76  ROR   a8,X
+78  SEI
+79  ADC   a16,Y
+7D  ADC   a16,X
+7E  ROR   a16,X
+81  STA   (a8,X)
+84  STY   a8
+85  STA   a8
+86  STX   a8
+88  DEY
+8A  TXA
+8C  STY   a16
+8D  STA   a16
+8E  STX   a16
+90  BCC   r8
+91  STA   (a8),Y
+94  STY   a8,X
+95  STA   a8,X
+96  STX   a8,Y
+98  TYA
+99  STA   a16,Y
+9A  TXS
+9D  STA   a16,X
+A0  LDY   #d8
+A1  LDA   (a8,X)
+A2  LDX   #d8
+A4  LDY   a8
+A5  LDA   a8
+A6  LDX   a8
+A8  TAY
+A9  LDA   #d8
+AA  TAX
+AC  LDY   a16
+AD  LDA   a16
+AE  LDX   a16
+B0  BCS   r8
+B1  LDA   (a8),Y
+B4  LDY   a8,X
+B5  LDA   a8,X
+B6  LDX   a8,Y
+B8  CLV
+B9  LDA   a16,Y
+BA  TSX
+BC  LDY   a16,X
+BD  LDA   a16,X
+BE  LDX   a16,Y
+C0  CPY   #d8
+C1  CMP   (a8,X)
+C4  CPY   a8
+C5  CMP   a8
+C6  DEC   a8
+C8  INY
+C9  CMP   #d8
+CA  DEX
+CC  CPY   a16
+CD  CMP   a16
+CE  DEC   a16
+D0  BNE   r8
+D1  CMP   (a8),Y
+D5  CMP   a8,X
+D6  DEC   a8,X
+D8  CLD
+D9  CMP   a16,Y
+DD  CMP   a16,X
+DE  DEC   a16,X
+E0  CPX   #d8
+E1  SBC   (a8,X)
+E4  CPX   a8
+E5  SBC   a8
+E6  INC   a8
+E8  INX
+E9  SBC   #d8
+EA  NOP
+EC  CPX   a16
+ED  SBC   a16
+EE  INC   a16
+F0  BEQ   r8
+F1  SBC   (a8),Y
+F5  SBC   a8,X
+F6  INC   a8,X
+F8  SED
+F9  SBC   a16,Y
+FD  SBC   a16,X
+FE  INC   a16,X
+</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="Courier"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <real key="NSStrokeWidth" value="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Q1b-aY-uIu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="eX0-1y-glB" firstAttribute="leading" secondItem="Q1b-aY-uIu" secondAttribute="leading" id="KLb-68-QVg"/>
-                            <constraint firstItem="eX0-1y-glB" firstAttribute="bottom" secondItem="Q1b-aY-uIu" secondAttribute="bottom" id="OqK-lg-JOQ"/>
-                            <constraint firstItem="eX0-1y-glB" firstAttribute="trailing" secondItem="Q1b-aY-uIu" secondAttribute="trailing" id="SCb-dm-G4N"/>
+                            <constraint firstItem="70f-qH-iiQ" firstAttribute="trailing" secondItem="Q1b-aY-uIu" secondAttribute="trailing" id="6lE-1S-pMs"/>
+                            <constraint firstItem="70f-qH-iiQ" firstAttribute="bottom" secondItem="Q1b-aY-uIu" secondAttribute="bottom" id="H4p-j0-Hg3"/>
                             <constraint firstItem="aKk-bO-YC1" firstAttribute="trailing" secondItem="Q1b-aY-uIu" secondAttribute="trailing" id="VIA-Cw-nut"/>
                             <constraint firstItem="aKk-bO-YC1" firstAttribute="leading" secondItem="Q1b-aY-uIu" secondAttribute="leading" id="dA6-yd-iXO"/>
+                            <constraint firstItem="70f-qH-iiQ" firstAttribute="top" secondItem="aKk-bO-YC1" secondAttribute="bottom" constant="8" symbolic="YES" id="nLI-Ux-OLE"/>
+                            <constraint firstItem="70f-qH-iiQ" firstAttribute="leading" secondItem="Q1b-aY-uIu" secondAttribute="leading" id="rDV-cs-ux1"/>
                             <constraint firstItem="aKk-bO-YC1" firstAttribute="top" secondItem="Q1b-aY-uIu" secondAttribute="top" id="wPs-fF-XGW"/>
-                            <constraint firstItem="eX0-1y-glB" firstAttribute="top" secondItem="aKk-bO-YC1" secondAttribute="bottom" constant="8" symbolic="YES" id="xGa-Es-zQ5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7Gs-SC-3x5"/>
-                    <connections>
-                        <outlet property="webview" destination="eX0-1y-glB" id="oJa-QU-Ved"/>
-                    </connections>
                 </viewController>
+                <exit id="9YD-XW-BU1" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0xK-vT-EtD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-418.39999999999998" y="778.56071964017997"/>
         </scene>

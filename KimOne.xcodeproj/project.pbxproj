@@ -15,15 +15,12 @@
 		AB107F24269FA3950048A3CF /* cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = AB107F23269FA3950048A3CF /* cpu.c */; };
 		AB107F29269FB1400048A3CF /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AB107F28269FB1400048A3CF /* logo.png */; };
 		AB31FD2D26A354020032C543 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB31FD2C26A354020032C543 /* HelpViewController.swift */; };
-		AB5D9FB526A2E17C00E765C7 /* screen.pdf in Resources */ = {isa = PBXBuildFile; fileRef = AB5D9FB426A2E17C00E765C7 /* screen.pdf */; };
-		AB65D41426A1872800AA37D6 /* test.m4a in Resources */ = {isa = PBXBuildFile; fileRef = AB65D41326A1872800AA37D6 /* test.m4a */; };
 		AB77A36426A2149A00F59F9D /* ProcessorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB77A36326A2149A00F59F9D /* ProcessorInterface.swift */; };
 		AB77A36926A2159F00F59F9D /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB77A36826A2159F00F59F9D /* DisplayView.swift */; };
 		AB9AEC1F26A04CB30010CB6D /* 3270Condensed-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */; };
 		ABB6814E26A0720800C2FC21 /* Riot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6814D26A0720800C2FC21 /* Riot.swift */; };
 		ABB6815426A0974600C2FC21 /* rom1.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABB6815226A0974600C2FC21 /* rom1.bin */; };
 		ABB6815526A0974600C2FC21 /* rom0.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABB6815326A0974600C2FC21 /* rom0.bin */; };
-		ABD2DCCE26A355E100A6B849 /* help.html in Resources */ = {isa = PBXBuildFile; fileRef = ABD2DCCD26A355E100A6B849 /* help.html */; };
 		ABD47B8E26A2E68300B6C93A /* SerialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD47B8D26A2E68300B6C93A /* SerialViewController.swift */; };
 		ABD781B422A00AFE00574458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABD781B322A00AFE00574458 /* Assets.xcassets */; };
 		ABEBE79426A1B20E009AA3F5 /* key.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABEBE79326A1B20E009AA3F5 /* key.m4a */; };
@@ -62,8 +59,6 @@
 		AB107F28269FB1400048A3CF /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = KimOne/Resources/logo.png; sourceTree = SOURCE_ROOT; };
 		AB31FD2C26A354020032C543 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		AB33BE62229FF6150003EEA3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		AB5D9FB426A2E17C00E765C7 /* screen.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = screen.pdf; sourceTree = "<group>"; };
-		AB65D41326A1872800AA37D6 /* test.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.m4a; sourceTree = "<group>"; };
 		AB77A36326A2149A00F59F9D /* ProcessorInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessorInterface.swift; sourceTree = "<group>"; };
 		AB77A36826A2159F00F59F9D /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		AB77A36D26A2206400F59F9D /* KimOne.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KimOne.entitlements; sourceTree = "<group>"; };
@@ -71,7 +66,6 @@
 		ABB6814D26A0720800C2FC21 /* Riot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Riot.swift; sourceTree = "<group>"; };
 		ABB6815226A0974600C2FC21 /* rom1.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = rom1.bin; sourceTree = "<group>"; };
 		ABB6815326A0974600C2FC21 /* rom0.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = rom0.bin; sourceTree = "<group>"; };
-		ABD2DCCD26A355E100A6B849 /* help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help.html; sourceTree = "<group>"; };
 		ABD47B8D26A2E68300B6C93A /* SerialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialViewController.swift; sourceTree = "<group>"; };
 		ABD781B322A00AFE00574458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABEBE79326A1B20E009AA3F5 /* key.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = key.m4a; sourceTree = "<group>"; };
@@ -147,10 +141,7 @@
 		AB65D3FD26A15E8900AA37D6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				ABD2DCCD26A355E100A6B849 /* help.html */,
-				AB5D9FB426A2E17C00E765C7 /* screen.pdf */,
 				ABEBE79326A1B20E009AA3F5 /* key.m4a */,
-				AB65D41326A1872800AA37D6 /* test.m4a */,
 				AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */,
 				AB107F28269FB1400048A3CF /* logo.png */,
 				ABB6815326A0974600C2FC21 /* rom0.bin */,
@@ -269,14 +260,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB65D41426A1872800AA37D6 /* test.m4a in Resources */,
-				ABD2DCCE26A355E100A6B849 /* help.html in Resources */,
 				AB04BF38229F539500B1111E /* LaunchScreen.storyboard in Resources */,
 				ABB6815426A0974600C2FC21 /* rom1.bin in Resources */,
 				ABEBE79426A1B20E009AA3F5 /* key.m4a in Resources */,
 				AB107F29269FB1400048A3CF /* logo.png in Resources */,
 				AB9AEC1F26A04CB30010CB6D /* 3270Condensed-Regular.otf in Resources */,
-				AB5D9FB526A2E17C00E765C7 /* screen.pdf in Resources */,
 				ABD781B422A00AFE00574458 /* Assets.xcassets in Resources */,
 				ABB6815526A0974600C2FC21 /* rom0.bin in Resources */,
 				AB04BF33229F539400B1111E /* Main.storyboard in Resources */,

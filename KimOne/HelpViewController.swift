@@ -14,14 +14,8 @@ import WebKit
 class HelpViewController: UIViewController, UITextViewDelegate {
     
     
-    @IBOutlet weak var webview: UIWebView!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let url = Bundle.main.url(forResource: "help", withExtension: "html") {
-            webview.loadRequest(URLRequest(url: url))
-        }
     }
     // Hide status bar
     override var prefersStatusBarHidden: Bool{

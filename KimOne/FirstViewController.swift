@@ -10,12 +10,14 @@ import AVFoundation
 
 var digits: [DigitItem] = [DigitItem(id:0), DigitItem(id:1), DigitItem(id:2), DigitItem(id:3), DigitItem(id:4), DigitItem(id:5)]
 
-let dispatchQueue = DispatchQueue.global(qos: .background)
+
 
 var riot0 = Riot(n:0)
 var riot1 = Riot(n:1)
 
 var singleStep: Bool = false
+
+
 
 
 class FirstViewController: UIViewController {
@@ -27,9 +29,13 @@ class FirstViewController: UIViewController {
     
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
         // Stop getting serial chars
-        riot0.serial = false
-        // Move to non serial routines so that we exit the getchar loop
-        pc = 0x1c77
+        dispatchQueue.sync {
+            riot0.serial = false
+            riot0.charPending = 0x15
+
+            reset6502()
+        }
+        start = DispatchTime.now()
     }
     
     @IBOutlet weak var goButton: UIButton!
@@ -51,8 +57,10 @@ class FirstViewController: UIViewController {
         
         if (start.uptimeNanoseconds > 1000) {
             start = DispatchTime.now()
-            clockticks6502 = 0
-            prevTicks = 0
+            dispatchQueue.sync {
+                clockticks6502 = 0
+                prevTicks = 0
+            }
         }
         
         if (self.speedLimit) {
@@ -64,20 +72,27 @@ class FirstViewController: UIViewController {
     }
     
     @IBAction func GoClicked(_ sender: Any) {
-        riot0.charPending = 0x13;
+        dispatchQueue.sync {
+            riot0.charPending = 0x13;
+        }
         audioPlayer.play()
     }
     @IBAction func stClicked(_ sender: Any) {
         print("NMI")
-        riot0.charPending = 0x15
-        nmi6502()
+        dispatchQueue.sync {
+            riot0.charPending = 0x15
+            nmi6502()
+        }
         audioPlayer.play()
     }
     @IBAction func rstClicked(_ sender: Any) {
         print("RESET")
-        riot0.charPending = 0x15
+        
         if (start.uptimeNanoseconds > 1000) {
-            reset6502()
+            dispatchQueue.sync {
+                reset6502()
+                riot0.charPending = 0x15
+            }
             start = DispatchTime.now()
         }
         audioPlayer.play()
@@ -86,85 +101,125 @@ class FirstViewController: UIViewController {
         singleStep = sender.isOn
     }
     @IBAction func ADClicked(_ sender: Any) {
-        riot0.charPending = 0x10
+        dispatchQueue.sync {
+            riot0.charPending = 0x10
+        }
         audioPlayer.play()
     }
     @IBAction func DAClicked(_ sender: Any) {
-        riot0.charPending = 0x11
+        dispatchQueue.sync {
+            riot0.charPending = 0x11
+        }
         audioPlayer.play()
     }
     @IBAction func pcClicked(_ sender: Any) {
-        riot0.charPending = 0x14
+        dispatchQueue.sync {
+            riot0.charPending = 0x14
+        }
         audioPlayer.play()
     }
     
     @IBAction func plusClicked(_ sender: Any) {
-        riot0.charPending = 0x12
+        dispatchQueue.sync {
+            riot0.charPending = 0x12
+        }
         audioPlayer.play()
     }
     
     @IBAction func CClicked(_ sender: Any) {
-        riot0.charPending = 0xC
+        dispatchQueue.sync {
+            riot0.charPending = 0xC
+        }
         audioPlayer.play()
     }
     @IBAction func DClicked(_ sender: Any) {
-        riot0.charPending = 0xD
+        dispatchQueue.sync {
+            riot0.charPending = 0xD
+        }
         audioPlayer.play()
     }
     @IBAction func EClicked(_ sender: Any) {
-        riot0.charPending = 0xE
+        dispatchQueue.sync {
+            riot0.charPending = 0xE
+        }
         audioPlayer.play()
     }
     @IBAction func FClicked(_ sender: Any) {
-        riot0.charPending = 0xF
+        dispatchQueue.sync {
+            riot0.charPending = 0xF
+        }
         audioPlayer.play()
     }
     @IBAction func Eightclicked(_ sender: Any) {
-        riot0.charPending = 0x8
+        dispatchQueue.sync {
+            riot0.charPending = 0x8
+        }
         audioPlayer.play()
     }
     @IBAction func NineClicked(_ sender: Any) {
-        riot0.charPending = 0x9
+        dispatchQueue.sync {
+            riot0.charPending = 0x9
+        }
         audioPlayer.play()
     }
     @IBAction func AClicked(_ sender: Any) {
-        riot0.charPending = 0xA
+        dispatchQueue.sync {
+            riot0.charPending = 0xA
+        }
         audioPlayer.play()
     }
     @IBAction func Bclicked(_ sender: Any) {
-        riot0.charPending = 0xB
+        dispatchQueue.sync {
+            riot0.charPending = 0xB
+        }
         audioPlayer.play()
     }
     @IBAction func FourClicked(_ sender: Any) {
-        riot0.charPending = 0x4
+        dispatchQueue.sync {
+            riot0.charPending = 0x4
+        }
         audioPlayer.play()
     }
     @IBAction func FiveClicked(_ sender: Any) {
-        riot0.charPending = 0x5
+        dispatchQueue.sync {
+            riot0.charPending = 0x5
+        }
         audioPlayer.play()
     }
     @IBAction func SixClicked(_ sender: Any) {
-        riot0.charPending = 0x6
+        dispatchQueue.sync {
+            riot0.charPending = 0x6
+        }
         audioPlayer.play()
     }
     @IBAction func SevenClicked(_ sender: Any) {
-        riot0.charPending = 0x7
+        dispatchQueue.sync {
+            riot0.charPending = 0x7
+        }
         audioPlayer.play()
     }
     @IBAction func ZeroClicked(_ sender: Any) {
-        riot0.charPending = 0x0
+        dispatchQueue.sync {
+            riot0.charPending = 0x0
+        }
         audioPlayer.play()
     }
     @IBAction func OneClicked(_ sender: Any) {
-        riot0.charPending = 0x1
+        dispatchQueue.sync {
+            riot0.charPending = 0x1
+        }
         audioPlayer.play()
     }
     @IBAction func TwoClicked(_ sender: Any) {
-        riot0.charPending = 0x2
+        dispatchQueue.sync {
+            riot0.charPending = 0x2
+        }
         audioPlayer.play()
     }
     @IBAction func ThreeClicked(_ sender: Any) {
-        riot0.charPending = 0x3
+        dispatchQueue.sync {
+            riot0.charPending = 0x3
+        }
         audioPlayer.play()
     }
     
@@ -193,9 +248,12 @@ class FirstViewController: UIViewController {
         
         self.view.addSubview(testView)
         
-        // Load data into 6530 ROM
-        riot0.loadRom()
-        riot1.loadRom()
+        dispatchQueue.sync {
+            // Load data into 6530 ROM
+            riot0.loadRom()
+            riot1.loadRom()
+        }
+        
         
         //Restore digits from RAM
         restoreDigits()
@@ -208,10 +266,9 @@ class FirstViewController: UIViewController {
         
         
         //Start a new thread to run the 6502 emulation
+        start = DispatchTime.now()
         dispatchQueue.async {
             reset6502();
-            start = DispatchTime.now()
-            
             // Flag for NMI when single stepping or when ST is pressed
             var nmiFlag: Bool = false;
             // Start main loop
@@ -265,7 +322,6 @@ class FirstViewController: UIViewController {
                     
                     riot0.charPending = 0x15;
                 } else if ((pc == 0x1E65)) {
-                    print("ggeting char from serial")
                     pc = 0x1e85;
                     a = self.getSerialChar();
                     y = 0xff;
@@ -275,21 +331,36 @@ class FirstViewController: UIViewController {
     }
     
     func getSerialChar() -> UInt8 {
+        if (serialCharsWaiting > 0) {
+            let v = serialBuffer[serialCharsWaiting-1]
+            serialCharsWaiting -= 1
+            return v
+        }
         return 0
     }
     
     func restoreDigits() {
-        let c1 = memory[0x00FB]
-        digits[0].view.showDigit(digit: ((c1 & 0xF0) >> 4))
-        digits[1].view.showDigit(digit: (c1 & 0x0F))
-
-        let c2 = memory[0x00FA]
-        digits[2].view.showDigit(digit: ((c2 & 0xF0) >> 4))
-        digits[3].view.showDigit(digit: (c2 & 0x0F))
-
-        let c3 = memory[0x00F9]
-        digits[4].view.showDigit(digit: ((c3 & 0xF0) >> 4))
-        digits[5].view.showDigit(digit: (c3 & 0x0F))
+        dispatchQueue.sync {
+            let c1 = memory[0x00FB]
+            DispatchQueue.main.async {
+                digits[0].view.showDigit(digit: ((c1 & 0xF0) >> 4))
+                digits[1].view.showDigit(digit: (c1 & 0x0F))
+            }
+        }
+        dispatchQueue.sync {
+            let c2 = memory[0x00FA]
+            DispatchQueue.main.async {
+                digits[2].view.showDigit(digit: ((c2 & 0xF0) >> 4))
+                digits[3].view.showDigit(digit: (c2 & 0x0F))
+            }
+        }
+        dispatchQueue.sync {
+            let c3 = memory[0x00F9]
+            DispatchQueue.main.async {
+                digits[4].view.showDigit(digit: ((c3 & 0xF0) >> 4))
+                digits[5].view.showDigit(digit: (c3 & 0x0F))
+            }
+        }
     }
     
     // Hide status bar
@@ -297,3 +368,4 @@ class FirstViewController: UIViewController {
         return true
     }
 }
+

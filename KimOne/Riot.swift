@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TIMER: Codable {
+struct TIMER {
     var timer_mult:UInt16
     var tick_accum: UInt16
     var start_value: UInt8
@@ -19,6 +19,8 @@ struct TIMER: Codable {
 
 
 class Riot: Codable {
+    
+    
     var rom:[UInt8] = [UInt8](repeating: 0, count: Int(1024))
     var ram: [UInt8] = [UInt8](repeating: 0, count: Int(64))
     var padd: UInt8 = 0
@@ -26,7 +28,13 @@ class Riot: Codable {
     var pbdd: UInt8 = 0
     var sbd: UInt8 = 0
     var charPending: UInt8 = 0x15
-    var serial = false;
+    var serial = false
+    var sendingSerial = false
+    var sendingSerialCount = 0
+    var sendingSerialByte: UInt8 = 0
+    var sendingSerialReady = false
+    
+    var delegate: TextReceiverDelegate!
     
     var timer: TIMER = TIMER(timer_mult: 0, tick_accum: 0, start_value: 0, timer_count: 0, timeout: 0, starttime: DispatchTime.now().uptimeNanoseconds)
 
@@ -35,6 +43,20 @@ class Riot: Codable {
     let ramBaseAddress: UInt16
     let romBaseAddress: UInt16
     
+    enum CodingKeys: CodingKey {
+        case rom
+        case ram
+        case padd
+        case sad
+        case pbdd
+        case sbd
+        case charPending
+        case num
+        case baseAddress
+        case ramBaseAddress
+        case romBaseAddress
+    }
+    
     let keyBits: [UInt8] = [ 0xbf, 0xdf, 0xef, 0xf7, 0xfb, 0xfd, 0xfe ];
     
     required init(n: UInt) {
@@ -42,6 +64,7 @@ class Riot: Codable {
         self.baseAddress = n > 0 ? 0x1700 : 0x1740
         self.ramBaseAddress = n > 0 ? 0x1780 : 0x17C0
         self.romBaseAddress = n > 0 ? 0x1800 : 0x1C00
+
     }
     
     
@@ -86,6 +109,9 @@ class Riot: Codable {
         case 1:
             return self.padd
         case 2:
+            if (self.sendingSerial) {
+                self.sendingSerialReady = true
+            }
             return self.sbd
         case 3:
             return self.pbdd
@@ -117,6 +143,28 @@ class Riot: Codable {
             break
         case self.baseAddress+2:
             self.sbd = value
+            
+            if (!self.sendingSerial && ((value & 1) == 0)) {
+                self.sendingSerial = true
+                self.sendingSerialCount = 0
+                self.sendingSerialByte = 0
+                self.sendingSerialReady = false
+
+            } else if (self.sendingSerial && self.sendingSerialReady) {
+                if (self.sendingSerialCount == 8) {
+                    DispatchQueue.main.sync {
+                        self.delegate?.addText(char: self.sendingSerialByte)
+                    }
+     
+                    self.sendingSerial = false
+                }
+                
+                self.sendingSerialByte = ((self.sendingSerialByte >> 1) & 0x7f) | ((value & 1) << 7)
+                self.sendingSerialCount += 1
+                self.sendingSerialReady = false;
+            }
+            
+            
             break
         case self.baseAddress+3:
             self.pbdd = value
