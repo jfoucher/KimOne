@@ -190,6 +190,8 @@ class FirstViewController: UIViewController {
         riot0.loadRom()
         riot1.loadRom()
         
+        //Restore digits from RAM
+        restoreDigits()
 
         
         var prevS: UInt64 = 0
@@ -258,6 +260,20 @@ class FirstViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func restoreDigits() {
+        let c1 = memory[0x00FB]
+        digits[0].view.showDigit(digit: ((c1 & 0xF0) >> 4))
+        digits[1].view.showDigit(digit: (c1 & 0x0F))
+
+        let c2 = memory[0x00FA]
+        digits[2].view.showDigit(digit: ((c2 & 0xF0) >> 4))
+        digits[3].view.showDigit(digit: (c2 & 0x0F))
+
+        let c3 = memory[0x00F9]
+        digits[4].view.showDigit(digit: ((c3 & 0xF0) >> 4))
+        digits[5].view.showDigit(digit: (c3 & 0x0F))
     }
     
     // Hide status bar
