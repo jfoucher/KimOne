@@ -26,6 +26,7 @@ class Riot: Codable {
     var pbdd: UInt8 = 0
     var sbd: UInt8 = 0
     var charPending: UInt8 = 0x15
+    var serial = false;
     
     var timer: TIMER = TIMER(timer_mult: 0, tick_accum: 0, start_value: 0, timer_count: 0, timeout: 0, starttime: DispatchTime.now().uptimeNanoseconds)
 
@@ -50,12 +51,11 @@ class Riot: Codable {
         
         switch addr {
         case 0:
-            sv = (self.sbd >> 1) & 0xf
-            let ch = Int(self.charPending)
-            
             if (self.num == 1) {
                 return self.sad
             }
+            sv = (self.sbd >> 1) & 0xf
+            let ch = Int(self.charPending)
             
             if (sv == 0) {
                 if (ch <= 6) {
@@ -76,6 +76,9 @@ class Riot: Codable {
                     return 0xff
                 }
             } else if (sv == 3) {
+                if (self.serial) {
+                    return 0;
+                }
                 return 0xff
             } else {
                 return 0x80

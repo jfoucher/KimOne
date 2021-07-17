@@ -93,6 +93,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             riot0 = try! JSONDecoder().decode(Riot.self, from: riot0Data)
         }
         
+        riot0.serial = false
+        
         if let riot1Data = UserDefaults.standard.data(forKey: "riot1") {
             riot1 = try! JSONDecoder().decode(Riot.self, from: riot1Data)
         }

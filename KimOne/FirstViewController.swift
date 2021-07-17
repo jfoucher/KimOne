@@ -25,6 +25,13 @@ class FirstViewController: UIViewController {
     
     var speedLimit: Bool = false
     
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {
+        // Stop getting serial chars
+        riot0.serial = false
+        // Move to non serial routines so that we exit the getchar loop
+        pc = 0x1c77
+    }
+    
     @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var stbutton: UIButton!
     @IBOutlet weak var rsbutton: UIButton!
@@ -257,9 +264,18 @@ class FirstViewController: UIViewController {
                     // clear out the pending keyboard character.
                     
                     riot0.charPending = 0x15;
+                } else if ((pc == 0x1E65)) {
+                    print("ggeting char from serial")
+                    pc = 0x1e85;
+                    a = self.getSerialChar();
+                    y = 0xff;
                 }
             }
         }
+    }
+    
+    func getSerialChar() -> UInt8 {
+        return 0
     }
     
     func restoreDigits() {

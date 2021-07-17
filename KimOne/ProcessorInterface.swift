@@ -23,7 +23,7 @@ func read6502Swift(address: UInt16) -> UInt8 {
     if (addr == 0x1F1F) {
         pc = 0x1F45;    // skip subroutine part that deals with LEDs
         let c1 = memory[0x00FB]
-        if (c1 != prev1) {
+        if (c1 != prev1 && riot0.serial == false) {
             prev1 = c1;
             DispatchQueue.main.async {
                 digits[0].view.showDigit(digit: ((c1 & 0xF0) >> 4))
@@ -31,7 +31,7 @@ func read6502Swift(address: UInt16) -> UInt8 {
             }
         }
         let c2 = memory[0x00FA]
-        if (c2 != prev2) {
+        if (c2 != prev2 && riot0.serial == false) {
             prev2 = c2;
             DispatchQueue.main.async {
                 digits[2].view.showDigit(digit: ((c2 & 0xF0) >> 4))
@@ -39,7 +39,7 @@ func read6502Swift(address: UInt16) -> UInt8 {
             }
         }
         let c3 = memory[0x00F9]
-        if (c3 != prev3) {
+        if (c3 != prev3 && riot0.serial == false) {
             prev3 = c3;
             DispatchQueue.main.async {
                 digits[4].view.showDigit(digit: ((c3 & 0xF0) >> 4))
