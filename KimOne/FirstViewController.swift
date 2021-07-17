@@ -323,20 +323,17 @@ class FirstViewController: UIViewController {
                     riot0.charPending = 0x15;
                 } else if ((pc == 0x1E65)) {
                     pc = 0x1e85;
-                    a = self.getSerialChar();
+                    a = 0
+                    if (serialCharsWaiting > 0) {
+                        let v = serialBuffer[serialCharsWaiting-1]
+                        serialCharsWaiting -= 1
+                        a = v
+                    }
+                    
                     y = 0xff;
                 }
             }
         }
-    }
-    
-    func getSerialChar() -> UInt8 {
-        if (serialCharsWaiting > 0) {
-            let v = serialBuffer[serialCharsWaiting-1]
-            serialCharsWaiting -= 1
-            return v
-        }
-        return 0
     }
     
     func restoreDigits() {

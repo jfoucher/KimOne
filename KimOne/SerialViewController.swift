@@ -71,10 +71,12 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
                     if (v == 43) {
                         v = 13
                     }
-                    print(v)
+                    
                     // Add text to serial monitor, unless its return
                     if (v != 13 && v != 10) {
                         self.serialText.text.append(Character(UnicodeScalar(v)))
+                        let range = NSMakeRange(self.serialText.text.count - 2, 1)
+                        self.serialText.scrollRangeToVisible(range)
                     }
                 
                     
@@ -92,9 +94,8 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
     }
     
     func addText(char: UInt8) {
-        print(char)
         self.serialText.text.append(Character(UnicodeScalar(char)))
-        let range = NSMakeRange(self.serialText.text.count - 1, 0)
+        let range = NSMakeRange(self.serialText.text.count - 2, 1)
         self.serialText.scrollRangeToVisible(range)
     }
     
