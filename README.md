@@ -1,6 +1,6 @@
 # KimOne
 
-is a MOS Kim-1 emulator for iOS
+is a MOS Kim-1 emulator for iOS (from iOS 9.3) and MacOS (from MacOS 10.15)
 
 <p align="center">
 <img alt="Startup interface" src="img/sc1.png" title="Startup interface" width="300px" hspace="30px" />
