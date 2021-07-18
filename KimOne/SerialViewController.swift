@@ -61,22 +61,31 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         if (textView.text.count > previousText.count) {
             if let character = textView.text.last {
                 if let f = character.unicodeScalars.first {
-                    
                     var v = UInt8(f.value & 0xFF)
+                    if (f.value == 8220 || f.value == 8221) {
+                        // Replace smart quotes
+                        v = 34
+                    }
                     // convert lowercase to uppercase
-                    if (v >= 0x61 && v <= 0x74) {
+                    if (v >= 0x61 && v <= 0x7A) {
                         v -= 0x20
                     }
                     // Convert + to LF to enable stepping forwards
                     if (v == 43) {
+                        v = 10
+                    }
+                    if (v == 10) {
                         v = 13
                     }
                     
                     // Add text to serial monitor, unless its return
+                    print("sending to kim", v)
                     if (v != 13 && v != 10) {
-                        self.serialText.text.append(Character(UnicodeScalar(v)))
-                        let range = NSMakeRange(self.serialText.text.count - 2, 1)
-                        self.serialText.scrollRangeToVisible(range)
+                        if let c = String(bytes: [v], encoding: .ascii) {
+                            self.serialText.text.append(c)
+                        } else {
+                            print("could not convert", v, "to ascii")
+                        }
                     }
                 
                     
@@ -94,9 +103,17 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
     }
     
     func addText(char: UInt8) {
-        self.serialText.text.append(Character(UnicodeScalar(char)))
-        let range = NSMakeRange(self.serialText.text.count - 2, 1)
-        self.serialText.scrollRangeToVisible(range)
+        if let v = String(bytes: [char], encoding: .ascii) {
+            self.serialText.text.append(v)
+        } else {
+            print("could not convert", char, "to ascii")
+        }
+        
+        if (char == 10 || char == 13) {
+            //try and make it really scroll to the bottom
+            let range = NSMakeRange(self.serialText.text.count*2, 1)
+            self.serialText.scrollRangeToVisible(range)
+        }
     }
     
     

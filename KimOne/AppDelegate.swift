@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func restoreData() {
         // LOAD data into RAM
-        loadMicroChess()
+        //loadMicroChess()
 
         memory[0x400] = 0x42
         memory[0x401] = 0xFF
@@ -102,46 +102,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         write6502(0x17FA, 0x00)
         write6502(0x17FB, 0x1C)
         
-        if let riot0Data = UserDefaults.standard.data(forKey: "riot0") {
-            do {
-                riot0 = try JSONDecoder().decode(Riot.self, from: riot0Data)
-            } catch {
-                riot0 = Riot(n: 0)
-            }
-            
-        }
-        
-        riot0.serial = false
-        
-        if let riot1Data = UserDefaults.standard.data(forKey: "riot1") {
-            do {
-                riot1 = try JSONDecoder().decode(Riot.self, from: riot1Data)
-            } catch {
-                riot1 = Riot(n: 1)
-            }
-            
-        }
-
-        pc = UInt16(UserDefaults.standard.integer(forKey: "pc"))
-        a = UInt8(UserDefaults.standard.integer(forKey: "a"))
-        x = UInt8(UserDefaults.standard.integer(forKey: "x"))
-        y = UInt8(UserDefaults.standard.integer(forKey: "y"))
-        sp = UInt8(UserDefaults.standard.integer(forKey: "sp"))
-        singleStep = UserDefaults.standard.bool(forKey: "singleStep")
-        status = UInt8(UserDefaults.standard.integer(forKey: "status"))
-        if (status == 0) {
-            status = UInt8(FLAG_CONSTANT)
-        }
-
-        //Load user data
-        if let stringData = UserDefaults.standard.string(forKey: "memory")  {
-            if let nsdata1 = Data(base64Encoded: stringData, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
-
-                memory = nsdata1.withUnsafeBytes {
-                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
-                }
-            }
-        }
+//        
+//        
+//
+//        
+//        if let riot0Data = UserDefaults.standard.data(forKey: "riot0") {
+//            do {
+//                riot0 = try JSONDecoder().decode(Riot.self, from: riot0Data)
+//            } catch {
+//                riot0 = Riot(n: 0)
+//            }
+//            
+//        }
+//        
+//        riot0.serial = false
+//        
+//        if let riot1Data = UserDefaults.standard.data(forKey: "riot1") {
+//            do {
+//                riot1 = try JSONDecoder().decode(Riot.self, from: riot1Data)
+//            } catch {
+//                riot1 = Riot(n: 1)
+//            }
+//            
+//        }
+//
+//        pc = UInt16(UserDefaults.standard.integer(forKey: "pc"))
+//        a = UInt8(UserDefaults.standard.integer(forKey: "a"))
+//        x = UInt8(UserDefaults.standard.integer(forKey: "x"))
+//        y = UInt8(UserDefaults.standard.integer(forKey: "y"))
+//        sp = UInt8(UserDefaults.standard.integer(forKey: "sp"))
+//        singleStep = UserDefaults.standard.bool(forKey: "singleStep")
+//        status = UInt8(UserDefaults.standard.integer(forKey: "status"))
+//        if (status == 0) {
+//            status = UInt8(FLAG_CONSTANT)
+//        }
+//
+//        //Load user data
+//        if let stringData = UserDefaults.standard.string(forKey: "memory")  {
+//            if let nsdata1 = Data(base64Encoded: stringData, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) {
+//
+//                memory = nsdata1.withUnsafeBytes {
+//                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
+//                }
+//            }
+//        }
+//        
+        loadBasic()
     }
     
     // Load microchess at 0XC000
@@ -152,6 +158,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         while i < 1393 {
             memory[0xC000 + i] = val?[i] ?? 0
             i += 1
+        }
+    }
+    
+    func loadBasic() {
+        let path = Bundle.main.path(forResource: "TinyBasic", ofType: "bin")!
+        let size = MemoryLayout<UInt8>.stride
+        let data = NSData(contentsOfFile: path)!
+        let length = data.count * size
+        var bytes1 = [UInt8](repeating: 0, count: data.count / size)
+        data.getBytes(&bytes1, length: length)
+        
+        for (i, b) in bytes1.enumerated() {
+            memory[i+0x100] = b
         }
     }
 }

@@ -61,10 +61,12 @@ class Riot: Codable {
     
     required init(n: UInt) {
         self.num = n
-        self.baseAddress = n > 0 ? 0x1700 : 0x1740
-        self.ramBaseAddress = n > 0 ? 0x1780 : 0x17C0
-        self.romBaseAddress = n > 0 ? 0x1800 : 0x1C00
-
+        // Riot 0 is 0x1740 and Riot 1 is 0x1700
+        self.baseAddress = (n == 0) ? 0x1740 : 0x1700
+        // Riot 0 is 0x17C0 and Riot 1 is 0x1780
+        self.ramBaseAddress = (n == 0) ? 0x17C0 : 0x1780
+        // Riot 0 is 0x1c00 and Riot 1 is 0x1800
+        self.romBaseAddress = (n == 0) ? 0x1c00 : 0x1800
     }
     
     
@@ -77,7 +79,9 @@ class Riot: Codable {
             if (self.num == 1) {
                 return self.sad
             }
+            //print("get sad from riot 0")
             sv = (self.sbd >> 1) & 0xf
+            
             let ch = Int(self.charPending)
             
             if (sv == 0) {
@@ -100,7 +104,10 @@ class Riot: Codable {
                 }
             } else if (sv == 3) {
                 if (self.serial) {
-                    return 0;
+                    if (self.sendingSerial) {
+                        return 0
+                    }
+                    return 0x80;
                 }
                 return 0xff
             } else {
@@ -134,14 +141,15 @@ class Riot: Codable {
     }
     
     func write(address: UInt16, value:UInt8) {
-        switch address {
-        case self.baseAddress:
+        let addr = address - self.baseAddress;
+        switch addr {
+        case 0:
             self.sad = value
             break
-        case self.baseAddress+1:
+        case 1:
             self.padd = value
             break
-        case self.baseAddress+2:
+        case 2:
             self.sbd = value
             
             if (!self.sendingSerial && ((value & 1) == 0)) {
@@ -166,19 +174,19 @@ class Riot: Codable {
             
             
             break
-        case self.baseAddress+3:
+        case 3:
             self.pbdd = value
             break
-        case self.baseAddress+4:
+        case 4:
             resetTimer(scale: 1, value: value)
             break
-        case self.baseAddress+5:
+        case 5:
             resetTimer(scale: 8, value: value)
             break
-        case self.baseAddress+6:
+        case 6:
             resetTimer(scale: 64, value: value)
             break
-        case self.baseAddress+7:
+        case 7:
             resetTimer(scale: 1024, value: value)
             break
         default:

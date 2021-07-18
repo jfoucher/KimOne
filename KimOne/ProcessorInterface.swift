@@ -22,6 +22,7 @@ func read6502Swift(address: UInt16) -> UInt8 {
     var val: UInt8
     let  addr = address;
     if (addr == 0x1F1F) {
+        // SCAND routine, show characters
         pc = 0x1F45;    // skip subroutine part that deals with LEDs
         let c1 = memory[0x00FB]
         if (c1 != prev1 && riot0.serial == false) {
@@ -49,51 +50,30 @@ func read6502Swift(address: UInt16) -> UInt8 {
         }
         
         return (0xEA);
-    } else if (address == 0xCFF4)  {
-         //simulated keyboard input
-        let tempval = riot0.charPending;
-        riot0.charPending = 0x15
-                // translate KIM-1 button codes into ASCII code expected by this version of Microchess
-        switch (tempval) {
-        case 0x14:  return 0x50    // PC translated to P
-        case 0xF:  return 13    // F translated to Return
-        case 0x12: return 0x57   // + translated to W meaning Blitz mode toggle
-        default:
-            return tempval
-        }
-        
-    } else if (address == 0xCFF3) {
-        return (riot0.charPending == 0) ? 0 : 1;
     } else if (addr >= riot0.baseAddress && addr < riot0.baseAddress + 8) {
-        
         val = riot0.read(address: addr)
         //print(String(format: "Read riot 0 registers ad: %04X v: %02X", address, val))
     } else if (addr >= riot1.baseAddress && addr < riot1.baseAddress + 8) {
-        
         val = riot1.read(address: addr)
         //print(String(format: "Read riot 1 registers ad: %04X v: %02X", address, val))
     } else if (addr >= riot0.ramBaseAddress && addr < riot0.ramBaseAddress + 64) {
-        
         val = riot0.ram[Int(addr - riot0.ramBaseAddress)]
         //print(String(format: "Read riot 0 RAM ad: %04X v: %02X", address, val))
     } else if (addr >= riot1.ramBaseAddress && addr < riot1.ramBaseAddress + 64) {
-        
         val = riot1.ram[Int(addr - riot1.ramBaseAddress)]
         //print(String(format: "Read riot 1 RAM ad: %04X v: %02X", address, val))
-    } else if (addr >= riot0.romBaseAddress && addr <= riot0.romBaseAddress + 1023) {
-        
+    } else if (addr >= riot0.romBaseAddress && addr < riot0.romBaseAddress + 1024) {
         val = riot0.rom[Int(addr - riot0.romBaseAddress)]
         //print(String(format: "Read riot 0 ROM ad: %04X v: %02X", address, val))
-    } else if (addr >= riot1.romBaseAddress && addr <= riot1.romBaseAddress + 1023) {
-        
+    } else if (addr >= riot1.romBaseAddress && addr < riot1.romBaseAddress + 1024) {
         val = riot1.rom[Int(addr - riot1.romBaseAddress)]
         //print(String(format: "Read riot 1 ROM ad: %04X v: %02X", address, val))
     } else if (addr >= 0xFF00) {
-        
         val = riot0.rom[Int(addr - 0xFC00)]
         //print(String(format: "Read riot 0 ROM ad: %04X v: %02X", address, val))
+    } else if ((addr >= 0x9c00) && (addr < 0xa000)) {
+        val = riot0.ram[Int(addr - 0x9c00)];
     } else {
-        
         val = memory[Int(address)]
         //print(String(format: "Read MEMORY ad: %04X v: %02X", address, val))
     }
@@ -118,6 +98,8 @@ func write6502Swift(address: UInt16, value: UInt8) {
     } else if (addr >= riot1.ramBaseAddress && addr < riot1.ramBaseAddress + 64) {
         //print(String(format: "Write riot 1 RAM ad: %04X v: %02X", address, value))
         riot1.ram[Int(addr - riot1.ramBaseAddress)] = value
+    } else if ((addr >= riot0.romBaseAddress && addr < riot0.romBaseAddress + 1024) || (addr >= riot1.romBaseAddress && addr < riot1.romBaseAddress + 1024) || (addr >= 0xFF00)) {
+        // ROM, do nothing
     } else {
         //print(String(format: "Write mem ad: %04X v: %02X", address, value))
         memory[Int(address)] = value

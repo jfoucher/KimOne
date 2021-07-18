@@ -332,6 +332,8 @@ class FirstViewController: UIViewController {
                     
                     y = 0xff;
                 }
+                
+                //print(String(format:"%04X", pc))
             }
         }
     }
@@ -359,6 +361,8 @@ class FirstViewController: UIViewController {
             }
         }
     }
+    
+
     
     // Hide status bar
     override var prefersStatusBarHidden: Bool{
