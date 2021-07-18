@@ -70,8 +70,8 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
                     if (v >= 0x61 && v <= 0x7A) {
                         v -= 0x20
                     }
-                    // Convert + to LF to enable stepping forwards
-                    if (v == 43) {
+                    // Convert ^ to CR to enable stepping backwards
+                    if (v == 0x5E) {
                         v = 10
                     }
                     if (v == 10) {
