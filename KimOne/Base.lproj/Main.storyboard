@@ -572,7 +572,7 @@
                                         <rect key="frame" x="264" y="0.0" width="80" height="80"/>
                                         <subviews>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="SST" translatesAutoresizingMaskIntoConstraints="NO" id="RG0-c6-fEY">
-                                                <rect key="frame" x="15.5" y="40.5" width="51" height="31"/>
+                                                <rect key="frame" x="15.5" y="45" width="51" height="31"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Single step" identifier="sstswitch" label="sst"/>
                                                 <color key="tintColor" systemColor="systemGray2Color"/>
                                                 <color key="onTintColor" systemColor="systemOrangeColor"/>
@@ -581,7 +581,7 @@
                                                 </connections>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFy-SC-HSt">
-                                                <rect key="frame" x="18.5" y="8" width="43" height="29.5"/>
+                                                <rect key="frame" x="13" y="8" width="54.5" height="34"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="43" id="nSN-hA-vts"/>
@@ -685,11 +685,11 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                 </state>
                                 <connections>
-                                    <segue destination="DNX-cu-SF5" kind="showDetail" animates="NO" id="UMd-Ip-zkZ"/>
+                                    <segue destination="DNX-cu-SF5" kind="showDetail" destinationCreationSelector="serialOn:" animates="NO" id="UMd-Ip-zkZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="biR-dm-X2B">
-                                <rect key="frame" x="16" y="98" width="71" height="30"/>
+                                <rect key="frame" x="16" y="98" width="78" height="30"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="1.00 MHz">
@@ -768,15 +768,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amD-Bh-zfp">
-                                <rect key="frame" x="170" y="318" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <segue destination="xzR-5c-doK" kind="unwind" animates="NO" unwindAction="unwindToMainWithSegue:" id="Rg3-S5-QEI"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvV-ok-0HC">
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZvV-ok-0HC">
                                 <rect key="frame" x="27.5" y="24" width="320" height="240"/>
                                 <color key="backgroundColor" red="0.1875" green="0.17692398133194073" blue="0.16515988760860945" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -794,12 +786,24 @@
                                 </attributedString>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="light" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amD-Bh-zfp">
+                                <rect key="frame" x="27.5" y="272" width="38" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="xzR-5c-doK" kind="unwind" animates="NO" unwindAction="unwindToMainWithSegue:" id="Rg3-S5-QEI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sxl-YY-xxc"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZvV-ok-0HC" firstAttribute="top" secondItem="sxl-YY-xxc" secondAttribute="top" constant="24" id="5TQ-xN-TSE"/>
+                            <constraint firstItem="amD-Bh-zfp" firstAttribute="top" secondItem="ZvV-ok-0HC" secondAttribute="bottom" constant="8" symbolic="YES" id="Bce-eh-22H"/>
                             <constraint firstItem="ZvV-ok-0HC" firstAttribute="centerX" secondItem="sxl-YY-xxc" secondAttribute="centerX" id="Bql-rs-I8m"/>
+                            <constraint firstItem="amD-Bh-zfp" firstAttribute="leading" secondItem="ZvV-ok-0HC" secondAttribute="leading" id="PqS-6a-AVf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FL3-yX-zZ6"/>
@@ -1022,6 +1026,9 @@ FE  INC   a16,X
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7Gs-SC-3x5"/>
+                    <connections>
+                        <outlet property="textView" destination="70f-qH-iiQ" id="kce-u5-hmb"/>
+                    </connections>
                 </viewController>
                 <exit id="9YD-XW-BU1" userLabel="Exit" sceneMemberID="exit"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0xK-vT-EtD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

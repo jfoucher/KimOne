@@ -21,6 +21,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
     @IBOutlet weak var serialText: UITextView!
     
     override func viewDidLoad() {
+        print("serial view controller view did load")
         serialText.textContainerInset.left = 10
         serialText.textContainerInset.right = 10
         serialText.textContainerInset.top = 10
@@ -33,25 +34,27 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         
         // Hidden textview to make keyboard appear
         let textView = UITextView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0))
-        
+        textView.autocorrectionType = .no
+        textView.autocapitalizationType = .none
+        textView.keyboardType = .alphabet
+
         textView.delegate = self
         textView.becomeFirstResponder()
         self.view.addSubview(textView)
-//        riot0.charPending = 0x15
-//        if (start.uptimeNanoseconds > 1000) {
-//            reset6502()
-//            start = DispatchTime.now()
-//        }
-        riot0.serial = true
+
+        dispatchQueue.sync {
+            riot0.serial = true
+        }
         
         riot0.delegate = self
     }
     
     func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
          //the textView parameter is the textView where text was changed
+        
         if (textView.text.count < previousText.count) {
             // Delete key was pressed, trigger it on Kim
-            print("delete")
+
             dispatchQueue.sync {
                 serialBuffer[serialCharsWaiting] = 0x7F
                 serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
@@ -79,7 +82,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
                     }
                     
                     // Add text to serial monitor, unless its return
-                    print("sending to kim", v)
+                    // print("sending to kim", v)
                     if (v != 13 && v != 10) {
                         if let c = String(bytes: [v], encoding: .ascii) {
                             self.serialText.text.append(c)

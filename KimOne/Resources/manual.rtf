@@ -1,0 +1,812 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Bold;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 Times-Italic;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red29\green29\blue29;
+\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;\cssrgb\c14902\c14902\c14902;
+\csgray\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{circle\}}{\leveltext\leveltemplateid202\'01\uc0\u9702 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\paperw12240\paperh15840\vieww13120\viewh12380\viewkind0
+\deftab720
+\pard\pardeftab720\fi325\sa428\qc\partightenfactor0
+
+\f0\b\fs64 \cf2 \expnd0\expndtw0\kerning0
+KIMONE USER MANUAL 
+\f1\b0 \
+\pard\pardeftab720\fi325\sa398\qc\partightenfactor0
+
+\f0\b\fs48 \cf2 KIM-1 MICROCOMPUTER MODULE SIMULATOR\uc0\u8232 USER MANUAL\u8232 
+\fs40 AUGUST 1976, JULY 2021\uc0\u8232 
+\f1\b0\fs48 \
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f2\i\fs26\fsmilli13300 \cf2 The information in this manual has been reviewed and is believed to be entirely reliable. However, no responsibility is assumed for inaccuracies. The material in this manual is for informational purposes only and is subject to change without notice.\uc0\u8232 The information within is based on the original KIM-1 manual and any additional material tries to reproduce the original style. 
+\f1\i0 \
+\pard\pardeftab720\sa428\partightenfactor0
+
+\f0\b\fs64 \cf2 CHAPTER 1
+\f1\b0 \
+\pard\pardeftab720\sa398\partightenfactor0
+
+\f0\b\fs48 \cf2 YOUR KIM-1 MICROCOMPUTER MODULE SIMULATOR
+\f1\b0 \
+\pard\pardeftab720\fi325\sa320\partightenfactor0
+
+\fs32 \cf2 Congratulations and welcome to the exciting new world of micro-computer simulators. As the owner of the 
+\f0\b KimOne
+\f1\b0  iPhone application you now have at your disposal a completely operational, fully tested and very capable digital computer simulator that strives to faithfully replicate the MOS KIM-1 micro-computer. It incorporates a faithful recreation of the original MOS 6502 microprocessor technology. By selecting the KimOne simulator, you have eliminated all the problems associated with constructing and debugging a microcomputer system. Your time is now available for learning the operation of the system and beginning immediately to apply it to your specific areas of interest. In fact, if you will follow a few simple procedures outlined in this manual, you should be able to achieve initial operation of your KIM-1 module simulator within a few seconds after installing the application. \
+Your 
+\f0\b KimOne
+\f1\b0  simulator has been designed to provide you with a choice of operating features. You may choose to operate the system using only the keyboard and display included on the first application screen. Next, you may switch to the serial interface simulation by clicking on the computer icon next to the help icon you clicked to open this page. This will allow you to interface with the simulated KIM-1 by using a screen and keyboard for input and output. \
+At the heart of your 
+\f0\b KimOne
+\f1\b0  application is a simulator for the 
+\f2\i MCS 6502 Microprocessor Array
+\f1\i0  operating in conjunction with simulators for two 
+\f2\i MCS 6530 arrays
+\f1\i0 . Each MCS 6530 provides a total of 1024 bytes of Read-only Memory (ROM) , 64 bytes of Random Access Memory (RAM), 15 Input/Output pins, and an Interval Timer. Stored permanently in the ROM's of the MCS 6530 arrays are the monitor and executive programs devised by NOS Technology, Inc. to control the various operating modes of the KIM-1 system. \
+While the original KIM-1 system only included 1024 bytes or RAM, this simulator includes 63 kilobytes, or 64512 bytes of random access memory to provide data and program storage for your application programs. In addition, one of the interval timers included in the system is available for generation of time base signals required by your application. \
+We recommend that you read all of this manual before attempting to operate your KimOne application. In the order presented, you will find: \
+\pard\pardeftab720\fi325\sa320\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Chapter 2 - "hints and kinks" to help you achieve initial system operation\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Chapter 3 - a more detailed description of the KIM-1 system hardware and software\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Chapter 4 - operating procedures for all system modes\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Chapter 5 - an example of a typical application program using all of the features of the KIM-1 system. \
+\pard\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 So much for introductory comments! Now let's get started and see if we can get your KimOne application doing some real work for you. \
+\pard\pardeftab720\sa428\partightenfactor0
+
+\f0\b\fs64 \cf2 CHAPTER 2
+\f1\b0 \
+\pard\pardeftab720\sa398\partightenfactor0
+
+\f0\b\fs48 \cf2 GETTING STARTED
+\f1\b0 \
+\pard\pardeftab720\fi325\sa320\partightenfactor0
+
+\fs32 \cf2 This chapter is intended to guide you through the first important steps in achieving initial operation of your KIM-1 Microcomputer Module Simulator. We will ask you to perform certain operations without explanation at this time as to why they are being done. In later sections of this manual, full explanations will be offered for every operating procedure. \
+\pard\pardeftab720\sa374\partightenfactor0
+
+\f0\b\fs37\fsmilli18700 \cf2 2.1 FIRST STEPS 
+\f1\b0 \
+\pard\pardeftab720\fi325\sa320\partightenfactor0
+
+\fs32 \cf2 After installing the 
+\f0\b KimOne
+\f1\b0  application, locate the relevant icon named 
+\f2\i "KimOne"
+\f1\i0  on your phone's home screen and tap it to start the KIM-1 simulator. You will be presented with the default 
+\f0\b KimOne
+\f1\b0  interface: a display at the top consisting of 6 digital displays, and a keyboard below presenting 16 hexadecimal keys as well as various function keys. Their functionality will be explained in detail later on.\uc0\u8232 The led digits should light and display the value 
+\f3\b \cf0 \kerning1\expnd0\expndtw0 000000
+\f4\b0 \cf2 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\fi325\partightenfactor0
+
+\f1 \cf2 Now depress the 
+\f4 \cf3 \cb4 \'a0RS\'a0
+\f1 \cf2 \cb1  (Reset) key.\
+\pard\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 \uc0\u8232 \
+\pard\pardeftab720\sa374\partightenfactor0
+
+\f0\b\fs37\fsmilli18700 \cf2 2.2 LETS TRY A SIMPLE PROGRAM 
+\f1\b0 \
+\pard\pardeftab720\fi325\sa320\partightenfactor0
+
+\fs32 \cf2 Assuming that you have completed successfully all of the steps thus far, a simple program now can be tried to demonstrate the operation of the system and increase your confidence that everything works properly. We'll be using only the keyboard and display on the module for this example. (In the next section we'll worry about the teleprinter) \
+For our first example, we will add two 8 bit binary numbers together and display the result. We presume that you are familiar with the hexadecimal representation of numbers and the general rules for binary arithmetic. \
+First check and be sure that the slide switch in the upper right corner of the keyboard is pushed to the left (SST Mode is OFF). Now proceed with the following key sequence:\
+\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f0\b \cf2 Press Keys\cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 See on display\cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 Step #\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4\b0\fs28 \cf3 \cb4 \'a0AD\'a0
+\f1 \cf2 \cb1  \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 xxxx xx
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 1
+\fs32 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4\fs24 \cf3 \cb4 \'a0
+\fs28 0\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a02\'a0
+\f1 \cf2 \cb1  \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0002 xx
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 2\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0DA\'a0
+\f1 \cf2 \cb1  \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0002 xx
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 3\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a01\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a08\'a0
+\f1 \cf2 \cb1  \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0002 18
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 4\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a0A\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a05\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0003 A5
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 5\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0004 00
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 6\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a06\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a05\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0005 65
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 7\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a01\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0006 01
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 8\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a08\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a05\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf2 0007 85
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 9\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a0F\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a0A\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0008 FA
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 10\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a0A\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a09\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0009 A9
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 11\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 000A 00
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 12\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a08\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a05\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 000B 85
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 13\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a0F\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a0B\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 000C FB
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 14\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a04\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a0C\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 000D 4C
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 15\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a04\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a0F\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 000E 4F
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 16\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a01\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a0C\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 000F 1C
+\f1\fs32 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\fs28 \cf2 17
+\fs32 \cell \lastrow\row
+\pard\pardeftab720\fi325\partightenfactor0
+\cf2 \
+What you have just done is entered a program and stored it in the RAM at locations 
+\f3\b 0002
+\f1\b0  through 
+\f3\b 000F
+\f1\b0 .  You should have noticed the purpose of several special keys on your keyboard:\
+\
+\pard\pardeftab720\fi325\sl312\slmult1\partightenfactor0
+\ls2\ilvl0\cf2 \cb5 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+ 
+\f4 \cf3 \cb4 \'a0AD\'a0
+\f1 \cf2 \cb1   -  selects the address entry mode\
+\ls2\ilvl0\cb5 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+ 
+\f4 \cf3 \cb4 \'a0DA\'a0
+\f1 \cf2 \cb1   -  selects the data entry mode\
+\ls2\ilvl0\cb5 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+ 
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1    -  increments the address without changing the entry mode\
+\pard\pardeftab720\fi325\sl312\slmult1\partightenfactor0
+\ls2\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+ 
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1  to 
+\f4 \cf3 \cb4 \'a0F\'a0
+\f1 \cf2 \cb1   -  16 entry keys defining the hex code for address or data entry\
+\pard\pardeftab720\fi325\sl312\slmult1\partightenfactor0
+\cf2 \
+\pard\pardeftab720\fi325\partightenfactor0
+\ls3\ilvl1\cf2 \
+\pard\pardeftab720\fi325\partightenfactor0
+\cf2 \
+You've noticed as well that your display contains 6 digits.  The four on the left are used to display the hex code for an address.  The two on the right show the hex code for the data stored at the address shown.  Therefore, when you pressed  
+\f4\fs28 \cf3 \cb4 \'a0AD\'a0
+\f1\fs32 \cf2 \cb1   (step 1) and 
+\f4\fs24 \cf3 \cb4 \'a0
+\fs28 0\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a02\'a0
+\f1\fs32 \cf2 \cb1  (step 2), you defined the address entry mode, selected the address 
+\f3\b 0002
+\f1\b0 , and displayed the address 
+\f3\b 0002
+\f1\b0  in the four left-most display digits. Incidentally, when we show an "x" in the display chart, we mean that we don't know what will be displayed and we "don't care."\
+\
+Next you pressed  
+\f4\fs28 \cf3 \cb4 \'a0DA\'a0
+\f1\fs32 \cf2 \cb1   (step 3) followed by 
+\f4\fs28 \cf3 \cb4 \'a01\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a08\'a0
+\f1\fs32 \cf2 \cb1  (step 4).  Here, you have defined the data entry mode and entered the value 
+\f3\b 18
+\f1\b0  to be stored at your selected address 
+\f3\b 0002
+\f1\b0 .  Of course, the 
+\f3\b 18
+\f1\b0  then was displayed in the two right-most digits of your display.\
+\
+You remained in the data entry mode but began to press 
+\f4\fs28 \cf3 \cb4 \'a0+\'a0
+\f1\fs32 \cf2 \cb1  followed by a two digit number (steps 5 to 17).  Note that each depression of the 
+\f4\fs28 \cf3 \cb4 \'a0+\'a0
+\f1\fs32 \cf2 \cb1  key caused the address displayed to increase by one.  The hex keys following the 
+\f4\fs28 \cf3 \cb4 \'a0+\'a0
+\f1\fs32 \cf2 \cb1  key continued to enter the data field of the display.\
+This procedure is merely a convenience when a number of successive address locations are to be filled.\
+\
+If you made any mistakes in pressing the keys, you should have noticed that correcting an error is simply a matter of reentering the data until the correct numbers show on the display.\
+\
+The program you have entered is a simple loop to add two 8 bit binary numbers together and present the result on the display.  For a programmer, the listing of the program entered might appear as follows:
+\f4\fs24 \
+\
+\pard\pardeftab720\fi325\partightenfactor0
+
+\fs28 \cf2 POINTL               = $FA\
+POINTH               = $FB\
+START                = $1C4F\
+0000                 VALl\
+0001                 VAL2\
+0002       18        PROG    CLC\
+0003       A5 00             LDA VALl\
+0005       65 01             ADC VAL2\
+0007       85 FA             STA POINTL\
+0009       A9 00             LDA #00\
+000B       85 FB             STA POINTH\
+000D       4C 4F 1C          JMP START
+\f1\fs32 \
+\
+\
+\pard\tx0\tx566\tx1133\pardeftab720\fi308\partightenfactor0
+\cf2 Stated in simple terms, the program will clear the carry flag (
+\f4 CLC
+\f1 ) load 
+\f4 VAL1
+\f1  into the accumulator (
+\f4 LDA VALl
+\f1 ), add with carry 
+\f4 VAL2
+\f1  to the accumulator (
+\f4 ADC VAL2
+\f1 ), and store the result in a location 
+\f4 POINTL
+\f1  (
+\f4 STA POINTL
+\f1 ).  A zero value is stored in a location 
+\f4 POINTH
+\f1  (
+\f4 LDA #00
+\f1  and 
+\f4 STA POINTH
+\f1 ) and the program jumps to a point labelled 
+\f4 START
+\f1  (
+\f4 JMP START
+\f1 ). \
+This pre-stored program will cause the display to be activated and will cause the address field of your display to show the numbers stored in locations 
+\f4 POINTH
+\f1  and 
+\f4 POINTL
+\f1 .  Note that the result of the addition has already been stored in location 
+\f4 POINTL
+\f1 .\
+\
+The hex codes appearing next to the address field of the listing are\
+exactly the numbers you entered to store the program.  We refer to these\
+as machine language codes.  For example, 
+\f3\b 4C
+\f1\b0  is the hex code for the 
+\f4 JMP
+\f1 \
+instruction of the microprocessor.  The next two bytes of the program\
+define 
+\f3\b 1C4F
+\f1\b0  (
+\f4 START
+\f1 ) as the jump address.\
+\
+As yet, you are not able to run the program because you have not yet\
+entered the two variables (
+\f4 VALl
+\f1  and 
+\f4 VAL2
+\f1 ).  Lets try an actual example:\
+\
+\pard\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 \
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f0\b \cf2 Press Keys\cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 See on display\cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 Step #\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4\b0\fs28 \cf3 \cb4 \'a0AD\'a0
+\f1 \cf2 \cb1  \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 000F 1C
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 17A
+\fs32 \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4\fs24 \cf3 \cb4 \'a0
+\fs28 0\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a0F\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a01\'a0
+\f1 \cf2 \cb1  \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 00F1 xx
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 17B\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0DA\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1  \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 00F1 00
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 18\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0AD\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 00F1 00
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 19\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4\fs24 \cf3 \cb4 \'a0
+\fs28 \cb4 0\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1 \'a0
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1  \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0000 xx
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 20\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0DA\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a02\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0000 02
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 21\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a00\'a0
+\f1 \cf2 \cb1  
+\f4 \cf3 \cb4 \'a03\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0001 03
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 22\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5080\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clwWidth3720\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clwWidth3640\clftsWidth3 \clbrdrt\brdrs\brdrw60\brdrcf3 \clbrdrl\brdrs\brdrw60\brdrcf3 \clbrdrb\brdrs\brdrw60\brdrcf3 \clbrdrr\brdrs\brdrw60\brdrcf3 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf3 \cb4 \'a0+\'a0
+\f1 \cf2 \cb1  \'a0\'a0\'a0 
+\f4 \cf3 \cb4 \'a0GO\'a0
+\f1 \cf2 \cb1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+
+\f4 \cf2 0002 18
+\f1 \cell 
+\pard\intbl\itap1\pardeftab720\fi325\sa320\partightenfactor0
+\cf2 23\cell \lastrow\row
+\pard\pardeftab720\fi325\partightenfactor0
+
+\f4 \cf2 \cb5 \
+\
+\pard\tx566\tx1133\pardeftab720\fi320\partightenfactor0
+
+\f1\fs32 \cf2 \cb1 Steps 17A, 17B, and 18 insure that the binary arithmetic mode is selected.\
+Steps 19 to 21 store the hex value 
+\f3\b 02
+\f1\b0  in location 
+\f3\b 0000
+\f1\b0  (
+\f4 VAL1
+\f1 ).  Step 22 stores the hex value 
+\f3\b 03
+\f1\b0  in location 
+\f3\b 0001
+\f1\b0  (
+\f4 VAL2
+\f1 ).  Now we are ready to run the program.  In step 23, the 
+\f4\fs28 \cf3 \cb4 \'a0GO\'a0
+\f1\fs32 \cf2 \cb1  key causes the program to execute and the result, 
+\f3\b 05
+\f1\b0 , appears in the right two digits of the address display.\
+Although the problem appears trivial, it illustrates the basic principles of entering and executing any program as well as providing a fairly high assurance level that your KIM-1 Module Simulator is operating properly.\
+\pard\pardeftab720\fi325\partightenfactor0
+\cf2 \
+\pard\tx566\tx1133\pardeftab720\partightenfactor0
+\cf2 You should try one more example using your stored program.  Repeat steps 17A to 23 but substitute the value 
+\f3\b FF
+\f1\b0  for 
+\f4 VALl
+\f1  and 
+\f4 VAL2
+\f1  at locations 
+\f3\b 0000
+\f1\b0  and 
+\f3\b 0001
+\f1\b0 .  Now when you press the 
+\f4\fs28 \cf3 \cb4 \'a0GO\'a0
+\f1\fs32 \cf2 \cb1  key, your display should read:
+\f4\fs24 \
+\
+
+\fs32 	00FE xx
+\fs24 \
+\
+
+\f1\fs32 The answer is correct because:
+\f4\fs24 \
+\
+
+\fs32        FF = 1111 1111\
+   +   \ul FF\ulnone  = \ul 1111 1111\ulnone \
+       FE   1111 1110
+\fs24 \
+\
+
+\f1\fs32 Try some more examples if you wish and then let's move on to the rest of the system.\
+}

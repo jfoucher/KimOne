@@ -19,8 +19,6 @@ struct TIMER {
 
 
 class Riot: Codable {
-    
-    
     var rom:[UInt8] = [UInt8](repeating: 0, count: Int(1024))
     var ram: [UInt8] = [UInt8](repeating: 0, count: Int(64))
     var padd: UInt8 = 0
@@ -55,6 +53,11 @@ class Riot: Codable {
         case baseAddress
         case ramBaseAddress
         case romBaseAddress
+        case serial
+        case sendingSerial
+        case sendingSerialCount
+        case sendingSerialByte
+        case sendingSerialReady
     }
     
     let keyBits: [UInt8] = [ 0xbf, 0xdf, 0xef, 0xf7, 0xfb, 0xfd, 0xfe ];

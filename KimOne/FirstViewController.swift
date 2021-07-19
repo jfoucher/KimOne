@@ -27,6 +27,10 @@ class FirstViewController: UIViewController {
     
     var speedLimit: Bool = false
     
+    @IBSegueAction func serialOn(_ coder: NSCoder) -> SerialViewController? {
+        riot0.serial = true
+        return SerialViewController(coder: coder)
+    }
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
         // Stop getting serial chars
         dispatchQueue.sync {
@@ -225,7 +229,7 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("first view controller view did load")
         // Prepare UI
         goButton.titleLabel!.adjustsFontSizeToFitWidth = true
         

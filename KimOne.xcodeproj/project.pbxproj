@@ -14,6 +14,7 @@
 		AB107F06269F7D4E0048A3CF /* DigitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB107F05269F7D4E0048A3CF /* DigitView.swift */; };
 		AB107F24269FA3950048A3CF /* cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = AB107F23269FA3950048A3CF /* cpu.c */; };
 		AB107F29269FB1400048A3CF /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AB107F28269FB1400048A3CF /* logo.png */; };
+		AB18FB8726A5EC4B00977C42 /* manual.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AB18FB8626A5EC4B00977C42 /* manual.rtf */; };
 		AB30C67226A41501007F6C38 /* TinyBasic.bin in Resources */ = {isa = PBXBuildFile; fileRef = AB30C67126A41501007F6C38 /* TinyBasic.bin */; };
 		AB31FD2D26A354020032C543 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB31FD2C26A354020032C543 /* HelpViewController.swift */; };
 		AB77A36426A2149A00F59F9D /* ProcessorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB77A36326A2149A00F59F9D /* ProcessorInterface.swift */; };
@@ -24,9 +25,8 @@
 		ABB6815526A0974600C2FC21 /* rom0.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABB6815326A0974600C2FC21 /* rom0.bin */; };
 		ABD47B8E26A2E68300B6C93A /* SerialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD47B8D26A2E68300B6C93A /* SerialViewController.swift */; };
 		ABD781B422A00AFE00574458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABD781B322A00AFE00574458 /* Assets.xcassets */; };
-		ABE6EF8726A3B16A008BAE75 /* KB9V01AA.BIN in Resources */ = {isa = PBXBuildFile; fileRef = ABE6EF8626A3B16A008BAE75 /* KB9V01AA.BIN */; };
-		ABE6EF8C26A3BA7E008BAE75 /* forth.BIN in Resources */ = {isa = PBXBuildFile; fileRef = ABE6EF8B26A3BA7E008BAE75 /* forth.BIN */; };
-		ABE6EF9126A3BE84008BAE75 /* tiny1.BIN in Resources */ = {isa = PBXBuildFile; fileRef = ABE6EF9026A3BE84008BAE75 /* tiny1.BIN */; };
+		ABE2E3D626A4D66D008E021E /* tiny.html in Resources */ = {isa = PBXBuildFile; fileRef = ABE2E3D526A4D66D008E021E /* tiny.html */; };
+		ABE2E3DD26A4DBA5008E021E /* Users Manual V1.0_files in Resources */ = {isa = PBXBuildFile; fileRef = ABE2E3DB26A4DBA5008E021E /* Users Manual V1.0_files */; };
 		ABEBE79426A1B20E009AA3F5 /* key.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABEBE79326A1B20E009AA3F5 /* key.m4a */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +61,7 @@
 		AB107F22269FA3950048A3CF /* cpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cpu.h; sourceTree = "<group>"; };
 		AB107F23269FA3950048A3CF /* cpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cpu.c; sourceTree = "<group>"; };
 		AB107F28269FB1400048A3CF /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = KimOne/Resources/logo.png; sourceTree = SOURCE_ROOT; };
+		AB18FB8626A5EC4B00977C42 /* manual.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = manual.rtf; sourceTree = "<group>"; };
 		AB30C67126A41501007F6C38 /* TinyBasic.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = TinyBasic.bin; sourceTree = "<group>"; };
 		AB31FD2C26A354020032C543 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		AB33BE62229FF6150003EEA3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -73,9 +74,8 @@
 		ABB6815326A0974600C2FC21 /* rom0.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = rom0.bin; sourceTree = "<group>"; };
 		ABD47B8D26A2E68300B6C93A /* SerialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialViewController.swift; sourceTree = "<group>"; };
 		ABD781B322A00AFE00574458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		ABE6EF8626A3B16A008BAE75 /* KB9V01AA.BIN */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = KB9V01AA.BIN; sourceTree = "<group>"; };
-		ABE6EF8B26A3BA7E008BAE75 /* forth.BIN */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = forth.BIN; sourceTree = "<group>"; };
-		ABE6EF9026A3BE84008BAE75 /* tiny1.BIN */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = tiny1.BIN; sourceTree = "<group>"; };
+		ABE2E3D526A4D66D008E021E /* tiny.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = tiny.html; sourceTree = "<group>"; };
+		ABE2E3DB26A4DBA5008E021E /* Users Manual V1.0_files */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Users Manual V1.0_files"; sourceTree = "<group>"; };
 		ABEBE79326A1B20E009AA3F5 /* key.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = key.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,10 +149,10 @@
 		AB65D3FD26A15E8900AA37D6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AB18FB8626A5EC4B00977C42 /* manual.rtf */,
+				ABE2E3DB26A4DBA5008E021E /* Users Manual V1.0_files */,
+				ABE2E3D526A4D66D008E021E /* tiny.html */,
 				AB30C67126A41501007F6C38 /* TinyBasic.bin */,
-				ABE6EF9026A3BE84008BAE75 /* tiny1.BIN */,
-				ABE6EF8B26A3BA7E008BAE75 /* forth.BIN */,
-				ABE6EF8626A3B16A008BAE75 /* KB9V01AA.BIN */,
 				ABEBE79326A1B20E009AA3F5 /* key.m4a */,
 				AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */,
 				AB107F28269FB1400048A3CF /* logo.png */,
@@ -272,18 +272,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABE6EF8726A3B16A008BAE75 /* KB9V01AA.BIN in Resources */,
-				ABE6EF9126A3BE84008BAE75 /* tiny1.BIN in Resources */,
 				AB30C67226A41501007F6C38 /* TinyBasic.bin in Resources */,
 				AB04BF38229F539500B1111E /* LaunchScreen.storyboard in Resources */,
+				ABE2E3DD26A4DBA5008E021E /* Users Manual V1.0_files in Resources */,
 				ABB6815426A0974600C2FC21 /* rom1.bin in Resources */,
 				ABEBE79426A1B20E009AA3F5 /* key.m4a in Resources */,
 				AB107F29269FB1400048A3CF /* logo.png in Resources */,
+				AB18FB8726A5EC4B00977C42 /* manual.rtf in Resources */,
 				AB9AEC1F26A04CB30010CB6D /* 3270Condensed-Regular.otf in Resources */,
 				ABD781B422A00AFE00574458 /* Assets.xcassets in Resources */,
 				ABB6815526A0974600C2FC21 /* rom0.bin in Resources */,
+				ABE2E3D626A4D66D008E021E /* tiny.html in Resources */,
 				AB04BF33229F539400B1111E /* Main.storyboard in Resources */,
-				ABE6EF8C26A3BA7E008BAE75 /* forth.BIN in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
