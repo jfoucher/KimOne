@@ -16,7 +16,7 @@ protocol TextReceiverDelegate:class {
 class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDelegate {
 
     var text = ""
-    var previousText = ""
+    var previousText = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     
     @IBOutlet weak var serialText: UITextView!
     
@@ -37,16 +37,20 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         textView.autocorrectionType = .no
         textView.autocapitalizationType = .none
         textView.keyboardType = .alphabet
+        // Init with some text to be able to type delete
+        textView.text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
         textView.delegate = self
         textView.becomeFirstResponder()
         self.view.addSubview(textView)
 
         dispatchQueue.sync {
+            riot0.delegate = self
             riot0.serial = true
+            
         }
         
-        riot0.delegate = self
+        
     }
     
     func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
@@ -68,16 +72,13 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
                     if (f.value == 8220 || f.value == 8221) {
                         // Replace smart quotes
                         v = 34
-                    }
-                    // convert lowercase to uppercase
-                    if (v >= 0x61 && v <= 0x7A) {
+                    } else if (v >= 0x61 && v <= 0x7A) {
+                        // convert lowercase to uppercase
                         v -= 0x20
-                    }
-                    // Convert ^ to CR to enable stepping backwards
-                    if (v == 0x5E) {
+                    } else if (v == 0x5E) {
+                        // Convert ^ to CR to enable stepping backwards
                         v = 10
-                    }
-                    if (v == 10) {
+                    }else if (v == 10) {
                         v = 13
                     }
                     

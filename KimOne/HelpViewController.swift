@@ -18,7 +18,7 @@ class HelpViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Help view controller view did load")
+
         
         if let rtfPath = Bundle.main.url(forResource: "manual", withExtension: "rtf") {
             do {

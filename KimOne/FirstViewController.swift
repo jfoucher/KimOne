@@ -17,9 +17,6 @@ var riot1 = Riot(n:1)
 
 var singleStep: Bool = false
 
-
-
-
 class FirstViewController: UIViewController {
     var running: Bool = true
     let kbSound = URL(fileURLWithPath: Bundle.main.path(forResource: "key", ofType: "m4a")!)
@@ -27,15 +24,32 @@ class FirstViewController: UIViewController {
     
     var speedLimit: Bool = false
     
+    @IBSegueAction func showHelp(_ coder: NSCoder) -> HelpViewController? {
+        dispatchQueue.async {
+            self.running = false;
+        }
+        return HelpViewController(coder: coder)
+    }
     @IBSegueAction func serialOn(_ coder: NSCoder) -> SerialViewController? {
+        print("Serial on segue")
         riot0.serial = true
         return SerialViewController(coder: coder)
     }
+    @IBAction func showHelpBtnClicked(_ sender: Any) {
+        dispatchQueue.async {
+            print("set running to false")
+            self.running = false;
+        }
+    }
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
         // Stop getting serial chars
+        print("unwind")
         dispatchQueue.sync {
-            riot0.serial = false
+            self.running = true;
+        
+//            riot0.turnSerialOff()
             riot0.charPending = 0x15
+            riot0.serial = false
 
             reset6502()
         }
@@ -65,13 +79,6 @@ class FirstViewController: UIViewController {
                 clockticks6502 = 0
                 prevTicks = 0
             }
-        }
-        
-        if (self.speedLimit) {
-            let attributedText: NSAttributedString = self.speedButton.attributedTitle(for: .normal)!
-            let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
-            mutableAttributedText.mutableString.setString("1.00 MHz")
-            self.speedButton.setAttributedTitle(mutableAttributedText, for: .normal)
         }
     }
     
@@ -276,7 +283,12 @@ class FirstViewController: UIViewController {
             // Flag for NMI when single stepping or when ST is pressed
             var nmiFlag: Bool = false;
             // Start main loop
-            while self.running {
+            while true {
+                if !self.running {
+                    print ("not running")
+                    usleep(1000000);
+                    continue;
+                }
                 let t = DispatchTime.now().uptimeNanoseconds
                 
                 // Slow down if speed limit
