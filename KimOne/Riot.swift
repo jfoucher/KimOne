@@ -221,13 +221,13 @@ class Riot: Codable {
     }
     
     func loadRom() {
+        print("loading rom contents", String(format: "rom%d", self.num))
         let filename = String(format: "rom%d", self.num)
         let bundle = Bundle.main
         let path = bundle.path(forResource: filename, ofType: "bin")!
-        //print(path)
-        
+
         let data = NSData(contentsOfFile: path)!
         let dataRange = NSRange(location: 0, length: 1024)
-        data.getBytes(&rom, range: dataRange)
+        data.getBytes(&self.rom, range: dataRange)
     }
 }

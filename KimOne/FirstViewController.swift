@@ -256,12 +256,7 @@ class FirstViewController: UIViewController {
         }
         
         self.view.addSubview(testView)
-        
-        dispatchQueue.sync(flags: .barrier) {
-            // Load data into 6530 ROM
-            riot0.loadRom()
-            riot1.loadRom()
-        }
+
         
         
         //Restore digits from RAM

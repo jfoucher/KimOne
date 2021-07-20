@@ -171,22 +171,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        dispatchQueue.async {
+        print("applicationWillTerminate")
+        FirstViewController().running = false
+        dispatchQueue.sync {
             riot0.serial = false
             self.saveData()
         }
-    
-        
     }
 
 
     func saveData() {
-//        let mem = Data(memory).base64EncodedString()
-//        UserDefaults.standard.set(mem, forKey: "memory")
-        
-//        UserDefaults.standard.set(memory, forKey:"memory")
-//        UserDefaults.standard.synchronize()
-        
+        print("saving data")
         UserDefaults.standard.set(pc, forKey: "pc")
         UserDefaults.standard.set(a, forKey: "a")
         UserDefaults.standard.set(x, forKey: "x")
@@ -194,12 +189,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(sp, forKey: "sp")
         UserDefaults.standard.set(status, forKey: "status")
         UserDefaults.standard.set(singleStep, forKey: "singleStep")
-        
-//        let r0Data = NSKeyedArchiver.archivedData(withRootObject: riot0)
-//        UserDefaults.standard.set(r0Data, forKey: "riot0")
-//
-//        let r1Data = NSKeyedArchiver.archivedData(withRootObject: riot1)
-//        UserDefaults.standard.set(r1Data, forKey: "riot1")
         
         if let encoded = try? PropertyListEncoder().encode(riot0) {
             UserDefaults.standard.set(encoded, forKey: "riot0")
@@ -209,13 +198,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if let encoded = try? PropertyListEncoder().encode(memory) {
+            
             UserDefaults.standard.set(encoded, forKey: "memory")
+        } else {
+            print("could not encode memory")
         }
     }
     
     func restoreData() {
         // LOAD data into RAM
-        loadMicroChess()
         dispatchQueue.sync {
             memory[0x400] = 0x42
             memory[0x401] = 0xFF
@@ -229,28 +220,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //Setup default NMI vector
             write6502(0x17FA, 0x00)
             write6502(0x17FB, 0x1C)
-        }
-        
-//        if let r0Data = UserDefaults.standard.object(forKey: "riot0") {
-//            if let r0 = NSKeyedUnarchiver.unarchiveObject(with: r0Data as! Data) as? Riot {
-//                riot0 = r0
-//            } else {
-//                print("Could not unarchive from r0Data")
-//            }
-//        } else {
-//            print("Could not read r0Data")
-//        }
-//
-//        if let r1Data = UserDefaults.standard.object(forKey: "riot1") {
-//            if let r1 = NSKeyedUnarchiver.unarchiveObject(with: r1Data as! Data) as? Riot {
-//                riot1 = r1
-//            } else {
-//                print("Could not unarchive from r1Data")
-//            }
-//        } else {
-//            print("Could not read r1Data")
-//        }
-        dispatchQueue.async {
+            
+            self.loadMicroChess()
         
             if let riot0Data = UserDefaults.standard.data(forKey: "riot0") {
                 do {
@@ -276,6 +247,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("No saved riot 1")
                 riot1 = Riot(n: 1)
             }
+            
+            riot0.loadRom()
+            riot1.loadRom()
         
             pc = UInt16(UserDefaults.standard.integer(forKey: "pc"))
             a = UInt8(UserDefaults.standard.integer(forKey: "a"))
@@ -287,35 +261,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if (status == 0) {
                 status = UInt8(FLAG_CONSTANT)
             }
-        }
-
-        //Load user data
-//        if let stringData = UserDefaults.standard.string(forKey: "memory")  {
-//            if let nsdata1 = Data(base64Encoded: stringData) {
-//
-//                memory = nsdata1.withUnsafeBytes {
-//                   Array(UnsafeBufferPointer<UInt8>(start: $0, count: nsdata1.count/MemoryLayout<UInt8>.size))
-//                }
-//            }
-//        }
-        
-        if let mData = UserDefaults.standard.data(forKey: "memory") {
-            dispatchQueue.sync {
-            do {
+            
+            if let mData = UserDefaults.standard.data(forKey: "memory") {
+                do {
                     memory = try PropertyListDecoder().decode([UInt8].self, from: mData)
-                
                 } catch {
                     print("could not decode memory")
                 }
+            } else {
+                print("No saved memory")
             }
+            self.loadBasic()
         }
-        
-//        if let memData = UserDefaults.standard.object(forKey: "memory") as? [UInt8] {
-//            print(memory)
-//            memory = memData
-//        }
-        
-        loadBasic()
     }
     
     // Load microchess at 0XC000

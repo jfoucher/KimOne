@@ -778,7 +778,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content=" ">
                                         <attributes>
-                                            <color key="NSColor" red="0.0" green="0.60332725253807107" blue="0.030877060237273109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="NSColor" red="0.0" green="0.92195595854922274" blue="0.065871862878421256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="16" name="3270Condensed"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
