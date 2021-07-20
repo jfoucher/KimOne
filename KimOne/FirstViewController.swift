@@ -11,10 +11,6 @@ import AVFoundation
 var digits: [DigitItem] = [DigitItem(id:0), DigitItem(id:1), DigitItem(id:2), DigitItem(id:3), DigitItem(id:4), DigitItem(id:5)]
 
 
-
-var riot0 = Riot(n:0)
-var riot1 = Riot(n:1)
-
 var singleStep: Bool = false
 
 class FirstViewController: UIViewController {
@@ -25,18 +21,20 @@ class FirstViewController: UIViewController {
     var speedLimit: Bool = false
     
     @IBSegueAction func showHelp(_ coder: NSCoder) -> HelpViewController? {
-        dispatchQueue.async {
+        dispatchQueue.async(flags: .barrier) {
             self.running = false;
         }
         return HelpViewController(coder: coder)
     }
     @IBSegueAction func serialOn(_ coder: NSCoder) -> SerialViewController? {
         print("Serial on segue")
-        riot0.serial = true
+        dispatchQueue.sync(flags: .barrier) {
+            riot0.serial = true
+        }
         return SerialViewController(coder: coder)
     }
     @IBAction func showHelpBtnClicked(_ sender: Any) {
-        dispatchQueue.async {
+        dispatchQueue.async(flags: .barrier) {
             print("set running to false")
             self.running = false;
         }
@@ -44,7 +42,7 @@ class FirstViewController: UIViewController {
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
         // Stop getting serial chars
         print("unwind")
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             self.running = true;
         
 //            riot0.turnSerialOff()
@@ -75,7 +73,7 @@ class FirstViewController: UIViewController {
         
         if (start.uptimeNanoseconds > 1000) {
             start = DispatchTime.now()
-            dispatchQueue.sync {
+            dispatchQueue.sync(flags: .barrier) {
                 clockticks6502 = 0
                 prevTicks = 0
             }
@@ -83,14 +81,14 @@ class FirstViewController: UIViewController {
     }
     
     @IBAction func GoClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x13;
         }
         audioPlayer.play()
     }
     @IBAction func stClicked(_ sender: Any) {
         print("NMI")
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x15
             nmi6502()
         }
@@ -100,7 +98,7 @@ class FirstViewController: UIViewController {
         print("RESET")
         
         if (start.uptimeNanoseconds > 1000) {
-            dispatchQueue.sync {
+            dispatchQueue.sync(flags: .barrier) {
                 reset6502()
                 riot0.charPending = 0x15
             }
@@ -112,123 +110,123 @@ class FirstViewController: UIViewController {
         singleStep = sender.isOn
     }
     @IBAction func ADClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x10
         }
         audioPlayer.play()
     }
     @IBAction func DAClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x11
         }
         audioPlayer.play()
     }
     @IBAction func pcClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x14
         }
         audioPlayer.play()
     }
     
     @IBAction func plusClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x12
         }
         audioPlayer.play()
     }
     
     @IBAction func CClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0xC
         }
         audioPlayer.play()
     }
     @IBAction func DClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0xD
         }
         audioPlayer.play()
     }
     @IBAction func EClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0xE
         }
         audioPlayer.play()
     }
     @IBAction func FClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0xF
         }
         audioPlayer.play()
     }
     @IBAction func Eightclicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x8
         }
         audioPlayer.play()
     }
     @IBAction func NineClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x9
         }
         audioPlayer.play()
     }
     @IBAction func AClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0xA
         }
         audioPlayer.play()
     }
     @IBAction func Bclicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0xB
         }
         audioPlayer.play()
     }
     @IBAction func FourClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x4
         }
         audioPlayer.play()
     }
     @IBAction func FiveClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x5
         }
         audioPlayer.play()
     }
     @IBAction func SixClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x6
         }
         audioPlayer.play()
     }
     @IBAction func SevenClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x7
         }
         audioPlayer.play()
     }
     @IBAction func ZeroClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x0
         }
         audioPlayer.play()
     }
     @IBAction func OneClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x1
         }
         audioPlayer.play()
     }
     @IBAction func TwoClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x2
         }
         audioPlayer.play()
     }
     @IBAction func ThreeClicked(_ sender: Any) {
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.charPending = 0x3
         }
         audioPlayer.play()
@@ -259,7 +257,7 @@ class FirstViewController: UIViewController {
         
         self.view.addSubview(testView)
         
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             // Load data into 6530 ROM
             riot0.loadRom()
             riot1.loadRom()

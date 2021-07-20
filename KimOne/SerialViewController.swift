@@ -44,7 +44,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         textView.becomeFirstResponder()
         self.view.addSubview(textView)
 
-        dispatchQueue.sync {
+        dispatchQueue.sync(flags: .barrier) {
             riot0.delegate = self
             riot0.serial = true
             
@@ -59,7 +59,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         if (textView.text.count < previousText.count) {
             // Delete key was pressed, trigger it on Kim
 
-            dispatchQueue.sync {
+            dispatchQueue.sync(flags: .barrier) {
                 serialBuffer[serialCharsWaiting] = 0x7F
                 serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
                 print(serialCharsWaiting)
@@ -93,7 +93,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
                     }
                 
                     
-                    dispatchQueue.sync {
+                    dispatchQueue.sync(flags: .barrier) {
                         serialBuffer[serialCharsWaiting] = v
                         serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
                     }

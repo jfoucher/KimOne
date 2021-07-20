@@ -71,8 +71,6 @@ func read6502Swift(address: UInt16) -> UInt8 {
     } else if (addr >= 0xFF00) {
         val = riot0.rom[Int(addr - 0xFC00)]
         //print(String(format: "Read riot 0 ROM ad: %04X v: %02X", address, val))
-    } else if ((addr >= 0x9c00) && (addr < 0xa000)) {
-        val = riot0.ram[Int(addr - 0x9c00)];
     } else {
         val = memory[Int(address)]
         //print(String(format: "Read MEMORY ad: %04X v: %02X", address, val))

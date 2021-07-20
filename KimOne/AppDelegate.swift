@@ -9,7 +9,8 @@
 import UIKit
 var start:DispatchTime = DispatchTime.now();
 
-
+var riot0:Riot = Riot(n: 0)
+var riot1:Riot = Riot(n: 1)
 
 
 let mchess:[UInt8] = [
@@ -144,7 +145,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        restoreData()
+        
+        self.restoreData()
+        
         return true
     }
 
@@ -168,8 +171,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        riot0.serial = false
-        saveData()
+        dispatchQueue.async {
+            riot0.serial = false
+            self.saveData()
+        }
+    
+        
     }
 
 
@@ -209,19 +216,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func restoreData() {
         // LOAD data into RAM
         loadMicroChess()
-
-        memory[0x400] = 0x42
-        memory[0x401] = 0xFF
-        memory[0x402] = 0xCA
-        memory[0x403] = 0xD0
-        memory[0x404] = 0xFD
-        
-        // Set up default IRQ vector
-        write6502(0x17FE, 0x22)
-        write6502(0x17FF, 0x1C)
-        //Setup default NMI vector
-        write6502(0x17FA, 0x00)
-        write6502(0x17FB, 0x1C)
+        dispatchQueue.sync {
+            memory[0x400] = 0x42
+            memory[0x401] = 0xFF
+            memory[0x402] = 0xCA
+            memory[0x403] = 0xD0
+            memory[0x404] = 0xFD
+            
+            // Set up default IRQ vector
+            write6502(0x17FE, 0x22)
+            write6502(0x17FF, 0x1C)
+            //Setup default NMI vector
+            write6502(0x17FA, 0x00)
+            write6502(0x17FB, 0x1C)
+        }
         
 //        if let r0Data = UserDefaults.standard.object(forKey: "riot0") {
 //            if let r0 = NSKeyedUnarchiver.unarchiveObject(with: r0Data as! Data) as? Riot {
@@ -242,36 +250,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        } else {
 //            print("Could not read r1Data")
 //        }
-
+        dispatchQueue.async {
         
-        if let riot0Data = UserDefaults.standard.data(forKey: "riot0") {
-            do {
-                riot0 = try PropertyListDecoder().decode(Riot.self, from: riot0Data)
-            } catch {
-                print("could not decode riot0")
+            if let riot0Data = UserDefaults.standard.data(forKey: "riot0") {
+                do {
+                    riot0 = try PropertyListDecoder().decode(Riot.self, from: riot0Data)
+                } catch {
+                    print("could not decode riot0")
+                    riot0 = Riot(n: 0)
+                }
+            } else {
+                print("No saved riot 0")
                 riot0 = Riot(n: 0)
             }
-        }
 
-        if let riot1Data = UserDefaults.standard.data(forKey: "riot1") {
-            print(riot1Data)
-            do {
-                riot1 = try PropertyListDecoder().decode(Riot.self, from: riot1Data)
-            } catch {
-                print("could not decode riot1")
+            if let riot1Data = UserDefaults.standard.data(forKey: "riot1") {
+                print(riot1Data)
+                do {
+                    riot1 = try PropertyListDecoder().decode(Riot.self, from: riot1Data)
+                } catch {
+                    print("could not decode riot1")
+                    riot1 = Riot(n: 1)
+                }
+            } else {
+                print("No saved riot 1")
                 riot1 = Riot(n: 1)
             }
-        }
-
-        pc = UInt16(UserDefaults.standard.integer(forKey: "pc"))
-        a = UInt8(UserDefaults.standard.integer(forKey: "a"))
-        x = UInt8(UserDefaults.standard.integer(forKey: "x"))
-        y = UInt8(UserDefaults.standard.integer(forKey: "y"))
-        sp = UInt8(UserDefaults.standard.integer(forKey: "sp"))
-        singleStep = UserDefaults.standard.bool(forKey: "singleStep")
-        status = UInt8(UserDefaults.standard.integer(forKey: "status"))
-        if (status == 0) {
-            status = UInt8(FLAG_CONSTANT)
+        
+            pc = UInt16(UserDefaults.standard.integer(forKey: "pc"))
+            a = UInt8(UserDefaults.standard.integer(forKey: "a"))
+            x = UInt8(UserDefaults.standard.integer(forKey: "x"))
+            y = UInt8(UserDefaults.standard.integer(forKey: "y"))
+            sp = UInt8(UserDefaults.standard.integer(forKey: "sp"))
+            singleStep = UserDefaults.standard.bool(forKey: "singleStep")
+            status = UInt8(UserDefaults.standard.integer(forKey: "status"))
+            if (status == 0) {
+                status = UInt8(FLAG_CONSTANT)
+            }
         }
 
         //Load user data
@@ -285,10 +300,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         
         if let mData = UserDefaults.standard.data(forKey: "memory") {
+            dispatchQueue.sync {
             do {
-                memory = try PropertyListDecoder().decode([UInt8].self, from: mData)
-            } catch {
-                print("could not decode memory")
+                    memory = try PropertyListDecoder().decode([UInt8].self, from: mData)
+                
+                } catch {
+                    print("could not decode memory")
+                }
             }
         }
         
@@ -304,7 +322,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loadMicroChess() {
         var i = 0;
         while i < 1393 {
-            memory[0xC000 + i] = mchess[i]
+            dispatchQueue.sync {
+                memory[0xC000 + i] = mchess[i]
+            }
             i += 1
         }
     }
@@ -318,7 +338,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         data.getBytes(&bytes1, length: length)
         
         for (i, b) in bytes1.enumerated() {
-            memory[i+0x100] = b
+            dispatchQueue.sync {
+                memory[i+0x100] = b
+            }
         }
     }
 }
