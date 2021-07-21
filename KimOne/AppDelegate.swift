@@ -137,6 +137,8 @@ let mchess:[UInt8] = [
 
 let dispatchQueue = DispatchQueue.global(qos: .background)
 
+let serialQueue = DispatchQueue(label: "com.kimone.queue.serial")
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -173,7 +175,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         print("applicationWillTerminate")
         FirstViewController().running = false
-        dispatchQueue.sync {
+        serialQueue.sync {
             riot0.serial = false
             self.saveData()
         }
@@ -207,19 +209,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func restoreData() {
         // LOAD data into RAM
-        dispatchQueue.sync {
+        serialQueue.sync {
             memory[0x400] = 0x42
             memory[0x401] = 0xFF
             memory[0x402] = 0xCA
             memory[0x403] = 0xD0
             memory[0x404] = 0xFD
             
-            // Set up default IRQ vector
-            write6502(0x17FE, 0x22)
-            write6502(0x17FF, 0x1C)
-            //Setup default NMI vector
-            write6502(0x17FA, 0x00)
-            write6502(0x17FB, 0x1C)
+
             
             self.loadMicroChess()
         
@@ -247,6 +244,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("No saved riot 1")
                 riot1 = Riot(n: 1)
             }
+            
+            // Set up default IRQ vector
+            write6502(0x17FE, 0x22)
+            write6502(0x17FF, 0x1C)
+            //Setup default NMI vector
+            write6502(0x17FA, 0x00)
+            write6502(0x17FB, 0x1C)
             
             riot0.loadRom()
             riot1.loadRom()
@@ -279,11 +283,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loadMicroChess() {
         var i = 0;
         while i < 1393 {
-            dispatchQueue.sync {
-                memory[0xC000 + i] = mchess[i]
-            }
+            memory[0xC000 + i] = mchess[i]
+        
             i += 1
         }
+        
     }
     
     func loadBasic() {
@@ -293,12 +297,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let length = data.count * size
         var bytes1 = [UInt8](repeating: 0, count: data.count / size)
         data.getBytes(&bytes1, length: length)
-        
         for (i, b) in bytes1.enumerated() {
-            dispatchQueue.sync {
-                memory[i+0x100] = b
-            }
+            memory[i+0x100] = b
         }
+        
     }
 }
 

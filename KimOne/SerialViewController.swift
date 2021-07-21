@@ -23,42 +23,70 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
     @IBOutlet weak var serialText: UITextView!
     
     @IBAction func paperFile(_ sender: Any) {
+        self.textView.resignFirstResponder()
         let documentPickerController = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
         documentPickerController.delegate = self
         self.present(documentPickerController, animated: true)
-        textView.becomeFirstResponder()
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         let file = urls[0];
         // Send file to serial port of Kim-1
         //reading
-        self.textView.becomeFirstResponder()
+        
         do {
             
             let text = try String(contentsOf: file, encoding: .ascii)
             
-            for char in text {
-                if let f = char.unicodeScalars.first {
-                    let v = UInt8(f.value & 0xFF)
-                    dispatchQueue.sync(flags: .barrier) {
-                        usleep(1000)
+            dispatchQueue.async {
+                var line = ""
+                for char in text {
+                    
+                    if let f = char.unicodeScalars.first {
+                        let v = UInt8(f.value & 0xFF)
+                        
+                        
+                        if let c = String(bytes: [v], encoding: .ascii) {
+                            line = line + c
+                        } else {
+                            print("could not convert", v, "to ascii")
+                        }
+                        
                         if (v == 0x0D || v == 0x0A) {
-                            // Wait a while for lines
-                            usleep(20000)
+                            print(line)
+                            DispatchQueue.main.sync {
+                                self.serialText.text.append(line)
+                                self.textView.text.append(line)
+                                let range = NSMakeRange(self.serialText.text.count*2, 1)
+                                self.serialText.scrollRangeToVisible(range)
+                            }
+                            
+                            line = ""
                         }
-                        if (serialCharsWaiting > 128) {
-                            // If many chars in buffer, wait a while
-                            usleep(10000)
+                        
+                        usleep(200)
+                        
+                        var w: Int!
+                        
+                        serialQueue.sync {
+                            print("sending",serialCharsWaiting, char, v)
+                            serialBuffer[serialCharsWaiting] = v
+                            serialCharsWaiting = (serialCharsWaiting + 1)
+                            
+                            w = serialCharsWaiting
                         }
-                        print("sending",serialCharsWaiting, char, v)
-                        serialBuffer[serialCharsWaiting] = v
-                        serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
+                        
+                        if w > 5 {
+                            usleep(1000*UInt32(w*w))
+                        }
                     }
                 }
             }
+            
         }
         catch {/* error handling here */}
+        
+        self.textView.becomeFirstResponder()
         
     }
     
@@ -87,8 +115,10 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         textView.becomeFirstResponder()
         self.view.addSubview(textView)
 
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.delegate = self
+        riot0.delegate = self
+        
+        serialQueue.async {
+            
             riot0.serial = true
         }
         
@@ -101,7 +131,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         if (textView.text.count < previousText.count) {
             // Delete key was pressed, trigger it on Kim
 
-            dispatchQueue.sync(flags: .barrier) {
+            serialQueue.async {
                 serialBuffer[serialCharsWaiting] = 0x7F
                 serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
                 print(serialCharsWaiting)
@@ -135,7 +165,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
                     }
                 
                     
-                    dispatchQueue.sync(flags: .barrier) {
+                    serialQueue.async {
                         serialBuffer[serialCharsWaiting] = v
                         serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
                     }
@@ -151,6 +181,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
     func addText(char: UInt8) {
         if let v = String(bytes: [char], encoding: .ascii) {
             self.serialText.text.append(v)
+            self.textView.text.append(v)
         } else {
             print("could not convert", char, "to ascii")
         }

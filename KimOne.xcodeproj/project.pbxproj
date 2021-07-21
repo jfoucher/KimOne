@@ -17,7 +17,6 @@
 		AB18FB8726A5EC4B00977C42 /* manual.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AB18FB8626A5EC4B00977C42 /* manual.rtf */; };
 		AB30C67226A41501007F6C38 /* TinyBasic.bin in Resources */ = {isa = PBXBuildFile; fileRef = AB30C67126A41501007F6C38 /* TinyBasic.bin */; };
 		AB31FD2D26A354020032C543 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB31FD2C26A354020032C543 /* HelpViewController.swift */; };
-		AB42F17D26A81860008A380E /* Ram.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB42F17C26A81860008A380E /* Ram.swift */; };
 		AB77A36426A2149A00F59F9D /* ProcessorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB77A36326A2149A00F59F9D /* ProcessorInterface.swift */; };
 		AB77A36926A2159F00F59F9D /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB77A36826A2159F00F59F9D /* DisplayView.swift */; };
 		AB9AEC1F26A04CB30010CB6D /* 3270Condensed-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */; };
@@ -65,7 +64,6 @@
 		AB30C67126A41501007F6C38 /* TinyBasic.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = TinyBasic.bin; sourceTree = "<group>"; };
 		AB31FD2C26A354020032C543 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		AB33BE62229FF6150003EEA3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		AB42F17C26A81860008A380E /* Ram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ram.swift; sourceTree = "<group>"; };
 		AB77A36326A2149A00F59F9D /* ProcessorInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessorInterface.swift; sourceTree = "<group>"; };
 		AB77A36826A2159F00F59F9D /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		AB77A36D26A2206400F59F9D /* KimOne.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KimOne.entitlements; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 				ABB6814D26A0720800C2FC21 /* Riot.swift */,
 				AB31FD2C26A354020032C543 /* HelpViewController.swift */,
 				ABD47B8D26A2E68300B6C93A /* SerialViewController.swift */,
-				AB42F17C26A81860008A380E /* Ram.swift */,
 				AB107F23269FA3950048A3CF /* cpu.c */,
 				AB04BF2D229F539400B1111E /* FirstViewController.swift */,
 				AB77A36326A2149A00F59F9D /* ProcessorInterface.swift */,
@@ -353,7 +350,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB42F17D26A81860008A380E /* Ram.swift in Sources */,
 				ABCC948326A70C5400C73E8C /* LoadViewController.swift in Sources */,
 				AB107F06269F7D4E0048A3CF /* DigitView.swift in Sources */,
 				AB77A36926A2159F00F59F9D /* DisplayView.swift in Sources */,
