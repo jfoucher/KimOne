@@ -33,6 +33,12 @@ class FirstViewController: UIViewController {
         }
         return SerialViewController(coder: coder)
     }
+    @IBAction func showLoadBtnClicked(_ sender: Any) {
+        dispatchQueue.async(flags: .barrier) {
+            print("set running to false")
+            self.running = false;
+        }
+    }
     @IBAction func showHelpBtnClicked(_ sender: Any) {
         dispatchQueue.async(flags: .barrier) {
             print("set running to false")
@@ -271,14 +277,16 @@ class FirstViewController: UIViewController {
         
         //Start a new thread to run the 6502 emulation
         start = DispatchTime.now()
-        dispatchQueue.async {
+        dispatchQueue.async {[weak self] in
+            guard let self = self else {
+              return
+            }
             reset6502();
             // Flag for NMI when single stepping or when ST is pressed
             var nmiFlag: Bool = false;
             // Start main loop
             while true {
                 if !self.running {
-                    print ("not running")
                     usleep(1000000);
                     continue;
                 }
@@ -302,11 +310,14 @@ class FirstViewController: UIViewController {
                     // Only update if it changed by at least 0.1 MHz
                     if (freq/10 != prevS && freq/10+1 != prevS) {
                         prevS = freq/10
-                        DispatchQueue.main.async {
-                            let attributedText: NSAttributedString = self.speedButton.attributedTitle(for: .normal)!
-                            let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
-                            mutableAttributedText.mutableString.setString(String(format: "%.2f MHz", Float(freq)/100.0))
-                            self.speedButton.setAttributedTitle(mutableAttributedText, for: .normal)
+                        DispatchQueue.main.async { [weak self] in
+                            if let title = self?.speedButton.attributedTitle(for: .normal) {
+                                let attributedText: NSAttributedString = title
+                                
+                                let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
+                                mutableAttributedText.mutableString.setString(String(format: "%.2f MHz", Float(freq)/100.0))
+                                self?.speedButton.setAttributedTitle(mutableAttributedText, for: .normal)
+                            }
                         }
                     }
                 }
@@ -337,6 +348,7 @@ class FirstViewController: UIViewController {
                         let v = serialBuffer[serialCharsWaiting-1]
                         serialCharsWaiting -= 1
                         a = v
+                        print("read from serial", v)
                     }
                     
                     y = 0xff;

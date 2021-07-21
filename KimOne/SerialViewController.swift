@@ -13,12 +13,54 @@ protocol TextReceiverDelegate:class {
     func addText(char: UInt8)
 }
 
-class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDelegate {
+class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDelegate, UIDocumentPickerDelegate {
 
     var text = ""
     var previousText = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     
+    let textView = UITextView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0))
+    
     @IBOutlet weak var serialText: UITextView!
+    
+    @IBAction func paperFile(_ sender: Any) {
+        let documentPickerController = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+        documentPickerController.delegate = self
+        self.present(documentPickerController, animated: true)
+        textView.becomeFirstResponder()
+    }
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        let file = urls[0];
+        // Send file to serial port of Kim-1
+        //reading
+        self.textView.becomeFirstResponder()
+        do {
+            
+            let text = try String(contentsOf: file, encoding: .ascii)
+            
+            for char in text {
+                if let f = char.unicodeScalars.first {
+                    let v = UInt8(f.value & 0xFF)
+                    dispatchQueue.sync(flags: .barrier) {
+                        usleep(1000)
+                        if (v == 0x0D || v == 0x0A) {
+                            // Wait a while for lines
+                            usleep(20000)
+                        }
+                        if (serialCharsWaiting > 128) {
+                            // If many chars in buffer, wait a while
+                            usleep(10000)
+                        }
+                        print("sending",serialCharsWaiting, char, v)
+                        serialBuffer[serialCharsWaiting] = v
+                        serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
+                    }
+                }
+            }
+        }
+        catch {/* error handling here */}
+        
+    }
     
     override func viewDidLoad() {
         print("serial view controller view did load")
@@ -33,10 +75,11 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         
         
         // Hidden textview to make keyboard appear
-        let textView = UITextView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0))
+        
         textView.autocorrectionType = .no
         textView.autocapitalizationType = .none
         textView.keyboardType = .alphabet
+        textView.keyboardAppearance = .dark
         // Init with some text to be able to type delete
         textView.text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
@@ -47,7 +90,6 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         dispatchQueue.sync(flags: .barrier) {
             riot0.delegate = self
             riot0.serial = true
-            
         }
         
         
