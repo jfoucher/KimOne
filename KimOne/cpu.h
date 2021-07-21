@@ -100,6 +100,4 @@ void step6502(void);
 
 void CallSwiftFromC(void(*f)(void));
 
-uint8_t mchess[1393];
-
 #endif /* cpu_h */

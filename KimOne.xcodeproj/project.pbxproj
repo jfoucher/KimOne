@@ -20,6 +20,7 @@
 		AB42F17D26A81860008A380E /* Ram.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB42F17C26A81860008A380E /* Ram.swift */; };
 		AB77A36426A2149A00F59F9D /* ProcessorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB77A36326A2149A00F59F9D /* ProcessorInterface.swift */; };
 		AB77A36926A2159F00F59F9D /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB77A36826A2159F00F59F9D /* DisplayView.swift */; };
+		AB77CFFF26A8B5C7009E1760 /* KimOneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB77CFFE26A8B5C7009E1760 /* KimOneUITests.swift */; };
 		AB9AEC1F26A04CB30010CB6D /* 3270Condensed-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */; };
 		ABB6814E26A0720800C2FC21 /* Riot.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6814D26A0720800C2FC21 /* Riot.swift */; };
 		ABB6815426A0974600C2FC21 /* rom1.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABB6815226A0974600C2FC21 /* rom1.bin */; };
@@ -31,19 +32,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AB04BF3F229F539600B1111E /* PBXContainerItemProxy */ = {
+		AB77D00126A8B5C7009E1760 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AB04BF20229F539400B1111E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = AB04BF27229F539400B1111E;
-			remoteInfo = Cesium;
-		};
-		AB04BF4A229F539600B1111E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AB04BF20229F539400B1111E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AB04BF27229F539400B1111E;
-			remoteInfo = Cesium;
+			remoteInfo = KimOne;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -54,8 +48,6 @@
 		AB04BF32229F539400B1111E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AB04BF37229F539500B1111E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB04BF39229F539500B1111E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB04BF3E229F539600B1111E /* KimOneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KimOneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB04BF49229F539600B1111E /* KimOneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KimOneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB107F05269F7D4E0048A3CF /* DigitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitView.swift; sourceTree = "<group>"; };
 		AB107F21269FA3950048A3CF /* KimOne-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KimOne-Bridging-Header.h"; sourceTree = "<group>"; };
 		AB107F22269FA3950048A3CF /* cpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cpu.h; sourceTree = "<group>"; };
@@ -69,6 +61,9 @@
 		AB77A36326A2149A00F59F9D /* ProcessorInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessorInterface.swift; sourceTree = "<group>"; };
 		AB77A36826A2159F00F59F9D /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		AB77A36D26A2206400F59F9D /* KimOne.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KimOne.entitlements; sourceTree = "<group>"; };
+		AB77CFFC26A8B5C7009E1760 /* KimOneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KimOneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB77CFFE26A8B5C7009E1760 /* KimOneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimOneUITests.swift; sourceTree = "<group>"; };
+		AB77D00026A8B5C7009E1760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB9AEC1E26A04CB30010CB6D /* 3270Condensed-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3270Condensed-Regular.otf"; sourceTree = "<group>"; };
 		ABB6814D26A0720800C2FC21 /* Riot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Riot.swift; sourceTree = "<group>"; };
 		ABB6815226A0974600C2FC21 /* rom1.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = rom1.bin; sourceTree = "<group>"; };
@@ -87,14 +82,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB04BF3B229F539600B1111E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AB04BF46229F539600B1111E /* Frameworks */ = {
+		AB77CFF926A8B5C7009E1760 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -108,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				AB04BF2A229F539400B1111E /* KimOne */,
+				AB77CFFD26A8B5C7009E1760 /* KimOneUITests */,
 				AB04BF29229F539400B1111E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,8 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				AB04BF28229F539400B1111E /* KimOne.app */,
-				AB04BF3E229F539600B1111E /* KimOneTests.xctest */,
-				AB04BF49229F539600B1111E /* KimOneUITests.xctest */,
+				AB77CFFC26A8B5C7009E1760 /* KimOneUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +150,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		AB77CFFD26A8B5C7009E1760 /* KimOneUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AB77CFFE26A8B5C7009E1760 /* KimOneUITests.swift */,
+				AB77D00026A8B5C7009E1760 /* Info.plist */,
+			);
+			path = KimOneUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -182,42 +179,22 @@
 			productReference = AB04BF28229F539400B1111E /* KimOne.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AB04BF3D229F539600B1111E /* KimOneTests */ = {
+		AB77CFFB26A8B5C7009E1760 /* KimOneUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AB04BF55229F539600B1111E /* Build configuration list for PBXNativeTarget "KimOneTests" */;
+			buildConfigurationList = AB77D00326A8B5C7009E1760 /* Build configuration list for PBXNativeTarget "KimOneUITests" */;
 			buildPhases = (
-				54683E6D48DF080EC034A967 /* [CP] Check Pods Manifest.lock */,
-				AB04BF3A229F539600B1111E /* Sources */,
-				AB04BF3B229F539600B1111E /* Frameworks */,
-				AB04BF3C229F539600B1111E /* Resources */,
+				AB77CFF826A8B5C7009E1760 /* Sources */,
+				AB77CFF926A8B5C7009E1760 /* Frameworks */,
+				AB77CFFA26A8B5C7009E1760 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				AB04BF40229F539600B1111E /* PBXTargetDependency */,
-			);
-			name = KimOneTests;
-			productName = CesiumTests;
-			productReference = AB04BF3E229F539600B1111E /* KimOneTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		AB04BF48229F539600B1111E /* KimOneUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AB04BF58229F539600B1111E /* Build configuration list for PBXNativeTarget "KimOneUITests" */;
-			buildPhases = (
-				A65397CA93F7F5174F28AF82 /* [CP] Check Pods Manifest.lock */,
-				AB04BF45229F539600B1111E /* Sources */,
-				AB04BF46229F539600B1111E /* Frameworks */,
-				AB04BF47229F539600B1111E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AB04BF4B229F539600B1111E /* PBXTargetDependency */,
+				AB77D00226A8B5C7009E1760 /* PBXTargetDependency */,
 			);
 			name = KimOneUITests;
-			productName = CesiumUITests;
-			productReference = AB04BF49229F539600B1111E /* KimOneUITests.xctest */;
+			productName = KimOneUITests;
+			productReference = AB77CFFC26A8B5C7009E1760 /* KimOneUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -226,7 +203,7 @@
 		AB04BF20229F539400B1111E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1020;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Jonathan Foucher";
 				TargetAttributes = {
@@ -234,14 +211,8 @@
 						CreatedOnToolsVersion = 10.2.1;
 						LastSwiftMigration = 1240;
 					};
-					AB04BF3D229F539600B1111E = {
-						CreatedOnToolsVersion = 10.2.1;
-						LastSwiftMigration = 1240;
-						TestTargetID = AB04BF27229F539400B1111E;
-					};
-					AB04BF48229F539600B1111E = {
-						CreatedOnToolsVersion = 10.2.1;
-						LastSwiftMigration = 1240;
+					AB77CFFB26A8B5C7009E1760 = {
+						CreatedOnToolsVersion = 12.4;
 						TestTargetID = AB04BF27229F539400B1111E;
 					};
 				};
@@ -261,8 +232,7 @@
 			projectRoot = "";
 			targets = (
 				AB04BF27229F539400B1111E /* KimOne */,
-				AB04BF3D229F539600B1111E /* KimOneTests */,
-				AB04BF48229F539600B1111E /* KimOneUITests */,
+				AB77CFFB26A8B5C7009E1760 /* KimOneUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -285,14 +255,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB04BF3C229F539600B1111E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AB04BF47229F539600B1111E /* Resources */ = {
+		AB77CFFA26A8B5C7009E1760 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -300,53 +263,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		54683E6D48DF080EC034A967 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CesiumTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A65397CA93F7F5174F28AF82 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CesiumUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AB04BF24229F539400B1111E /* Sources */ = {
@@ -367,32 +283,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB04BF3A229F539600B1111E /* Sources */ = {
+		AB77CFF826A8B5C7009E1760 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AB04BF45229F539600B1111E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				AB77CFFF26A8B5C7009E1760 /* KimOneUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AB04BF40229F539600B1111E /* PBXTargetDependency */ = {
+		AB77D00226A8B5C7009E1760 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AB04BF27229F539400B1111E /* KimOne */;
-			targetProxy = AB04BF3F229F539600B1111E /* PBXContainerItemProxy */;
-		};
-		AB04BF4B229F539600B1111E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AB04BF27229F539400B1111E /* KimOne */;
-			targetProxy = AB04BF4A229F539600B1111E /* PBXContainerItemProxy */;
+			targetProxy = AB77D00126A8B5C7009E1760 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -595,85 +500,47 @@
 			};
 			name = Release;
 		};
-		AB04BF56229F539600B1111E /* Debug */ = {
+		AB77D00426A8B5C7009E1760 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 24G23598DF;
-				INFOPLIST_FILE = CesiumTests/Info.plist;
+				INFOPLIST_FILE = KimOneUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = sixpixels.CesiumTests;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.sixpixels.KimOneUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KimOne.app/KimOne";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TEST_TARGET_NAME = KimOne;
 			};
 			name = Debug;
 		};
-		AB04BF57229F539600B1111E /* Release */ = {
+		AB77D00526A8B5C7009E1760 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 24G23598DF;
-				INFOPLIST_FILE = CesiumTests/Info.plist;
+				INFOPLIST_FILE = KimOneUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = sixpixels.CesiumTests;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = eu.sixpixels.KimOneUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KimOne.app/KimOne";
-			};
-			name = Release;
-		};
-		AB04BF59229F539600B1111E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 24G23598DF;
-				INFOPLIST_FILE = CesiumUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = sixpixels.CesiumUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Cesium;
-			};
-			name = Debug;
-		};
-		AB04BF5A229F539600B1111E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 24G23598DF;
-				INFOPLIST_FILE = CesiumUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = sixpixels.CesiumUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Cesium;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TEST_TARGET_NAME = KimOne;
 			};
 			name = Release;
 		};
@@ -698,20 +565,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AB04BF55229F539600B1111E /* Build configuration list for PBXNativeTarget "KimOneTests" */ = {
+		AB77D00326A8B5C7009E1760 /* Build configuration list for PBXNativeTarget "KimOneUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AB04BF56229F539600B1111E /* Debug */,
-				AB04BF57229F539600B1111E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AB04BF58229F539600B1111E /* Build configuration list for PBXNativeTarget "KimOneUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AB04BF59229F539600B1111E /* Debug */,
-				AB04BF5A229F539600B1111E /* Release */,
+				AB77D00426A8B5C7009E1760 /* Debug */,
+				AB77D00526A8B5C7009E1760 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

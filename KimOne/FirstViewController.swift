@@ -10,15 +10,48 @@ import AVFoundation
 
 var digits: [DigitItem] = [DigitItem(id:0), DigitItem(id:1), DigitItem(id:2), DigitItem(id:3), DigitItem(id:4), DigitItem(id:5)]
 
-
-var singleStep: Bool = false
-
 class FirstViewController: UIViewController {
-    var running: Bool = true
+    private let queue = DispatchQueue(label: "UI")
+    private var _running: Bool = true
+    var running: Bool {
+        get {
+            var a: Bool!
+            queue.sync {
+                a = self._running
+            }
+            
+            return a
+        }
+        set {
+            queue.sync {
+                _running = newValue
+            }
+        }
+    }
+    
+    private var _speedLimit: Bool = false
+    var speedLimit: Bool {
+        get {
+            var a: Bool!
+            queue.sync {
+                a = self._speedLimit
+            }
+            
+            return a
+        }
+        set {
+            queue.sync {
+                _speedLimit = newValue
+            }
+        }
+    }
+    
     let kbSound = URL(fileURLWithPath: Bundle.main.path(forResource: "key", ofType: "m4a")!)
     var audioPlayer = AVAudioPlayer()
     
-    var speedLimit: Bool = false
+    var processorInterface: ProcessorInterface = ProcessorInterface()
+    
+    
     
     @IBSegueAction func showHelp(_ coder: NSCoder) -> HelpViewController? {
         dispatchQueue.async(flags: .barrier) {
@@ -28,9 +61,8 @@ class FirstViewController: UIViewController {
     }
     @IBSegueAction func serialOn(_ coder: NSCoder) -> SerialViewController? {
         print("Serial on segue")
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.serial = true
-        }
+        riot0.serial = true
+        
         return SerialViewController(coder: coder)
     }
     @IBAction func showLoadBtnClicked(_ sender: Any) {
@@ -55,7 +87,7 @@ class FirstViewController: UIViewController {
             riot0.charPending = 0x15
             riot0.serial = false
 
-            reset6502()
+            processorInterface.reset()
         }
         start = DispatchTime.now()
     }
@@ -79,162 +111,134 @@ class FirstViewController: UIViewController {
         
         if (start.uptimeNanoseconds > 1000) {
             start = DispatchTime.now()
-            dispatchQueue.sync(flags: .barrier) {
-                clockticks6502 = 0
-                prevTicks = 0
-            }
+            self.processorInterface.resetSpeed()
         }
     }
     
     @IBAction func GoClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x13;
-        }
+        riot0.charPending = 0x13;
+        
         audioPlayer.play()
     }
     @IBAction func stClicked(_ sender: Any) {
         print("NMI")
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x15
-            nmi6502()
-        }
         audioPlayer.play()
+        riot0.charPending = 0x15
+        processorInterface.nmi()
     }
     @IBAction func rstClicked(_ sender: Any) {
         print("RESET")
         
         if (start.uptimeNanoseconds > 1000) {
-            dispatchQueue.sync(flags: .barrier) {
-                reset6502()
-                riot0.charPending = 0x15
-            }
+            processorInterface.reset()
+            riot0.charPending = 0x15
+            
             start = DispatchTime.now()
         }
         audioPlayer.play()
     }
     @IBAction func sstChanged(_ sender: UISwitch) {
-        singleStep = sender.isOn
+        processorInterface.singleStep = sender.isOn
     }
     @IBAction func ADClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x10
-        }
+        riot0.charPending = 0x10
+        
         audioPlayer.play()
     }
     @IBAction func DAClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x11
-        }
+        riot0.charPending = 0x11
+        
         audioPlayer.play()
     }
     @IBAction func pcClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x14
-        }
+        riot0.charPending = 0x14
+
         audioPlayer.play()
     }
     
     @IBAction func plusClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x12
-        }
+        riot0.charPending = 0x12
+
         audioPlayer.play()
     }
     
     @IBAction func CClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0xC
-        }
+        riot0.charPending = 0xC
+        
         audioPlayer.play()
     }
     @IBAction func DClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0xD
-        }
+        riot0.charPending = 0xD
+        
         audioPlayer.play()
     }
     @IBAction func EClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0xE
-        }
+        riot0.charPending = 0xE
         audioPlayer.play()
     }
     @IBAction func FClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0xF
-        }
+        riot0.charPending = 0xF
+        
         audioPlayer.play()
     }
     @IBAction func Eightclicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x8
-        }
+        riot0.charPending = 0x8
+        
         audioPlayer.play()
     }
     @IBAction func NineClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x9
-        }
+        riot0.charPending = 0x9
+        
         audioPlayer.play()
     }
     @IBAction func AClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0xA
-        }
+        riot0.charPending = 0xA
+        
         audioPlayer.play()
     }
     @IBAction func Bclicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0xB
-        }
+        riot0.charPending = 0xB
+        
         audioPlayer.play()
     }
     @IBAction func FourClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x4
-        }
+        riot0.charPending = 0x4
+        
         audioPlayer.play()
     }
     @IBAction func FiveClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x5
-        }
+        riot0.charPending = 0x5
+        
         audioPlayer.play()
     }
     @IBAction func SixClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x6
-        }
+        riot0.charPending = 0x6
+        
         audioPlayer.play()
     }
     @IBAction func SevenClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x7
-        }
+        riot0.charPending = 0x7
+        
         audioPlayer.play()
     }
     @IBAction func ZeroClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x0
-        }
+        riot0.charPending = 0x0
+        
         audioPlayer.play()
     }
     @IBAction func OneClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x1
-        }
+        riot0.charPending = 0x1
+        
         audioPlayer.play()
     }
     @IBAction func TwoClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x2
-        }
+        riot0.charPending = 0x2
+        
         audioPlayer.play()
     }
     @IBAction func ThreeClicked(_ sender: Any) {
-        dispatchQueue.sync(flags: .barrier) {
-            riot0.charPending = 0x3
-        }
+        riot0.charPending = 0x3
+        
         audioPlayer.play()
     }
     
@@ -244,7 +248,7 @@ class FirstViewController: UIViewController {
         // Prepare UI
         goButton.titleLabel!.adjustsFontSizeToFitWidth = true
         
-        sst.isOn = singleStep;
+        sst.isOn = processorInterface.singleStep;
         
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: kbSound)
@@ -254,14 +258,14 @@ class FirstViewController: UIViewController {
         sst.clipsToBounds = true
         
         
-        let testView: DisplayView = self.view.viewWithTag(1) as! DisplayView
+        let displayView: DisplayView = self.view.viewWithTag(1) as! DisplayView
 
         self.view.backgroundColor = UIColor.black
         for d in digits {
-            testView.addSubview(d.view)
+            displayView.addSubview(d.view)
         }
         
-        self.view.addSubview(testView)
+        self.view.addSubview(displayView)
 
         
         
@@ -277,24 +281,22 @@ class FirstViewController: UIViewController {
         
         //Start a new thread to run the 6502 emulation
         start = DispatchTime.now()
-        dispatchQueue.async {[weak self] in
-            guard let self = self else {
-              return
-            }
-            reset6502();
-            // Flag for NMI when single stepping or when ST is pressed
-            var nmiFlag: Bool = false;
+        dispatchQueue.async {
+            self.processorInterface.reset();
+            
             // Start main loop
             while true {
                 if !self.running {
                     usleep(1000000);
+                    print("stopped")
                     continue;
                 }
+                
                 let t = DispatchTime.now().uptimeNanoseconds
                 
                 // Slow down if speed limit
                 let div = t > start.uptimeNanoseconds ? t.subtractingReportingOverflow(start.uptimeNanoseconds).partialValue : 1
-                let freq = clockticks6502*100000 / div
+                let freq = self.processorInterface.ticks * 100000 / div
                 
                 if (self.speedLimit && freq > 100) {
                     usleep(1);
@@ -305,84 +307,41 @@ class FirstViewController: UIViewController {
 
                 // update speed counter every 0.1s
                 if (totalEl > 100000000) {
-                    prevTicks = clockticks6502
+                    prevTicks = self.processorInterface.ticks
                     prevTime = t
                     // Only update if it changed by at least 0.1 MHz
                     if (freq/10 != prevS && freq/10+1 != prevS) {
                         prevS = freq/10
-                        DispatchQueue.main.async { [weak self] in
-                            if let title = self?.speedButton.attributedTitle(for: .normal) {
+                        DispatchQueue.main.async {
+                            if let title = self.speedButton.attributedTitle(for: .normal) {
                                 let attributedText: NSAttributedString = title
                                 
                                 let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
                                 mutableAttributedText.mutableString.setString(String(format: "%.2f MHz", Float(freq)/100.0))
-                                self?.speedButton.setAttributedTitle(mutableAttributedText, for: .normal)
+                                self.speedButton.setAttributedTitle(mutableAttributedText, for: .normal)
                             }
                         }
                     }
                 }
-                // If the single step switch is on and we are in RAM
-                // Turn the nmi flag on
-                if (singleStep && ((pc < 0x1C00) || (pc >= 0x2000))) {
-                    nmiFlag = true;
-                }
                 
-                //Run the current instruction
-                step6502()
-                
-                if (nmiFlag) {
-                    // If we have an nmi, go to the nmi handler now
-                    nmiFlag = false;
-                    nmi6502();
-                }
-                
-                if ((pc == 0x1f79) || (pc == 0x1f90)) {
-                    // If we get to the place where a character has been read,
-                    // clear out the pending keyboard character.
-                    
-                    riot0.charPending = 0x15;
-                } else if ((pc == 0x1E65)) {
-                    pc = 0x1e85;
-                    a = 0
-                    if (serialCharsWaiting > 0) {
-                        let v = serialBuffer[serialCharsWaiting-1]
-                        serialCharsWaiting -= 1
-                        a = v
-                        print("read from serial", v)
-                    }
-                    
-                    y = 0xff;
-                }
-                
-                //print(String(format:"%04X", pc))
+                self.processorInterface.runOneStep()
             }
         }
     }
     
     func restoreDigits() {
-        dispatchQueue.sync {
-            let c1 = memory[0x00FB]
-            DispatchQueue.main.async {
-                digits[0].view.showDigit(digit: ((c1 & 0xF0) >> 4))
-                digits[1].view.showDigit(digit: (c1 & 0x0F))
-            }
-        }
-        dispatchQueue.sync {
-            let c2 = memory[0x00FA]
-            DispatchQueue.main.async {
-                digits[2].view.showDigit(digit: ((c2 & 0xF0) >> 4))
-                digits[3].view.showDigit(digit: (c2 & 0x0F))
-            }
-        }
-        dispatchQueue.sync {
-            let c3 = memory[0x00F9]
-            DispatchQueue.main.async {
-                digits[4].view.showDigit(digit: ((c3 & 0xF0) >> 4))
-                digits[5].view.showDigit(digit: (c3 & 0x0F))
-            }
-        }
-    }
+        let c1 = memory[0x00FB]
+        digits[0].view.showDigit(digit: ((c1 & 0xF0) >> 4))
+        digits[1].view.showDigit(digit: (c1 & 0x0F))
+        
+        let c2 = memory[0x00FA]
+        digits[2].view.showDigit(digit: ((c2 & 0xF0) >> 4))
+        digits[3].view.showDigit(digit: (c2 & 0x0F))
     
+        let c3 = memory[0x00F9]
+        digits[4].view.showDigit(digit: ((c3 & 0xF0) >> 4))
+        digits[5].view.showDigit(digit: (c3 & 0x0F))
+    }
 
     
     // Hide status bar

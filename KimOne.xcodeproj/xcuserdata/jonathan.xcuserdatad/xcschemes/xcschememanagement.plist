@@ -7,12 +7,17 @@
 		<key>KimOne-fr.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>1</integer>
 		</dict>
 		<key>KimOne.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>0</integer>
+		</dict>
+		<key>KimOneUITests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -28,6 +33,11 @@
 			<true/>
 		</dict>
 		<key>AB04BF48229F539600B1111E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AB77CFFB26A8B5C7009E1760</key>
 		<dict>
 			<key>primary</key>
 			<true/>

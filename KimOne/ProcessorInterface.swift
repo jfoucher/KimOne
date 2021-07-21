@@ -8,10 +8,10 @@
 
 import Foundation
 
-var memory:[UInt8] = [UInt8](repeating: 0x00, count: Int(64*1024))
+var memory: Ram = Ram(size: 64*1024)
 
-var serialBuffer: [UInt8] = [UInt8](repeating: 0x00, count: Int(256))
-var serialCharsWaiting = 0;
+var serialBuffer: Ram = Ram(size: 256)
+var serialCharsWaiting: UInt16 = 0;
 
 var prev1: UInt8 = 0xFF
 var prev2: UInt8 = 0xFF
@@ -57,10 +57,10 @@ func read6502Swift(address: UInt16) -> UInt8 {
         val = riot1.read(address: addr)
         //print(String(format: "Read riot 1 registers ad: %04X v: %02X", address, val))
     } else if (addr >= riot0.ramBaseAddress && addr < riot0.ramBaseAddress + 64) {
-        val = riot0.ram[Int(addr - riot0.ramBaseAddress)]
+        val = riot0.ram[addr - riot0.ramBaseAddress]
         //print(String(format: "Read riot 0 RAM ad: %04X v: %02X", address, val))
     } else if (addr >= riot1.ramBaseAddress && addr < riot1.ramBaseAddress + 64) {
-        val = riot1.ram[Int(addr - riot1.ramBaseAddress)]
+        val = riot1.ram[addr - riot1.ramBaseAddress]
         //print(String(format: "Read riot 1 RAM ad: %04X v: %02X", address, val))
     } else if (addr >= riot0.romBaseAddress && addr < riot0.romBaseAddress + 1024) {
         val = riot0.rom[Int(addr - riot0.romBaseAddress)]
@@ -72,7 +72,7 @@ func read6502Swift(address: UInt16) -> UInt8 {
         val = riot0.rom[Int(addr - 0xFC00)]
         //print(String(format: "Read riot 0 ROM ad: %04X v: %02X", address, val))
     } else {
-        val = memory[Int(address)]
+        val = memory[address]
         //print(String(format: "Read MEMORY ad: %04X v: %02X", address, val))
     }
     
@@ -92,14 +92,124 @@ func write6502Swift(address: UInt16, value: UInt8) {
         riot1.write(address: addr, value: value)
     } else if (addr >= riot0.ramBaseAddress && addr < riot0.ramBaseAddress + 64) {
         //print(String(format: "Write riot 0 RAM ad: %04X v: %02X", address, value))
-        riot0.ram[Int(addr - riot0.ramBaseAddress)] = value
+        riot0.ram[addr - riot0.ramBaseAddress] = value
     } else if (addr >= riot1.ramBaseAddress && addr < riot1.ramBaseAddress + 64) {
         //print(String(format: "Write riot 1 RAM ad: %04X v: %02X", address, value))
-        riot1.ram[Int(addr - riot1.ramBaseAddress)] = value
+        riot1.ram[addr - riot1.ramBaseAddress] = value
     } else if ((addr >= riot0.romBaseAddress && addr < riot0.romBaseAddress + 1024) || (addr >= riot1.romBaseAddress && addr < riot1.romBaseAddress + 1024) || (addr >= 0xFF00)) {
         // ROM, do nothing
     } else {
         //print(String(format: "Write mem ad: %04X v: %02X", address, value))
-        memory[Int(address)] = value
+        memory[address] = value
     }
 }
+
+class ProcessorInterface {
+    private let queue = DispatchQueue(label: "Processor")
+    
+    private var _singleStep: Bool = false
+    
+    var singleStep: Bool {
+        get {
+            var a: Bool!
+            queue.sync {
+                a = self._singleStep
+            }
+            
+            return a
+        }
+        set {
+            queue.sync {
+                _singleStep = newValue
+            }
+        }
+    }
+    
+    var ticks: UInt64 {
+        get {
+            var a: UInt64!
+            queue.sync {
+                a = clockticks6502
+            }
+            
+            return a
+        }
+        set {
+            queue.sync {
+                clockticks6502 = newValue
+            }
+        }
+    }
+    
+    func reset() {
+        queue.sync {
+            reset6502()
+        }
+    }
+    
+    func nmi() {
+        queue.sync {
+            nmi6502()
+        }
+    }
+    
+    func step() {
+        //queue.sync {
+            step6502()
+        //}
+    }
+    
+    func resetSpeed() {
+        queue.sync {
+            clockticks6502 = 0
+            prevTicks = 0
+        }
+    }
+    
+    func handlePC() {
+        queue.sync {
+            if ((pc == 0x1f79) || (pc == 0x1f90)) {
+                // If we get to the place where a character has been read,
+                // clear out the pending keyboard character.
+                
+                riot0.charPending = 0x15;
+            } else if ((pc == 0x1E65)) {
+                pc = 0x1e85;
+                a = 0
+                if (serialCharsWaiting > 0) {
+                    let v = serialBuffer[serialCharsWaiting-1]
+                    serialCharsWaiting -= 1
+                    a = v
+                    print("read from serial", v)
+                }
+                
+                y = 0xff;
+            }
+        }
+    }
+    
+    func runOneStep() {
+        // Flag for NMI when single stepping or when ST is pressed
+        var nmiFlag: Bool = false;
+        
+        // If the single step switch is on and we are in RAM
+        // Turn the nmi flag on
+        if (self.singleStep && ((pc < 0x1C00) || (pc >= 0x2000))) {
+            print("single step", self.singleStep)
+            nmiFlag = true;
+        }
+        
+        //Run the current instruction
+        self.step()
+        
+        if (nmiFlag) {
+            // If we have an nmi, go to the nmi handler now
+            nmiFlag = false;
+            self.nmi();
+        }
+        
+        handlePC()
+    }
+}
+
+

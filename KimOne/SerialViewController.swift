@@ -17,6 +17,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
 
     var text = ""
     var previousText = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    let processorInterface: ProcessorInterface
     
     let textView = UITextView(frame: CGRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0))
     
@@ -27,6 +28,16 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         documentPickerController.delegate = self
         self.present(documentPickerController, animated: true)
         textView.becomeFirstResponder()
+    }
+
+    init(with processorInterface: ProcessorInterface) {
+        self.processorInterface = processorInterface
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    public required init?(coder aDecoder: NSCoder) {
+        self.processorInterface = ProcessorInterface()
+        super.init(coder: aDecoder)
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {

@@ -24,7 +24,7 @@ class LoadViewController: UIViewController, UIDocumentPickerDelegate {
             if let start = UInt16(ad, radix: 16) {
                 for i in 0...bytes.count-1 {
                     if let b = UInt8(bytes[i], radix: 16) {
-                        memory[Int(start) + i] = b
+                        memory[start + UInt16(i)] = b
                     } else {
                         print(String(format: "byte %d is not a hex integer", i))
                     }

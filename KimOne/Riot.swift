@@ -20,13 +20,45 @@ struct TIMER {
 
 class Riot: Codable {
     var rom:[UInt8] = [UInt8](repeating: 0, count: Int(1024))
-    var ram: [UInt8] = [UInt8](repeating: 0, count: Int(64))
+    var ram: Ram = Ram(size: 64)
     var padd: UInt8 = 0
     var sad: UInt8 = 0
     var pbdd: UInt8 = 0
     var sbd: UInt8 = 0
-    var charPending: UInt8 = 0x15
-    var serial = false
+    
+    private let queue = DispatchQueue(label: "Ram")
+    private var _charPending: UInt8 = 0x15
+    var charPending: UInt8 {
+        get {
+            var c: UInt8!
+            queue.sync {
+                c = _charPending
+            }
+            return c
+        }
+        set {
+            queue.sync {
+                self._charPending = newValue
+            }
+        }
+    }
+    
+    private var _serial: Bool = false
+    var serial: Bool {
+        get {
+            var c: Bool!
+            queue.sync {
+                c = _serial
+            }
+            return c
+        }
+        set {
+            queue.sync {
+                self._serial = newValue
+            }
+        }
+    }
+    
     var sendingSerial = false
     var sendingSerialCount = 0
     var sendingSerialByte: UInt8 = 0
@@ -48,12 +80,12 @@ class Riot: Codable {
         case sad
         case pbdd
         case sbd
-        case charPending
+        case _charPending
         case num
         case baseAddress
         case ramBaseAddress
         case romBaseAddress
-        case serial
+        case _serial
         case sendingSerial
         case sendingSerialCount
         case sendingSerialByte
