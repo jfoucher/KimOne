@@ -572,7 +572,7 @@
                                         <rect key="frame" x="264" y="0.0" width="80" height="80"/>
                                         <subviews>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" highlighted="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" title="SST" translatesAutoresizingMaskIntoConstraints="NO" id="RG0-c6-fEY">
-                                                <rect key="frame" x="15.5" y="45" width="51" height="31"/>
+                                                <rect key="frame" x="15.5" y="40.5" width="51" height="31"/>
                                                 <accessibility key="accessibilityConfiguration" hint="Single step" identifier="sstswitch" label="sst"/>
                                                 <color key="tintColor" systemColor="systemGray2Color"/>
                                                 <color key="onTintColor" systemColor="systemOrangeColor"/>
@@ -581,7 +581,7 @@
                                                 </connections>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFy-SC-HSt">
-                                                <rect key="frame" x="13" y="8" width="54.5" height="34"/>
+                                                <rect key="frame" x="18.5" y="8" width="43" height="29.5"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="43" id="nSN-hA-vts"/>
@@ -690,7 +690,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="biR-dm-X2B">
-                                <rect key="frame" x="15.5" y="102" width="78" height="26"/>
+                                <rect key="frame" x="15.5" y="102" width="71" height="26"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="1.00 MHz">
@@ -817,7 +817,7 @@
                                     <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.92195595854922274" blue="0.065871862878421256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="16" name="3270Condensed"/>
+                                            <font key="NSFont" size="14" name="3270Condensed"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>

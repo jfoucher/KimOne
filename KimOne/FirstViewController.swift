@@ -59,7 +59,7 @@ class FirstViewController: UIViewController {
 
             reset6502()
         }
-        start = DispatchTime.now()
+        start = DispatchTime.now().uptimeNanoseconds
     }
     
     @IBOutlet weak var goButton: UIButton!
@@ -77,14 +77,14 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var speedButton: UIButton!
     
     @IBAction func speedClicked(_ sender: UIButton) {
-        UISerialQueue.sync {
+        serialQueue.sync {
             self.speedLimit = !self.speedLimit
         }
         
         print("limit", self.speedLimit)
         
-        if (start.uptimeNanoseconds > 1000) {
-            start = DispatchTime.now()
+        if (start > 1000) {
+            start = DispatchTime.now().uptimeNanoseconds
             serialQueue.async {
                 clockticks6502 = 0
                 prevTicks = 0
@@ -109,12 +109,12 @@ class FirstViewController: UIViewController {
     @IBAction func rstClicked(_ sender: Any) {
         print("RESET")
         
-        if (start.uptimeNanoseconds > 1000) {
+        if (start > 1000) {
             serialQueue.async {
                 reset6502()
                 riot0.charPending = 0x15
             }
-            start = DispatchTime.now()
+            start = DispatchTime.now().uptimeNanoseconds
         }
         audioPlayer.play()
     }
@@ -278,61 +278,60 @@ class FirstViewController: UIViewController {
         restoreDigits()
 
         
-        var prevS: UInt64 = 0
-        
-        var prevTime: UInt64 = 0;
-        
+//        var prevS: UInt64 = 0
+//
+//        var prevTime: UInt64 = 0;
+        var slept = false
         
         
         //Start a new thread to run the 6502 emulation
-        start = DispatchTime.now()
+        start = DispatchTime.now().uptimeNanoseconds
         reset6502();
         dispatchQueue.async {
             // Start main loop
             while true {
                 serialQueue.sync {
+                    if !self.running {
+                        usleep(1000000)
+                        return
+                    }
                     // Flag for NMI when single stepping or when ST is pressed
                     var nmiFlag: Bool = false;
                     let t = DispatchTime.now().uptimeNanoseconds
                     
                     // Slow down if speed limit
-                    let div = t > start.uptimeNanoseconds ? t.subtractingReportingOverflow(start.uptimeNanoseconds).partialValue : 1
+                    let div = t > start ? t.subtractingReportingOverflow(start).partialValue : 1
                     
                     let freq = clockticks6502*100000 / div
                     
-                    //print(freq)
-                    
-                    if !self.running {
-                        usleep(1000000)
-                        return
-                    }
 
-                    if (self.speedLimit && freq > 100) {
+                    if (/*self.speedLimit && */freq > 100) {
+                        print("limit")
                         usleep(1)
                         return
                     }
-                    
-                    let totalEl = t > prevTime ? t - prevTime : 0
-
-                    // update speed counter every 0.1s
-                    if (totalEl > 100000000) {
-                        prevTicks = clockticks6502
-                        prevTime = t
-                        // Only update if it changed by at least 0.1 MHz
-                        if (freq/10 != prevS && freq/10+1 != prevS) {
-                            prevS = freq/10
-                            
-                            DispatchQueue.main.async {
-                                if let title = self.speedButton.attributedTitle(for: .normal) {
-                                    let attributedText: NSAttributedString = title
-                                    
-                                    let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
-                                    mutableAttributedText.mutableString.setString(String(format: "%.2f MHz", Float(freq)/100.0))
-                                    self.speedButton.setAttributedTitle(mutableAttributedText, for: .normal)
-                                }
-                            }
-                        }
-                    }
+//
+//                    let totalEl = t > prevTime ? t - prevTime : 0
+//
+//                    // update speed counter every 0.1s
+//                    if (totalEl > 100000000) && !slept {
+//                        prevTicks = clockticks6502
+//                        prevTime = t
+//                        // Only update if it changed by at least 0.1 MHz
+//                        if (freq/10 != prevS && freq/10+1 != prevS) {
+//                            prevS = freq/10
+//
+//                            DispatchQueue.main.async {
+//                                if let title = self.speedButton.attributedTitle(for: .normal) {
+//                                    let attributedText: NSAttributedString = title
+//
+//                                    let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
+//                                    mutableAttributedText.mutableString.setString(String(format: "%.2f MHz", Float(freq)/100.0))
+//                                    self.speedButton.setAttributedTitle(mutableAttributedText, for: .normal)
+//                                }
+//                            }
+//                        }
+//                    }
 
                     // If the single step switch is on and we are in RAM
                     // Turn the nmi flag on
@@ -349,28 +348,51 @@ class FirstViewController: UIViewController {
                         nmi6502();
                     }
                     
-                    if ((pc == 0x1f79) || (pc == 0x1f90)) {
+                    //print(String(format: "pc: %04X", pc))
+                    
+                    if(pc == 0x1F18) {
+                        if a == 0 {
+                            usleep(1000)
+                            slept = true
+                        } else {
+                            if slept {
+                                slept = false
+                                start = DispatchTime.now().uptimeNanoseconds
+                                clockticks6502 = 0;
+                                prevTicks = 0;
+                            }
+                        }
+                    }else if (pc == 0x1f90 || pc == 0x1f79) {
                         // If we get to the place where a character has been read,
                         // clear out the pending keyboard character.
-                        
                         riot0.charPending = 0x15;
                     } else if ((pc == 0x1E65)) {
-                        pc = 0x1e85;
                         a = 0
                         if (serialCharsWaiting > 0) {
+                            pc = 0x1e85;
                             let v = serialBuffer[serialCharsWaiting-1]
                             serialCharsWaiting -= 1
                             a = v
-                            print("got char from serial", v)
+                            //print("got char from serial", v)
+                            if slept {
+                                slept = false
+                                start = DispatchTime.now().uptimeNanoseconds
+                                clockticks6502 = 0;
+                                prevTicks = 0;
+                            }
+                        } else {
+                            // sleep a while waiting for a character
+                            slept = true
+                            usleep(1000)
                         }
                         
                         y = 0xff;
-                    } else if (pc == 0x1D38) {
-                        print("load end")
-                    } else if (pc == 0x1D06) {
-                        print("load addr high", (memory[0xFA] | (memory[0xFB] << 8)))
-                    } else if (pc == 0x1CE7) {
-                        print("load start")
+//                    } else if (pc == 0x1D38) {
+//                        print("load end")
+//                    } else if (pc == 0x1D06) {
+//                        print("load addr high", (memory[0xFA] | (memory[0xFB] << 8)))
+//                    } else if (pc == 0x1CE7) {
+//                        print("load start")
                     }
                 }
                 

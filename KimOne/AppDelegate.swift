@@ -7,7 +7,7 @@
 //
 
 import UIKit
-var start:DispatchTime = DispatchTime.now();
+var start:UInt64 = DispatchTime.now().uptimeNanoseconds;
 
 var riot0:Riot = Riot(n: 0)
 var riot1:Riot = Riot(n: 1)

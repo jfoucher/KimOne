@@ -15,6 +15,7 @@ protocol TextReceiverDelegate:class {
 
 class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDelegate, UIDocumentPickerDelegate {
 
+    var cancelSend = false
     var text = ""
     var previousText = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     
@@ -41,35 +42,41 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
             dispatchQueue.async {
                 var line = ""
                 for char in text {
-                    
+                    if self.cancelSend {
+                       return
+                    }
                     if let f = char.unicodeScalars.first {
                         let v = UInt8(f.value & 0xFF)
                         
                         
                         if let c = String(bytes: [v], encoding: .ascii) {
                             line = line + c
+                            DispatchQueue.main.async {
+                                self.serialText.text.append(c)
+                            }
                         } else {
                             print("could not convert", v, "to ascii")
                         }
                         
                         if (v == 0x0D || v == 0x0A) {
-                            print(line)
                             DispatchQueue.main.sync {
-                                self.serialText.text.append(line)
-                                self.textView.text.append(line)
+//                                self.textView.text.append(line)
                                 let range = NSMakeRange(self.serialText.text.count*2, 1)
                                 self.serialText.scrollRangeToVisible(range)
                             }
                             
                             line = ""
+                            usleep(2000)
                         }
                         
-                        usleep(200)
+                        usleep(1000)
+                        // Adjust time
+                        start += 1000*1000
                         
                         var w: Int!
                         
                         serialQueue.sync {
-                            print("sending",serialCharsWaiting, char, v)
+                            //print("sending",serialCharsWaiting, char, v)
                             serialBuffer[serialCharsWaiting] = v
                             serialCharsWaiting = (serialCharsWaiting + 1)
                             
@@ -78,6 +85,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
                         
                         if w > 5 {
                             usleep(1000*UInt32(w*w))
+                            start += 1000*UInt64(w*w)*1000
                         }
                     }
                 }
@@ -90,8 +98,18 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        dispatchQueue.async {
+            print("cancel send")
+            self.cancelSend = true
+        }
+    }
+    
     override func viewDidLoad() {
         print("serial view controller view did load")
+        dispatchQueue.async {
+            self.cancelSend = false
+        }
         serialText.textContainerInset.left = 10
         serialText.textContainerInset.right = 10
         serialText.textContainerInset.top = 10
@@ -100,6 +118,8 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         serialText.layer.cornerRadius = 10.0;
         
         serialText.isEditable = true
+        
+        serialText.contentSize = CGSize(width: 800, height: serialText.frame.size.height)
         
         
         // Hidden textview to make keyboard appear
@@ -134,7 +154,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
             serialQueue.async {
                 serialBuffer[serialCharsWaiting] = 0x7F
                 serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
-                print(serialCharsWaiting)
+
             }
         }
         if (textView.text.count > previousText.count) {
