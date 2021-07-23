@@ -10,8 +10,30 @@ import Foundation
 
 var memory:[UInt8] = [UInt8](repeating: 0x00, count: Int(64*1024))
 
-var serialBuffer: [UInt8] = [UInt8](repeating: 0x00, count: Int(64*1024))
-var serialCharsWaiting = 0;
+struct Queue<T> {
+  private var elements: [T] = []
+
+  mutating func enqueue(_ value: T) {
+    elements.append(value)
+  }
+
+  mutating func dequeue() -> T? {
+    guard !elements.isEmpty else {
+      return nil
+    }
+    return elements.removeFirst()
+  }
+
+  var head: T? {
+    return elements.first
+  }
+
+  var tail: T? {
+    return elements.last
+  }
+}
+
+var serialBuffer: Queue<UInt8> = Queue<UInt8>()
 
 var prev1: UInt8 = 0xFF
 var prev2: UInt8 = 0xFF

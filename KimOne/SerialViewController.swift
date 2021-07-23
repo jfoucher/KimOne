@@ -34,15 +34,17 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         let file = urls[0];
         // Send file to serial port of Kim-1
         //reading
+        dispatchQueue.sync{
+            self.cancelSend = false
+        }
         
         do {
-            
             let text = try String(contentsOf: file, encoding: .ascii)
             
             dispatchQueue.async {
                 var line = ""
                 for char in text {
-                    if self.cancelSend {
+                    if self.cancelSend == true {
                        return
                     }
                     if let f = char.unicodeScalars.first {
@@ -51,44 +53,35 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
                         
                         if let c = String(bytes: [v], encoding: .ascii) {
                             line = line + c
-                            DispatchQueue.main.async {
-                                self.serialText.text.append(c)
-                            }
                         } else {
                             print("could not convert", v, "to ascii")
                         }
                         
                         if (v == 0x0D || v == 0x0A) {
                             DispatchQueue.main.sync {
-//                                self.textView.text.append(line)
-                                let range = NSMakeRange(self.serialText.text.count*2, 1)
+                                self.serialText.text.append(line)
+                                let range = NSMakeRange(self.serialText.text.count, 1)
                                 self.serialText.scrollRangeToVisible(range)
                             }
                             
                             line = ""
-                            usleep(2000)
                         }
                         
-                        usleep(1000)
-                        // Adjust time
-                        start += 1000*1000
-                        
-                        var w: Int!
+                        //usleep(100)
                         
                         serialQueue.sync {
-                            //print("sending",serialCharsWaiting, char, v)
-                            serialBuffer[serialCharsWaiting] = v
-                            serialCharsWaiting = (serialCharsWaiting + 1)
-                            
-                            w = serialCharsWaiting
-                        }
-                        
-                        if w > 5 {
-                            usleep(1000*UInt32(w*w))
-                            start += 1000*UInt64(w*w)*1000
+                            //print("sending", char, v)
+                            serialBuffer.enqueue(v)
                         }
                     }
                 }
+                
+                DispatchQueue.main.sync {
+                    self.serialText.text.append("\n\n")
+                    let range = NSMakeRange(self.serialText.text.count, 1)
+                    self.serialText.scrollRangeToVisible(range)
+                }
+                
             }
             
         }
@@ -138,11 +131,8 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         riot0.delegate = self
         
         serialQueue.async {
-            
             riot0.serial = true
         }
-        
-        
     }
     
     func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
@@ -152,9 +142,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
             // Delete key was pressed, trigger it on Kim
 
             serialQueue.async {
-                serialBuffer[serialCharsWaiting] = 0x7F
-                serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
-
+                serialBuffer.enqueue(0x7F)
             }
         }
         if (textView.text.count > previousText.count) {
@@ -186,8 +174,8 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
                 
                     
                     serialQueue.async {
-                        serialBuffer[serialCharsWaiting] = v
-                        serialCharsWaiting = (serialCharsWaiting + 1) & 0xFF
+                        print("sending", character, v)
+                        serialBuffer.enqueue(v)
                     }
                 }
                 

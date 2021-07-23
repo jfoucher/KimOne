@@ -689,23 +689,6 @@
                                     <segue destination="DNX-cu-SF5" kind="showDetail" destinationCreationSelector="serialOn:" animates="NO" id="UMd-Ip-zkZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="biR-dm-X2B">
-                                <rect key="frame" x="15.5" y="102" width="71" height="26"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="1.00 MHz">
-                                            <attributes>
-                                                <color key="NSColor" red="1" green="0.084040851149999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="18" name="3270Condensed"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <connections>
-                                    <action selector="speedClicked:" destination="oJ6-If-Sbn" eventType="touchUpInside" id="gVM-gg-jza"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPJ-0d-ppD">
                                 <rect key="frame" x="217.5" y="90" width="30" height="44"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
@@ -735,14 +718,11 @@
                         <viewLayoutGuide key="safeArea" id="dIY-R0-IZ1"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="UHG-9l-mxu" firstAttribute="top" secondItem="biR-dm-X2B" secondAttribute="bottom" constant="8" symbolic="YES" id="DeX-WO-DhA"/>
                             <constraint firstItem="ZYm-IK-zGb" firstAttribute="centerX" secondItem="ca5-c5-v8U" secondAttribute="centerX" id="Mv3-tN-4OO"/>
                             <constraint firstItem="ZYm-IK-zGb" firstAttribute="top" secondItem="dIY-R0-IZ1" secondAttribute="top" priority="750" constant="40" id="SCp-bx-CMF"/>
                             <constraint firstItem="5o7-wS-Zy4" firstAttribute="leading" secondItem="Ujk-I4-3fI" secondAttribute="trailing" constant="8" symbolic="YES" id="SUO-iF-VHL"/>
                             <constraint firstItem="5o7-wS-Zy4" firstAttribute="trailing" secondItem="1bb-Vu-rD2" secondAttribute="trailing" id="ZAb-BJ-Yd7"/>
                             <constraint firstItem="UHG-9l-mxu" firstAttribute="top" secondItem="DPJ-0d-ppD" secondAttribute="bottom" constant="2" id="Zxo-P2-glU"/>
-                            <constraint firstItem="biR-dm-X2B" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZYm-IK-zGb" secondAttribute="bottom" constant="8" symbolic="YES" id="bEJ-l8-n0j"/>
-                            <constraint firstItem="biR-dm-X2B" firstAttribute="leading" secondItem="Vl0-Px-TgJ" secondAttribute="leading" id="f14-om-6Vm"/>
                             <constraint firstItem="UHG-9l-mxu" firstAttribute="bottom" secondItem="dIY-R0-IZ1" secondAttribute="bottom" constant="-8" id="fHE-Jb-dQj"/>
                             <constraint firstItem="5o7-wS-Zy4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZYm-IK-zGb" secondAttribute="bottom" priority="999" constant="8" symbolic="YES" id="foM-yL-ivw"/>
                             <constraint firstItem="ZYm-IK-zGb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dIY-R0-IZ1" secondAttribute="top" id="ifY-ez-lHz"/>
@@ -769,7 +749,6 @@
                         <outlet property="goButton" destination="Vl0-Px-TgJ" id="IoY-Z9-mxB"/>
                         <outlet property="plusButton" destination="MwM-oN-QLX" id="scg-Bl-tor"/>
                         <outlet property="rsbutton" destination="ZKO-QY-aCm" id="AWq-I6-UEP"/>
-                        <outlet property="speedButton" destination="biR-dm-X2B" id="ZJe-J6-DzL"/>
                         <outlet property="sst" destination="RG0-c6-fEY" id="Jlw-5n-kif"/>
                         <outlet property="stbutton" destination="0hs-SE-6Kt" id="eng-am-vrJ"/>
                     </connections>
