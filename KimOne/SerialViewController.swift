@@ -8,12 +8,14 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 protocol TextReceiverDelegate:class {
     func addText(char: UInt8)
 }
 
 class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDelegate, UIDocumentPickerDelegate {
+    var audioPlayer = AVAudioPlayer()
 
     var cancelSend = false
     var text = ""
@@ -99,7 +101,11 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
     }
     
     override func viewDidLoad() {
-        print("serial view controller view did load")
+        let bellSound = URL(fileURLWithPath: Bundle.main.path(forResource: "bell", ofType: "m4a")!)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: bellSound)
+        }catch{}
+        
         dispatchQueue.async {
             self.cancelSend = false
         }
@@ -144,6 +150,10 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
             serialQueue.async {
                 serialBuffer.enqueue(0x7F)
             }
+            
+//            if (serialText.text.count > 0) {
+//                serialText.text.removeLast()
+//            }
         }
         if (textView.text.count > previousText.count) {
             if let character = textView.text.last {
@@ -171,7 +181,6 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
                             print("could not convert", v, "to ascii")
                         }
                     }
-                
                     
                     serialQueue.async {
                         print("sending", character, v)
@@ -193,8 +202,11 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
         } else {
             print("could not convert", char, "to ascii")
         }
-        
-        if (char == 10 || char == 13) {
+        if (char == 7) {
+            dispatchQueue.async {
+                self.audioPlayer.play()
+            }
+        }else if (char == 10 || char == 13) {
             //try and make it really scroll to the bottom
             let range = NSMakeRange(self.serialText.text.count*2, 1)
             self.serialText.scrollRangeToVisible(range)

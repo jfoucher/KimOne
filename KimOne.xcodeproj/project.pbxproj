@@ -25,6 +25,7 @@
 		ABB6815526A0974600C2FC21 /* rom0.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABB6815326A0974600C2FC21 /* rom0.bin */; };
 		ABD47B8E26A2E68300B6C93A /* SerialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD47B8D26A2E68300B6C93A /* SerialViewController.swift */; };
 		ABD781B422A00AFE00574458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABD781B322A00AFE00574458 /* Assets.xcassets */; };
+		ABE4516F26AB456B00E0932F /* bell.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABE4516E26AB456B00E0932F /* bell.m4a */; };
 		ABEBE79426A1B20E009AA3F5 /* key.m4a in Resources */ = {isa = PBXBuildFile; fileRef = ABEBE79326A1B20E009AA3F5 /* key.m4a */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		ABB6815326A0974600C2FC21 /* rom0.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = rom0.bin; sourceTree = "<group>"; };
 		ABD47B8D26A2E68300B6C93A /* SerialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialViewController.swift; sourceTree = "<group>"; };
 		ABD781B322A00AFE00574458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ABE4516E26AB456B00E0932F /* bell.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.m4a; sourceTree = "<group>"; };
 		ABEBE79326A1B20E009AA3F5 /* key.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = key.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +147,7 @@
 		AB65D3FD26A15E8900AA37D6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ABE4516E26AB456B00E0932F /* bell.m4a */,
 				AB18FB8626A5EC4B00977C42 /* manual.rtf */,
 				AB30C67126A41501007F6C38 /* TinyBasic.bin */,
 				ABEBE79326A1B20E009AA3F5 /* key.m4a */,
@@ -276,6 +279,7 @@
 				ABD781B422A00AFE00574458 /* Assets.xcassets in Resources */,
 				ABB6815526A0974600C2FC21 /* rom0.bin in Resources */,
 				AB04BF33229F539400B1111E /* Main.storyboard in Resources */,
+				ABE4516F26AB456B00E0932F /* bell.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
