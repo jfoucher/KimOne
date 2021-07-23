@@ -35,12 +35,6 @@ class FirstViewController: UIViewController {
         }
         return SerialViewController(coder: coder)
     }
-    @IBAction func showLoadBtnClicked(_ sender: Any) {
-        serialQueue.async {
-            print("set running to false")
-            self.running = false;
-        }
-    }
     @IBAction func showHelpBtnClicked(_ sender: Any) {
         serialQueue.async {
             print("set running to false")
