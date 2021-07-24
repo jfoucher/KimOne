@@ -306,8 +306,6 @@ class FirstViewController: UIViewController {
                             //print("waiting for serial character")
                             usleep(1000)
                         }
-                    } else if (pc == 0x1E04) {
-                        print("load start")
                     }
                 }
                 

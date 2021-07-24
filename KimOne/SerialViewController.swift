@@ -95,7 +95,6 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
     
     override func viewDidDisappear(_ animated: Bool) {
         dispatchQueue.async {
-            print("cancel send")
             self.cancelSend = true
         }
     }
@@ -183,7 +182,7 @@ class SerialViewController: UIViewController, UITextViewDelegate, TextReceiverDe
                     }
                     
                     serialQueue.async {
-                        print("sending", character, v)
+//                        print("sending", character, v)
                         serialBuffer.enqueue(v)
                     }
                 }
